@@ -1,0 +1,5 @@
+module DB {
+	interface Shp {
+		string getShp(in string file);
+	};
+};
