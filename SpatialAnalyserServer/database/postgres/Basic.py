@@ -53,8 +53,11 @@ class PostgresBasic(object):
             #Exit and print exception.
             sys.exit("Query executing failed!\n -> %s %s" % (exType, exValue))
         
-        
-        
+    
+if __name__ == "__main__":    
+    test = PostgresBasic()
+    test.connectToDatabase("test_gis", "postgres", "postgres")
+       
         
         
         
