@@ -10,10 +10,10 @@ class Shp_i(DB__POA.Shp):
     '''
     classdocs
     '''
-    def getShp(self, file_name):
+    def getShp(self, fileName):
         print("Calling getShp() function test \n")
-        file_name = "kupa"
-        return file_name
+        fileName = "kupa"
+        return fileName
 
     def __init__(self):
         '''
