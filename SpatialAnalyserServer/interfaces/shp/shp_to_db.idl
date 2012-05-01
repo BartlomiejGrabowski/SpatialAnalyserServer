@@ -1,0 +1,5 @@
+module SHP {
+	interface ShpToDB {
+		void send_shp_to_postgres(in string shp_file, in string table_name);
+	};
+};

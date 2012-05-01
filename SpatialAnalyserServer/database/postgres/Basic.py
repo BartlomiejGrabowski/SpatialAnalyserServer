@@ -6,6 +6,11 @@ Created on Mar 26, 2012
 import psycopg2
 import sys
 import psycopg2.extras
+import Queue
+
+sys.path.append("../performance")
+from FindDB import FindDB
+
 
 class PostgresBasic(object):
     '''
@@ -17,7 +22,13 @@ class PostgresBasic(object):
         Constructor
         '''
     def connectToDatabase(self, _db_name, _db_user, _db_passwd):
-        print("Connecting to database ->%s" % (_db_name))
+        print("Connecting to database -> %s" % (_db_name))
+        ips = Queue.Queue()   
+        times = {}
+
+        obj = FindDB(ips, times)
+        obj.set_conn_parameters()
+        
         try:
             #Get a connection.
             conn = psycopg2.connect(database=_db_name, user=_db_user, password=_db_passwd)
