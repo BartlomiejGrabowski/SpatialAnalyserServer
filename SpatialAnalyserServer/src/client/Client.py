@@ -47,4 +47,7 @@ if shpRef is None:
     print("Object reference is no an SHP::ShpToDB\n")
     sys.exit(1)
 
-shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
+try:
+    shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L6.shp", "gshhs")
+except SHP.FileDoesNotExist as ex:
+    print ex.reason

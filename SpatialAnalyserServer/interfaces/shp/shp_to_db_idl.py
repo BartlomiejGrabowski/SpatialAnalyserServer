@@ -15,6 +15,21 @@ _0_SHP = omniORB.openModule("SHP", r"shp_to_db.idl")
 _0_SHP__POA = omniORB.openModule("SHP__POA", r"shp_to_db.idl")
 
 
+# exception FileDoesNotExist
+_0_SHP.FileDoesNotExist = omniORB.newEmptyClass()
+class FileDoesNotExist (CORBA.UserException):
+    _NP_RepositoryId = "IDL:SHP/FileDoesNotExist:1.0"
+
+    def __init__(self, reason):
+        CORBA.UserException.__init__(self, reason)
+        self.reason = reason
+
+_0_SHP.FileDoesNotExist = FileDoesNotExist
+_0_SHP._d_FileDoesNotExist  = (omniORB.tcInternal.tv_except, FileDoesNotExist, FileDoesNotExist._NP_RepositoryId, "FileDoesNotExist", "reason", (omniORB.tcInternal.tv_string,0))
+_0_SHP._tc_FileDoesNotExist = omniORB.tcInternal.createTypeCode(_0_SHP._d_FileDoesNotExist)
+omniORB.registerType(FileDoesNotExist._NP_RepositoryId, _0_SHP._d_FileDoesNotExist, _0_SHP._tc_FileDoesNotExist)
+del FileDoesNotExist
+
 # interface ShpToDB
 _0_SHP._d_ShpToDB = (omniORB.tcInternal.tv_objref, "IDL:SHP/ShpToDB:1.0", "ShpToDB")
 omniORB.typeMapping["IDL:SHP/ShpToDB:1.0"] = _0_SHP._d_ShpToDB
@@ -33,7 +48,7 @@ _0_SHP._tc_ShpToDB = omniORB.tcInternal.createTypeCode(_0_SHP._d_ShpToDB)
 omniORB.registerType(ShpToDB._NP_RepositoryId, _0_SHP._d_ShpToDB, _0_SHP._tc_ShpToDB)
 
 # ShpToDB operations and attributes
-ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), None)
+ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist})
 
 # ShpToDB object reference
 class _objref_ShpToDB (CORBA.Object):

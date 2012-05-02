@@ -28,6 +28,7 @@ class PostgresBasic(object):
 
         obj = FindDB(ips, times)
         obj.set_conn_parameters()
+
         
         try:
             #Get a connection.
