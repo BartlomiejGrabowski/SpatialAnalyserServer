@@ -20,17 +20,25 @@ from Basic import PostgresBasic
 
 class ShpToDB_i(SHP__POA.ShpToDB):
     '''
-    classdocs
+    Implementation of ShpToDB servant.
     '''
         
     def __init__(self):
         '''
-        Constructor
+        Initialize logging handler.
         '''
+        self.logger = Logger("ShpToDB")
+        
     def send_shp_to_postgres(self, shpFile, tableName):
-        logger = Logger("ShpToDB")
-        logger.log.info("Connecting to database")
-        connection = psycopg2.connect(database="shp_database", user="postgres", password="postgres")
+        pb = PostgresBasic()
+        self.logger.log.info("Connecting to %s database" % (pb.db))
+        try:
+            connection = pb.connectToDatabase()
+        except psycopg2.OperationalError as ex:
+            self.logger.log.error("%s exception occurred during connection to %s database" % (ex, pb.db))
+            raise SHP.CannotConnectToDB("Cannot connect to database", pb.db )
+            sys.exit(1)
+            
         cursor = connection.cursor()
     
         cursor.execute('DROP TABLE IF EXISTS %s' % (tableName))
@@ -42,7 +50,7 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         cursor.execute("SELECT AddGeometryColumn('%s', 'geom', 4326, 'POLYGON', 2)" % (tableName))
         cursor.execute("CREATE INDEX geomIndex ON %s USING GIST (geom)" % (tableName))
         
-        logger.log.info("Opening %s shapefile" % (shpFile))
+        self.logger.log.info("Opening %s shapefile" % (shpFile))
         shapefile = ogr.Open(shpFile)
         try:
             layer = shapefile.GetLayer(0)
@@ -54,9 +62,60 @@ class ShpToDB_i(SHP__POA.ShpToDB):
                 cursor.execute("INSERT INTO %s (level, geom)" % (tableName) + "VALUES (%s, ST_GeomFromText(%s, 4326))"
                            ,(level, wkt))
         except AttributeError as ex:
-            logger.log.error("Error occurred during open %s file. %s" % (shpFile, ex))
-            raise SHP.FileDoesNotExist("File does not exist")
+            self.logger.log.error("Error occurred during open %s file. %s" % (shpFile, ex))
+            raise SHP.FileDoesNotExist("File does not exist", shpFile)
+            sys.exit(1)
+        
+        
+        #Run VACUUM ANALYZE command so that PostGIS cat gather statistics to help it optimize database.
+        old_level = connection.isolation_level
+        connection.set_isolation_level(0)
+        cursor.execute("VACUUM ANALYZE")
+        connection.set_isolation_level(old_level)
+        
+        connection.commit()
+    
+    def send_wbd_to_postgres(self, shpFile):
+        pb = PostgresBasic()
+        self.logger.log.info("Connecting to %s database" % (pb.db))
+        try:
+            connection = pb.connectToDatabase()
+        except psycopg2.OperationalError as ex:
+            self.logger.log.error("%s exception occurred during connection to %s database" % (ex, pb.db))
+            raise SHP.CannotConnectToDB("Cannot connect to database", pb.db )
+            sys.exit(1)
+            
+        cursor = connection.cursor()
+        
+        cursor.execute("DROP TABLE IF EXISTS countries")
+        cursor.execute("""
+                    CREATE TABLE countries (
+                        id SERIAL,
+                        name VARCHAR(255),
+                        PRIMARY KEY (id))
+                        """)
+        cursor.execute("SELECT AddGeometryColumn('countries', 'outline', 4326, 'POLYGON', 2)")
+        cursor.execute("CREATE INDEX countryIndex ON countries USING GIST(outline)")
+
+        
+        cursor.execute("DELETE FROM countries")
+
+        try:
+            self.logger.log.info("Opening %s shapefile" % (shpFile))
+            shapefile = ogr.Open(shpFile)
+            layer = shapefile.GetLayer(0)
+            for i in range(layer.GetFeatureCount()):
+                feature = layer.GetFeature(i)
+                name = feature.GetField("NAME").decode("Latin-1")
+                wkt = feature.GetGeometryRef().ExportToWkt()
+            cursor.execute("INSERT INTO countries (name,outline) " +
+                           "VALUES (%s, ST_PolygonFromText(%s, " +
+                           "4326))", (name.encode("utf8"), wkt))
+        except AttributeError as ex:
+            self.logger.log.error("Error occurred during open %s file. %s" % (shpFile, ex))
+            raise SHP.FileDoesNotExist("File does not exist", shpFile)
+            sys.exit(1)
             
         connection.commit()
-        
+
             

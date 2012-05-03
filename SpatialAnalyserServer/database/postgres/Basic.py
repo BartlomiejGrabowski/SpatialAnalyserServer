@@ -11,6 +11,8 @@ import Queue
 sys.path.append("../performance")
 from FindDB import FindDB
 
+sys.path.append("../../src/logger")
+from Logger import Logger
 
 class PostgresBasic(object):
     '''
@@ -19,39 +21,40 @@ class PostgresBasic(object):
 
     def __init__(self):
         '''
-        Constructor
+        Initialize logging handler.
         '''
-    def connectToDatabase(self, _db_name, _db_user, _db_passwd):
-        print("Connecting to database -> %s" % (_db_name))
         ips = Queue.Queue()   
         times = {}
-
-        obj = FindDB(ips, times)
-        obj.set_conn_parameters()
-
+        fdb = FindDB(ips, times)
+        fdb.set_conn_parameters()
         
-        try:
-            #Get a connection.
-            conn = psycopg2.connect(database=_db_name, user=_db_user, password=_db_passwd)
-            print("Connected!\n")
-        except:
-            #Get the most recent exceptions.
-            exType, exValue, exTraceback = sys.exc_info()
-            sys.exit("Database connection failed!\n ->%s %s" % (exType, exValue))
+        self.db = fdb.db
+        self.user = fdb.user
+        self.passwd = fdb.passwd
+        
+        self.logger = Logger("PostgresBasic")
+        
+    def connectToDatabase(self):
+        self.logger.log.info("Connecting to database: %s" % (self.db))
+
+        conn = psycopg2.connect(database=self.db, user=self.user, password=self.passwd)
+            
+        self.logger.log.info("Connected to %s database as %s user" % (self.db, self.user))
+        
         return conn
     
     def createCursor(self, _conn):
-        print("Creating cursor to database\n")
+        self.logger.log.info("Creating cursor to database")
         try:
             cursor = _conn.cursor('cursor_unique_name', cursor_factory=psycopg2.extras.DictCursor)
         except:
             #Get the most recent exceptions.
             exType, exValue, exTraceback = sys.exc_info()
-            sys.exit("Cursor creation failed!\n ->%s %s" % (exType, exValue))    
+            sys.exit("Cursor creation failed!\n -> %s %s" % (exType, exValue))    
         return cursor
     
     def executeQuery(self, _cursor, _query):
-        print("Executing query ->%s" % (_query))
+        self.logger.log.info("Executing query: %s" % (_query))
         try:
             _cursor.execute(_query)
             row_count = 0

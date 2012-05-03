@@ -62,7 +62,7 @@ class FindDB(threading.Thread):
     def set_conn_parameters(self):
         best_ip = self.get_best_ip()
         if best_ip == '127.0.0.1':
-            self.db = 'local_db'
+            self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
         elif best_ip == '212.77.100.101':

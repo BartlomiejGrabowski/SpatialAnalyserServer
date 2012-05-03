@@ -1,10 +1,18 @@
 module SHP {
 
 	exception FileDoesNotExist { 
-		string reason;	
+		string reason;
+		string fileName;
+	};
+
+	exception CannotConnectToDB {
+		string reason;
+		string dbName;
 	};
 
 	interface ShpToDB {
-		void send_shp_to_postgres(in string shp_file, in string table_name) raises (FileDoesNotExist);
+		void send_shp_to_postgres(in string shp_file, in string table_name) raises (FileDoesNotExist, CannotConnectToDB);
+
+		void send_wbd_to_postgres(in string shp_file) raises (FileDoesNotExist, CannotConnectToDB);
 	};
 };

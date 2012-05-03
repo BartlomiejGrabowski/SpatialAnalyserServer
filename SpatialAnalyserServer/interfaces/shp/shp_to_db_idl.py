@@ -20,15 +20,32 @@ _0_SHP.FileDoesNotExist = omniORB.newEmptyClass()
 class FileDoesNotExist (CORBA.UserException):
     _NP_RepositoryId = "IDL:SHP/FileDoesNotExist:1.0"
 
-    def __init__(self, reason):
-        CORBA.UserException.__init__(self, reason)
+    def __init__(self, reason, fileName):
+        CORBA.UserException.__init__(self, reason, fileName)
         self.reason = reason
+        self.fileName = fileName
 
 _0_SHP.FileDoesNotExist = FileDoesNotExist
-_0_SHP._d_FileDoesNotExist  = (omniORB.tcInternal.tv_except, FileDoesNotExist, FileDoesNotExist._NP_RepositoryId, "FileDoesNotExist", "reason", (omniORB.tcInternal.tv_string,0))
+_0_SHP._d_FileDoesNotExist  = (omniORB.tcInternal.tv_except, FileDoesNotExist, FileDoesNotExist._NP_RepositoryId, "FileDoesNotExist", "reason", (omniORB.tcInternal.tv_string,0), "fileName", (omniORB.tcInternal.tv_string,0))
 _0_SHP._tc_FileDoesNotExist = omniORB.tcInternal.createTypeCode(_0_SHP._d_FileDoesNotExist)
 omniORB.registerType(FileDoesNotExist._NP_RepositoryId, _0_SHP._d_FileDoesNotExist, _0_SHP._tc_FileDoesNotExist)
 del FileDoesNotExist
+
+# exception CannotConnectToDB
+_0_SHP.CannotConnectToDB = omniORB.newEmptyClass()
+class CannotConnectToDB (CORBA.UserException):
+    _NP_RepositoryId = "IDL:SHP/CannotConnectToDB:1.0"
+
+    def __init__(self, reason, dbName):
+        CORBA.UserException.__init__(self, reason, dbName)
+        self.reason = reason
+        self.dbName = dbName
+
+_0_SHP.CannotConnectToDB = CannotConnectToDB
+_0_SHP._d_CannotConnectToDB  = (omniORB.tcInternal.tv_except, CannotConnectToDB, CannotConnectToDB._NP_RepositoryId, "CannotConnectToDB", "reason", (omniORB.tcInternal.tv_string,0), "dbName", (omniORB.tcInternal.tv_string,0))
+_0_SHP._tc_CannotConnectToDB = omniORB.tcInternal.createTypeCode(_0_SHP._d_CannotConnectToDB)
+omniORB.registerType(CannotConnectToDB._NP_RepositoryId, _0_SHP._d_CannotConnectToDB, _0_SHP._tc_CannotConnectToDB)
+del CannotConnectToDB
 
 # interface ShpToDB
 _0_SHP._d_ShpToDB = (omniORB.tcInternal.tv_objref, "IDL:SHP/ShpToDB:1.0", "ShpToDB")
@@ -48,7 +65,8 @@ _0_SHP._tc_ShpToDB = omniORB.tcInternal.createTypeCode(_0_SHP._d_ShpToDB)
 omniORB.registerType(ShpToDB._NP_RepositoryId, _0_SHP._d_ShpToDB, _0_SHP._tc_ShpToDB)
 
 # ShpToDB operations and attributes
-ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist})
+ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist, _0_SHP.CannotConnectToDB._NP_RepositoryId: _0_SHP._d_CannotConnectToDB})
+ShpToDB._d_send_wbd_to_postgres = (((omniORB.tcInternal.tv_string,0), ), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist, _0_SHP.CannotConnectToDB._NP_RepositoryId: _0_SHP._d_CannotConnectToDB})
 
 # ShpToDB object reference
 class _objref_ShpToDB (CORBA.Object):
@@ -60,7 +78,10 @@ class _objref_ShpToDB (CORBA.Object):
     def send_shp_to_postgres(self, *args):
         return _omnipy.invoke(self, "send_shp_to_postgres", _0_SHP.ShpToDB._d_send_shp_to_postgres, args)
 
-    __methods__ = ["send_shp_to_postgres"] + CORBA.Object.__methods__
+    def send_wbd_to_postgres(self, *args):
+        return _omnipy.invoke(self, "send_wbd_to_postgres", _0_SHP.ShpToDB._d_send_wbd_to_postgres, args)
+
+    __methods__ = ["send_shp_to_postgres", "send_wbd_to_postgres"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(ShpToDB._NP_RepositoryId, _objref_ShpToDB)
 _0_SHP._objref_ShpToDB = _objref_ShpToDB
@@ -72,7 +93,7 @@ class ShpToDB (PortableServer.Servant):
     _NP_RepositoryId = _0_SHP.ShpToDB._NP_RepositoryId
 
 
-    _omni_op_d = {"send_shp_to_postgres": _0_SHP.ShpToDB._d_send_shp_to_postgres}
+    _omni_op_d = {"send_shp_to_postgres": _0_SHP.ShpToDB._d_send_shp_to_postgres, "send_wbd_to_postgres": _0_SHP.ShpToDB._d_send_wbd_to_postgres}
 
 ShpToDB._omni_skeleton = ShpToDB
 _0_SHP__POA.ShpToDB = ShpToDB
