@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'client_main.ui'
 #
-# Created: Sat May 12 21:34:45 2012
+# Created: Sat May 12 22:15:23 2012
 #      by: PyQt4 UI code generator 4.7.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,10 +17,10 @@ class Ui_MainWindow(object):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.send_shp = QtGui.QPushButton(self.centralwidget)
-        self.send_shp.setGeometry(QtCore.QRect(620, 30, 93, 27))
+        self.send_shp.setGeometry(QtCore.QRect(630, 40, 93, 27))
         self.send_shp.setObjectName("send_shp")
         self.widget = QtGui.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(60, 30, 217, 24))
+        self.widget.setGeometry(QtCore.QRect(60, 20, 241, 61))
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -48,7 +48,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        QtCore.QObject.connect(self.send_shp, QtCore.SIGNAL("clicked()"), self.sendShp)
+        QtCore.QObject.connect(self.send_shp, QtCore.SIGNAL("clicked()"), self.sendSHP)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Connected to:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
-    def sendShp(self):
+    def sendSHP(self):
         self.Form = QtGui.QWidget()
         self.sh = send_shp.Ui_SendSHP()
         self.sh.setupUi(self.Form)

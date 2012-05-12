@@ -39,6 +39,7 @@ class Ui_SendSHP(object):
 
         self.retranslateUi(SendSHP)
         QtCore.QObject.connect(self.shp_clear, QtCore.SIGNAL("clicked()"), self.shp_file.clear)
+        QtCore.QObject.connect(self.shp_select, QtCore.SIGNAL("clicked()"), self.selectSHP)
         QtCore.QMetaObject.connectSlotsByName(SendSHP)
 
     def retranslateUi(self, SendSHP):
@@ -49,3 +50,8 @@ class Ui_SendSHP(object):
         self.shp_send.setText(QtGui.QApplication.translate("SendSHP", "Send", None, QtGui.QApplication.UnicodeUTF8))
         self.shp_cancel.setText(QtGui.QApplication.translate("SendSHP", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
 
+    def selectSHP(self):       
+        fname = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Open')
+        self.shp_file.setText(fname) 
+
+        
