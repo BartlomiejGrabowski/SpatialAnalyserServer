@@ -57,7 +57,7 @@ if shpRef is None:
 
 try:
     client.logger.log.info("Calling send_shp_to_postgres() function")
-    #shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
+    shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
 except SHP.FileDoesNotExist as ex:
     client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
 except SHP.CannotConnectToDB as ex:

@@ -27,25 +27,6 @@
      <string>Send SHP</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>260</y>
-      <width>143</width>
-      <height>59</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Andale Mono</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Connected to:</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
@@ -56,6 +37,19 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Andale Mono</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Connected to:</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLabel" name="label_server">
        <property name="font">
@@ -71,6 +65,10 @@
      </item>
     </layout>
    </widget>
+   <zorder>send_shp</zorder>
+   <zorder>label</zorder>
+   <zorder>label_server</zorder>
+   <zorder>label</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

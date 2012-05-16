@@ -66,19 +66,19 @@ class FindDB(threading.Thread):
             self.user = 'postgres'
             self.passwd = 'postgres'
         elif best_ip == '212.77.100.101':
-            self.db = 'target_db_1'
+            self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
         elif best_ip == '173.194.70.139':
-            self.db = 'target_db_2'
+            self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
         elif best_ip == '213.180.141.140':
-            self.db = 'target_db_3'
+            self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
         elif best_ip == '195.93.178.6':
-            self.db = 'target_db_4'
+            self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
         else:
