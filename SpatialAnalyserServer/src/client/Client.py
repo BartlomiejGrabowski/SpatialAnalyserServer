@@ -8,11 +8,11 @@ import os
 from omniORB import CORBA
 import CosNaming
 
-sys.path.append("../logger")
+#sys.path.append("../logger")
 from Logger import Logger
 
-sys.path.append("../../interfaces/db")
-sys.path.append("../../interfaces/shp")
+#sys.path.append("../../interfaces/db")
+#sys.path.append("../../interfaces/shp")
 
 import DB
 import SHP
@@ -44,30 +44,46 @@ class Client(object):
             self.logger.log.error("Name not found. Error: %s" % (ex))
             sys.exit(1)       
         return self.obj
-        
-client = Client()
-
-obj = client.get_reference_to_obj("SHPShpToDB", "Object")
-
-client.logger.log.info("Narrowing to SHP.ShpToDB reference")
-shpRef = obj._narrow(SHP.ShpToDB)
-if shpRef is None:
-    client.logger.log.error("Object reference is no an SHP::ShpToDB")
-    sys.exit(1)
-
-try:
-    client.logger.log.info("Calling send_shp_to_postgres() function")
-    shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
-except SHP.FileDoesNotExist as ex:
-    client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
-except SHP.CannotConnectToDB as ex:
-    client.logger.log.error("%s. %s" % (ex.reason, ex.dbName))
     
-try:
-    srcFile = os.path.join(sys.path[0], "../../data_files/TM_WORLD_BORDERS-0.3", "TM_WORLD_BORDERS-0.3.shp")
-    client.logger.log.info("Calling send_wbd_to_postgres() function")
-    shpRef.send_wbd_to_postgres(srcFile)
-except SHP.FileDoesNotExist as ex:
-    client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
-except SHP.CannotConnectToDB as ex:
-    client.logger.log.error("%s. %s" % (ex.reason, ex.dbName))
+    def client_send_shp_to_postgres(self, fileName):
+        client = Client()
+        
+        obj = client.get_reference_to_obj("SHPShpToDB", "Object")
+        
+        client.logger.log.info("Narrowing to SHP.ShpToDB reference")
+        shpRef = obj._narrow(SHP.ShpToDB)
+        if shpRef is None:
+            client.logger.log.error("Object reference is no an SHP::ShpToDB")
+            sys.exit(1)       
+        try:
+            client.logger.log.info("Calling send_shp_to_postgres() function")
+            shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
+            return 0
+        except SHP.FileDoesNotExist as ex:
+            client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
+            return 1
+        except SHP.CannotConnectToDB as ex:
+            client.logger.log.error("%s. %s" % (ex.reason, ex.dbName))
+            return 1
+            
+    def client_send_wbd_to_postgres(self, fileName):
+        client = Client()
+        
+        obj = client.get_reference_to_obj("SHPShpToDB", "Object")
+        
+        client.logger.log.info("Narrowing to SHP.ShpToDB reference")
+        shpRef = obj._narrow(SHP.ShpToDB)
+        if shpRef is None:
+            client.logger.log.error("Object reference is no an SHP::ShpToDB")
+            sys.exit(1)
+        try:
+            srcFile = os.path.join(sys.path[0], "../../data_files/TM_WORLD_BORDERS-0.3", "TM_WORLD_BORDERS-0.3.shp")
+            client.logger.log.info("Calling send_wbd_to_postgres() function")
+            shpRef.send_wbd_to_postgres(srcFile)
+            return 0
+        except SHP.FileDoesNotExist as ex:
+            client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
+            return 1
+        except SHP.CannotConnectToDB as ex:
+            client.logger.log.error("%s. %s" % (ex.reason, ex.dbName))
+            return 1

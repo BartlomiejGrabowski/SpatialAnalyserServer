@@ -66,6 +66,7 @@ class ShpToDB_i(SHP__POA.ShpToDB):
             raise SHP.FileDoesNotExist("File does not exist", shpFile)
             sys.exit(1)
         
+        connection.commit()
         
         #Run VACUUM ANALYZE command so that PostGIS cat gather statistics to help it optimize database.
         old_level = connection.isolation_level
@@ -73,7 +74,6 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         cursor.execute("VACUUM ANALYZE")
         connection.set_isolation_level(old_level)
         
-        connection.commit()
     
     def send_wbd_to_postgres(self, shpFile):
         pb = PostgresBasic()
