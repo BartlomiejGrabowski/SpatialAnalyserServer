@@ -45,7 +45,7 @@ class Client(object):
             sys.exit(1)       
         return self.obj
     
-    def client_send_shp_to_postgres(self, fileName):
+    def client_send_shp_to_postgres(self, fileName, tabName):
         client = Client()
         
         obj = client.get_reference_to_obj("SHPShpToDB", "Object")
@@ -57,7 +57,7 @@ class Client(object):
             sys.exit(1)       
         try:
             client.logger.log.info("Calling send_shp_to_postgres() function")
-            shpRef.send_shp_to_postgres("/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/data_files/gshhs/GSHHS_l_L4.shp", "gshhs")
+            shpRef.send_shp_to_postgres(fileName, "gshhs")
             return 0
         except SHP.FileDoesNotExist as ex:
             client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))

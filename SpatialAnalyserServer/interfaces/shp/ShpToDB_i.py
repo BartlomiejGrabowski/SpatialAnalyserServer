@@ -97,6 +97,7 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         cursor.execute("SELECT AddGeometryColumn('countries', 'outline', 4326, 'POLYGON', 2)")
         cursor.execute("CREATE INDEX countryIndex ON countries USING GIST(outline)")
 
+        connection.commit()
         
         cursor.execute("DELETE FROM countries")
 
