@@ -22,6 +22,7 @@ sys.path.append("../../../interfaces/shp")
 # Import interface implementation.
 from Shp_i import Shp_i
 from ShpToDB_i import ShpToDB_i
+from SHPDraw_i import SHPDraw_i
 
 
 
@@ -88,9 +89,12 @@ if __name__ == "__main__":
     dbObj = Shp_i()    
     #Create SHP object.
     shpObj = ShpToDB_i()
-    
+    #Create SHPDraw object.
+    shpDrawObj = SHPDraw_i()
     
     server.bind_new_context("DBShp", "Object", dbObj)
     
     server.bind_new_context("SHPShpToDB", "Object", shpObj)
+    
+    server.bind_new_context("SHPDrawBasic", "Object", shpDrawObj)
     server.activate_POA()

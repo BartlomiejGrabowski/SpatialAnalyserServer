@@ -1,0 +1,22 @@
+module SHPDraw {
+		
+    typedef string <1024> FileName;
+	typedef string <1024> Created;
+	typedef string <1024> LastModified;
+
+	struct File {
+		FileName fName;
+		Created  cTime;
+		LastModified lModified;
+	};
+
+	typedef sequence<File> FileList;
+
+	exception UnknownInternalError {
+		string reason;
+	};
+
+	interface Basic {
+		FileList get_shp_file_list() raises (UnknownInternalError);
+	};
+};

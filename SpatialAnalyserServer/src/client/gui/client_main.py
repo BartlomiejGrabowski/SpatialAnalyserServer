@@ -9,16 +9,20 @@
 
 from PyQt4 import QtCore, QtGui
 import send_shp
+import draw_from_shp
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.setGeometry(0,0,800,400)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.send_shp = QtGui.QPushButton(self.centralwidget)
         self.send_shp.setGeometry(QtCore.QRect(630, 40, 93, 27))
         self.send_shp.setObjectName("send_shp")
+        self.draw_shp_from_file = QtGui.QPushButton(self.centralwidget)
+        self.draw_shp_from_file.setGeometry(QtCore.QRect(630, 80, 93, 27))
+        self.draw_shp_from_file.setObjectName("draw_shp_from_file")
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(60, 20, 241, 61))
         self.widget.setObjectName("widget")
@@ -49,11 +53,13 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.send_shp, QtCore.SIGNAL("clicked()"), self.sendSHP)
+        QtCore.QObject.connect(self.draw_shp_from_file, QtCore.SIGNAL("clicked()"), self.drawFromSHPFile)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Client", None, QtGui.QApplication.UnicodeUTF8))
         self.send_shp.setText(QtGui.QApplication.translate("MainWindow", "Send SHP", None, QtGui.QApplication.UnicodeUTF8))
+        self.draw_shp_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Connected to:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
@@ -62,3 +68,9 @@ class Ui_MainWindow(object):
         self.sh = send_shp.Ui_SendSHP()
         self.sh.setupUi(self.Form)
         self.Form.show()
+        
+    def drawFromSHPFile(self):
+        self.DrawFromSHPFile = QtGui.QWidget()
+        self.sh = draw_from_shp.Ui_DrawFromSHPFile()
+        self.sh.setupUi(self.DrawFromSHPFile)
+        self.DrawFromSHPFile.show()

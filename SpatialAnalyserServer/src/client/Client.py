@@ -16,6 +16,7 @@ from Logger import Logger
 
 import DB
 import SHP
+import SHPDraw
 
 class Client(object):
     '''
@@ -57,7 +58,7 @@ class Client(object):
             sys.exit(1)       
         try:
             client.logger.log.info("Calling send_shp_to_postgres() function")
-            shpRef.send_shp_to_postgres(fileName, "gshhs")
+            shpRef.send_shp_to_postgres(fileName, tabName)
             return 0
         except SHP.FileDoesNotExist as ex:
             client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
@@ -87,3 +88,22 @@ class Client(object):
         except SHP.CannotConnectToDB as ex:
             client.logger.log.error("%s. %s" % (ex.reason, ex.dbName))
             return 1
+        
+    def client_get_shp_file_list(self):
+        client = Client()
+        self.outList = list()
+        
+        obj = client.get_reference_to_obj("SHPDrawBasic", "Object")
+        
+        client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
+        shpLstObj = obj._narrow(SHPDraw.Basic)
+        if shpLstObj is None:
+            client.logger.log.error("Object reference is no an SHPDraw::Basic")
+            sys.exit(1)
+        try:
+            self.outList = shpLstObj.get_shp_file_list()
+            return self.outList
+        except SHPDraw.UnknownInternalError as ex:
+            client.logger.log.error("%s." % (ex.reason))
+            return 1
+            
