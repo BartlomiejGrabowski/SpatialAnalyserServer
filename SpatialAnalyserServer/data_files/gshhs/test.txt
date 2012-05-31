@@ -1,0 +1,3 @@
+CORBA test file.
+Example file.
+test

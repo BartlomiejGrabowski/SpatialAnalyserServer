@@ -15,6 +15,18 @@ _0_SHPDraw = omniORB.openModule("SHPDraw", r"shp_draw.idl")
 _0_SHPDraw__POA = omniORB.openModule("SHPDraw__POA", r"shp_draw.idl")
 
 
+# typedef ... DirPath
+class DirPath:
+    _NP_RepositoryId = "IDL:SHPDraw/DirPath:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_SHPDraw.DirPath = DirPath
+_0_SHPDraw._d_DirPath  = (omniORB.tcInternal.tv_string,1024)
+_0_SHPDraw._ad_DirPath = (omniORB.tcInternal.tv_alias, DirPath._NP_RepositoryId, "DirPath", (omniORB.tcInternal.tv_string,1024))
+_0_SHPDraw._tc_DirPath = omniORB.tcInternal.createTypeCode(_0_SHPDraw._ad_DirPath)
+omniORB.registerType(DirPath._NP_RepositoryId, _0_SHPDraw._ad_DirPath, _0_SHPDraw._tc_DirPath)
+del DirPath
+
 # typedef ... FileName
 class FileName:
     _NP_RepositoryId = "IDL:SHPDraw/FileName:1.0"
@@ -79,6 +91,18 @@ _0_SHPDraw._tc_FileList = omniORB.tcInternal.createTypeCode(_0_SHPDraw._ad_FileL
 omniORB.registerType(FileList._NP_RepositoryId, _0_SHPDraw._ad_FileList, _0_SHPDraw._tc_FileList)
 del FileList
 
+# typedef ... FileContent
+class FileContent:
+    _NP_RepositoryId = "IDL:SHPDraw/FileContent:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_SHPDraw.FileContent = FileContent
+_0_SHPDraw._d_FileContent  = (omniORB.tcInternal.tv_sequence, omniORB.tcInternal.tv_octet, 0)
+_0_SHPDraw._ad_FileContent = (omniORB.tcInternal.tv_alias, FileContent._NP_RepositoryId, "FileContent", (omniORB.tcInternal.tv_sequence, omniORB.tcInternal.tv_octet, 0))
+_0_SHPDraw._tc_FileContent = omniORB.tcInternal.createTypeCode(_0_SHPDraw._ad_FileContent)
+omniORB.registerType(FileContent._NP_RepositoryId, _0_SHPDraw._ad_FileContent, _0_SHPDraw._tc_FileContent)
+del FileContent
+
 # exception UnknownInternalError
 _0_SHPDraw.UnknownInternalError = omniORB.newEmptyClass()
 class UnknownInternalError (CORBA.UserException):
@@ -93,6 +117,22 @@ _0_SHPDraw._d_UnknownInternalError  = (omniORB.tcInternal.tv_except, UnknownInte
 _0_SHPDraw._tc_UnknownInternalError = omniORB.tcInternal.createTypeCode(_0_SHPDraw._d_UnknownInternalError)
 omniORB.registerType(UnknownInternalError._NP_RepositoryId, _0_SHPDraw._d_UnknownInternalError, _0_SHPDraw._tc_UnknownInternalError)
 del UnknownInternalError
+
+# exception FileNotFound
+_0_SHPDraw.FileNotFound = omniORB.newEmptyClass()
+class FileNotFound (CORBA.UserException):
+    _NP_RepositoryId = "IDL:SHPDraw/FileNotFound:1.0"
+
+    def __init__(self, reason, fileName):
+        CORBA.UserException.__init__(self, reason, fileName)
+        self.reason = reason
+        self.fileName = fileName
+
+_0_SHPDraw.FileNotFound = FileNotFound
+_0_SHPDraw._d_FileNotFound  = (omniORB.tcInternal.tv_except, FileNotFound, FileNotFound._NP_RepositoryId, "FileNotFound", "reason", (omniORB.tcInternal.tv_string,0), "fileName", (omniORB.tcInternal.tv_string,0))
+_0_SHPDraw._tc_FileNotFound = omniORB.tcInternal.createTypeCode(_0_SHPDraw._d_FileNotFound)
+omniORB.registerType(FileNotFound._NP_RepositoryId, _0_SHPDraw._d_FileNotFound, _0_SHPDraw._tc_FileNotFound)
+del FileNotFound
 
 # interface Basic
 _0_SHPDraw._d_Basic = (omniORB.tcInternal.tv_objref, "IDL:SHPDraw/Basic:1.0", "Basic")
@@ -112,7 +152,10 @@ _0_SHPDraw._tc_Basic = omniORB.tcInternal.createTypeCode(_0_SHPDraw._d_Basic)
 omniORB.registerType(Basic._NP_RepositoryId, _0_SHPDraw._d_Basic, _0_SHPDraw._tc_Basic)
 
 # Basic operations and attributes
+Basic._d__get_dirLocation = ((),((omniORB.tcInternal.tv_string,0),),None)
+Basic._d__set_dirLocation = (((omniORB.tcInternal.tv_string,0),),(),None)
 Basic._d_get_shp_file_list = ((), (omniORB.typeMapping["IDL:SHPDraw/FileList:1.0"], ), {_0_SHPDraw.UnknownInternalError._NP_RepositoryId: _0_SHPDraw._d_UnknownInternalError})
+Basic._d_get_shp_file_content = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:SHPDraw/FileContent:1.0"], ), {_0_SHPDraw.FileNotFound._NP_RepositoryId: _0_SHPDraw._d_FileNotFound})
 
 # Basic object reference
 class _objref_Basic (CORBA.Object):
@@ -121,10 +164,19 @@ class _objref_Basic (CORBA.Object):
     def __init__(self):
         CORBA.Object.__init__(self)
 
+    def _get_dirLocation(self, *args):
+        return _omnipy.invoke(self, "_get_dirLocation", _0_SHPDraw.Basic._d__get_dirLocation, args)
+
+    def _set_dirLocation(self, *args):
+        return _omnipy.invoke(self, "_set_dirLocation", _0_SHPDraw.Basic._d__set_dirLocation, args)
+
     def get_shp_file_list(self, *args):
         return _omnipy.invoke(self, "get_shp_file_list", _0_SHPDraw.Basic._d_get_shp_file_list, args)
 
-    __methods__ = ["get_shp_file_list"] + CORBA.Object.__methods__
+    def get_shp_file_content(self, *args):
+        return _omnipy.invoke(self, "get_shp_file_content", _0_SHPDraw.Basic._d_get_shp_file_content, args)
+
+    __methods__ = ["_get_dirLocation", "_set_dirLocation", "get_shp_file_list", "get_shp_file_content"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Basic._NP_RepositoryId, _objref_Basic)
 _0_SHPDraw._objref_Basic = _objref_Basic
@@ -136,7 +188,7 @@ class Basic (PortableServer.Servant):
     _NP_RepositoryId = _0_SHPDraw.Basic._NP_RepositoryId
 
 
-    _omni_op_d = {"get_shp_file_list": _0_SHPDraw.Basic._d_get_shp_file_list}
+    _omni_op_d = {"_get_dirLocation": _0_SHPDraw.Basic._d__get_dirLocation, "_set_dirLocation": _0_SHPDraw.Basic._d__set_dirLocation, "get_shp_file_list": _0_SHPDraw.Basic._d_get_shp_file_list, "get_shp_file_content": _0_SHPDraw.Basic._d_get_shp_file_content}
 
 Basic._omni_skeleton = Basic
 _0_SHPDraw__POA.Basic = Basic

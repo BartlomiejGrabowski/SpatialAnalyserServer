@@ -106,4 +106,22 @@ class Client(object):
         except SHPDraw.UnknownInternalError as ex:
             client.logger.log.error("%s." % (ex.reason))
             return 1
+        
+    def client_get_shp_file_content(self, fileName):
+        client = Client()
+        
+        obj = client.get_reference_to_obj("SHPDrawBasic", "Object")
+        
+        client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
+        shpLstObj = obj._narrow(SHPDraw.Basic)
+        if shpLstObj is None:
+            client.logger.log.error("Object reference is no an SHPDraw::Basic")
+            sys.exit(1)
+        try:
+            fileContent = shpLstObj.get_shp_file_content(fileName)
+            print fileContent
+            return fileContent
+        except SHPDraw.FileNotFound as ex:
+            client.logger.log.error("%s." % (ex.reason))
+            return 1
             

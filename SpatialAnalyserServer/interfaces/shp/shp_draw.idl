@@ -1,6 +1,7 @@
 module SHPDraw {
-		
-    typedef string <1024> FileName;
+	typedef string <1024> DirPath;	
+	
+    	typedef string <1024> FileName;
 	typedef string <1024> Created;
 	typedef string <1024> LastModified;
 
@@ -11,12 +12,19 @@ module SHPDraw {
 	};
 
 	typedef sequence<File> FileList;
+	typedef sequence<octet> FileContent;
 
 	exception UnknownInternalError {
 		string reason;
 	};
+	exception FileNotFound {
+		string reason;
+		string fileName;
+	};
 
 	interface Basic {
+		attribute string dirLocation;
 		FileList get_shp_file_list() raises (UnknownInternalError);
+		FileContent get_shp_file_content(in string fileName) raises (FileNotFound);
 	};
 };
