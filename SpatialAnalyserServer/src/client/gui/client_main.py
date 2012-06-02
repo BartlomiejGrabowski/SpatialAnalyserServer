@@ -10,8 +10,9 @@
 from PyQt4 import QtCore, QtGui
 import send_shp
 import draw_from_shp
+from Client import Client
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(Client):     
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(0,0,800,400)

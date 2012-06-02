@@ -29,7 +29,7 @@ from SHPDraw_i import SHPDraw_i
 class Server(object):
     
     def __init__(self):
-        self.logger = Logger("Server")
+        self.logger = Logger("Server", "server.log")
         self.objContext = ''
         self.logger.log.info("Starting the server")
         self.logger.log.info("Activating CORBA ORB")

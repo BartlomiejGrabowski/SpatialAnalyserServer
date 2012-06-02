@@ -17,6 +17,7 @@ from Logger import Logger
 import DB
 import SHP
 import SHPDraw
+import xml.etree.ElementTree as ET
 
 class Client(object):
     '''
@@ -24,7 +25,7 @@ class Client(object):
     '''
 
     def __init__(self):
-        self.logger = Logger("Client")
+        self.logger = Logger("Client", "../client.log")
         # Initialize the ORB
         self.logger.log.info("Initialize the ORB")
         orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
@@ -35,10 +36,27 @@ class Client(object):
         if self.rootContext is None:
             self.logger.log.error("Failed to narrow the root naming context")
             sys.exit(1)
+        #Retrieving xml configuration file.
+        self.logger.log.info("Retrieving configuration data from XML file.")
+        #Open xml configuration file.
+        configurationFile = ET.parse('../conf/clientConf.xml')
+        doc = configurationFile.getroot()
+        
+        downloadsConf = doc.find('DownloadDir')
+        #Fetch location of downloads folder.
+        self.confDownloadsLoc = downloadsConf.find('Location').text
+        #Fetch flush downloads directory flag.
+        self.confDownloadsFlush = downloadsConf.find('FlushContent').text 
+        
+        contextConf = doc.find('NamingContext')
+        #Fetch server context name.
+        self.confServerContext = contextConf.find('ServerContext').text
+        #Fetch object context name,
+        self.confObjectContext = contextConf.find('ObjectContext').text  
         
     def get_reference_to_obj(self, prefix, postfix):
         self.logger.log.info("Getting reference to %s.%s object" % (prefix, postfix))
-        name = [CosNaming.NameComponent("Server", "Context"), CosNaming.NameComponent(prefix, postfix)]
+        name = [CosNaming.NameComponent(self.confServerContext, self.confObjectContext), CosNaming.NameComponent(prefix, postfix)]
         try:
             self.obj = self.rootContext.resolve(name)            
         except CosNaming.NamingContext.NotFound, ex:
@@ -119,7 +137,6 @@ class Client(object):
             sys.exit(1)
         try:
             fileContent = shpLstObj.get_shp_file_content(fileName)
-            print fileContent
             return fileContent
         except SHPDraw.FileNotFound as ex:
             client.logger.log.error("%s." % (ex.reason))

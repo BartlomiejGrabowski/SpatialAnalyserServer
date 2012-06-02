@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ClientConf (DownloadDir, SplashImage, NamingContext)>
+<!ELEMENT DownloadDir (FlushContent, Location)>
+<!ELEMENT SplashImage (Location)>
+<!ELEMENT NamingContext (ServerContext, ObjectContext)>
+<!ELEMENT FlushContent (#PCDATA)>
+<!ELEMENT Location (#PCDATA)>
+<!ELEMENT ServerContext (#PCDATA)>
+<!ELEMENT ObjectContext (#PCDATA)>

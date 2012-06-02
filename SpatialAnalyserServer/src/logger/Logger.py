@@ -11,18 +11,17 @@ class Logger(object):
     Class Logger provides methods to write log informations.
     '''
 
-    def __init__(self, myLogger):
+    def __init__(self, myLogger, logFile):
         '''
         Set Logger environment and define log handlers.
         '''
-        fName = "/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/src/server/main/server.log"
         self.log = logging.getLogger(myLogger)
         self.log.setLevel(logging.DEBUG)
         #creating console handler
         ch = logging.StreamHandler()
         ch.setLevel(logging.DEBUG)
         #create file handler
-        fh = logging.FileHandler(fName)
+        fh = logging.FileHandler(logFile)
         fh.setLevel(logging.DEBUG)
         
         #formatter

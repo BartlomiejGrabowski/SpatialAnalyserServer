@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ClientConf SYSTEM "clientConf.dtd">
+
+<ClientConf>
+	<DownloadDir>
+		<FlushContent>1</FlushContent>
+		<Location>downloads</Location>
+	</DownloadDir>
+	<SplashImage>
+		<Location>images/splash.jpg</Location>
+	</SplashImage>
+	<NamingContext>
+		<ServerContext>Server</ServerContext>
+		<ObjectContext>Context</ObjectContext>
+	</NamingContext>
+</ClientConf>

@@ -27,7 +27,7 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         '''
         Initialize logging handler.
         '''
-        self.logger = Logger("ShpToDB")
+        self.logger = Logger("ShpToDB", "../../../src/server/main/server.log")
         
     def send_shp_to_postgres(self, shpFile, tableName):
         pb = PostgresBasic()

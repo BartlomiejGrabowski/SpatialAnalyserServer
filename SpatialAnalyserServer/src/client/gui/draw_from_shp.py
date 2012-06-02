@@ -142,14 +142,14 @@ class Ui_DrawFromSHPFile(Client):
             #Get file name from table row.
             fileName = self.files_table.item(row, 0).text()
             #Find related files.
-            relatedFiles = list()
+            self.relatedFiles = list()
             #If list is not empty, then clear list.
             if self.related_files_list.count() != 0:
                 self.related_files_list.clear()
             for f in self.outList:
                 if f.fName.split(".")[0] == fileName.split(".")[0]:
                     #If founded related file, then append file to related list
-                    relatedFiles.append(f.fName)
+                    self.relatedFiles.append(f.fName)
                     #We are founding file in the table,
                     relatedItem = self.files_table.findItems(f.fName, QtCore.Qt.MatchExactly)
                     #If founded, then get row number.
@@ -160,7 +160,19 @@ class Ui_DrawFromSHPFile(Client):
                     self.addFileIntoList(self.related_files_list, f.fName)
     
     def drawSHPFile(self):
-        fileContent = self.client_get_shp_file_content('test.txt')
-        out_file = open('downloads/test.txt', 'w')
-        out_file.writelines(fileContent)    
-        out_file.close()         
+        #Loop thru related files list.
+        for fileName in self.relatedFiles:
+            self.downloadFile(self.confDownloadsLoc, fileName)
+            
+    def downloadFile(self, destDir, fileName):
+        #Redirect stdout to /dev/null.
+        f = open(os.devnull, 'w')
+        sys.stdout = f
+        #Get file content to string.
+        fileContent = self.client_get_shp_file_content(fileName)
+        #Create file in downloads directory. Name of file is the same as the name on server.
+        out_file = open("%s/%s" % (destDir, fileName), 'w')
+        #Write list of strings into file.
+        out_file.writelines(fileContent)
+        #Close the file.
+        out_file.close()  
