@@ -2,10 +2,20 @@
 <!DOCTYPE ClientConf SYSTEM "clientConf.dtd">
 
 <ClientConf>
-	<DownloadDir>
+	<SHPDownloadDir>
 		<FlushContent>1</FlushContent>
-		<Location>downloads</Location>
-	</DownloadDir>
+		<Location>downloads/shp/</Location>
+	</SHPDownloadDir>
+	<OSMDownloadDir>
+		<FlushContent>1</FlushContent>
+		<Location>downloads/osm/</Location>
+	</OSMDownloadDir>
+	<ImagesDir>
+		<Location>images/</Location>
+	</ImagesDir>
+	<IconsDir>
+		<Location>icons/</Location>
+	</IconsDir>
 	<SplashImage>
 		<Location>images/splash.jpg</Location>
 	</SplashImage>
@@ -13,4 +23,14 @@
 		<ServerContext>Server</ServerContext>
 		<ObjectContext>Context</ObjectContext>
 	</NamingContext>
+	<Interfaces>
+		<ShpDraw>
+			<ID>SHPDrawBasic</ID>
+			<Kind>Object</Kind>
+		</ShpDraw>
+		<SHP>
+			<ID>SHPShpToDB</ID>
+			<Kind>Object</Kind>
+		</SHP>
+	</Interfaces>
 </ClientConf>

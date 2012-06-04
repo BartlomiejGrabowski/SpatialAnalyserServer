@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'draw_shp_image.ui'
+#
+# Created: Mon Jun  4 20:51:50 2012
+#      by: PyQt4 UI code generator 4.7.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+class Ui_DrawSHPImage(object):        
+    def setupUi(self, DrawSHPImage):
+        DrawSHPImage.setObjectName("DrawSHPImage")
+        DrawSHPImage.resize(796, 594)
+        self.conf_shp_image = QtGui.QTabWidget(DrawSHPImage)
+        self.conf_shp_image.setGeometry(QtCore.QRect(10, 460, 601, 111))
+        self.conf_shp_image.setObjectName("conf_shp_image")
+        self.tab = QtGui.QWidget()
+        self.tab.setObjectName("tab")
+        self.background_image_color = QtGui.QComboBox(self.tab)
+        self.background_image_color.setGeometry(QtCore.QRect(10, 40, 141, 31))
+        self.background_image_color.setObjectName("background_image_color")
+        self.background_label = QtGui.QLabel(self.tab)
+        self.background_label.setGeometry(QtCore.QRect(10, 10, 121, 21))
+        self.background_label.setObjectName("background_label")
+        self.polygons_color = QtGui.QComboBox(self.tab)
+        self.polygons_color.setGeometry(QtCore.QRect(180, 40, 141, 31))
+        self.polygons_color.setObjectName("polygons_color")
+        self.label = QtGui.QLabel(self.tab)
+        self.label.setGeometry(QtCore.QRect(180, 10, 111, 21))
+        self.label.setObjectName("label")
+        self.lines_color = QtGui.QComboBox(self.tab)
+        self.lines_color.setGeometry(QtCore.QRect(350, 40, 141, 31))
+        self.lines_color.setObjectName("lines_color")
+        self.label_2 = QtGui.QLabel(self.tab)
+        self.label_2.setGeometry(QtCore.QRect(350, 10, 91, 21))
+        self.label_2.setObjectName("label_2")
+        self.conf_shp_image.addTab(self.tab, "")
+        self.tab_2 = QtGui.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.projection_label = QtGui.QLabel(self.tab_2)
+        self.projection_label.setGeometry(QtCore.QRect(10, 20, 71, 21))
+        self.projection_label.setObjectName("projection_label")
+        self.projection_type = QtGui.QComboBox(self.tab_2)
+        self.projection_type.setGeometry(QtCore.QRect(10, 40, 171, 31))
+        self.projection_type.setObjectName("projection_type")
+        self.out_image_name = QtGui.QLineEdit(self.tab_2)
+        self.out_image_name.setGeometry(QtCore.QRect(220, 40, 191, 31))
+        self.out_image_name.setObjectName("out_image_name")
+        self.out_image_label = QtGui.QLabel(self.tab_2)
+        self.out_image_label.setGeometry(QtCore.QRect(220, 20, 141, 21))
+        self.out_image_label.setObjectName("out_image_label")
+        self.conf_shp_image.addTab(self.tab_2, "")
+        self.shp_image_view = QtGui.QGraphicsView(DrawSHPImage)
+        self.shp_image_view.setGeometry(QtCore.QRect(10, 40, 601, 401))
+        self.shp_image_view.setObjectName("shp_image_view")
+        self.shp_name_label = QtGui.QLabel(DrawSHPImage)
+        self.shp_name_label.setGeometry(QtCore.QRect(10, 10, 62, 17))
+        self.shp_name_label.setObjectName("shp_name_label")
+        self.shp_file_name = QtGui.QLabel(DrawSHPImage)
+        self.shp_file_name.setGeometry(QtCore.QRect(70, 10, 200, 17))
+        self.shp_file_name.setText("")
+        self.shp_file_name.setObjectName("shp_file_name")
+        self.draw_image = QtGui.QPushButton(DrawSHPImage)
+        self.draw_image.setGeometry(QtCore.QRect(660, 40, 91, 27))
+        self.draw_image.setObjectName("draw_image")
+        self.clear_button = QtGui.QPushButton(DrawSHPImage)
+        self.clear_button.setGeometry(QtCore.QRect(660, 90, 91, 27))
+        self.clear_button.setObjectName("clear_button")
+        self.cancel_button = QtGui.QPushButton(DrawSHPImage)
+        self.cancel_button.setGeometry(QtCore.QRect(660, 140, 91, 27))
+        self.cancel_button.setObjectName("cancel_button")
+
+        self.retranslateUi(DrawSHPImage)
+        QtCore.QObject.connect(self.cancel_button, QtCore.SIGNAL("clicked()"), DrawSHPImage,  QtCore.SLOT("close()"))
+        self.conf_shp_image.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(DrawSHPImage)
+
+    def retranslateUi(self, DrawSHPImage):
+        DrawSHPImage.setWindowTitle(QtGui.QApplication.translate("DrawSHPImage", "Draw from SHP", None, QtGui.QApplication.UnicodeUTF8))
+        self.background_label.setText(QtGui.QApplication.translate("DrawSHPImage", "Background color", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DrawSHPImage", "Polygons color", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DrawSHPImage", "Lines color", None, QtGui.QApplication.UnicodeUTF8))
+        self.conf_shp_image.setTabText(self.conf_shp_image.indexOf(self.tab), QtGui.QApplication.translate("DrawSHPImage", "Colors", None, QtGui.QApplication.UnicodeUTF8))
+        self.projection_label.setText(QtGui.QApplication.translate("DrawSHPImage", "Projection", None, QtGui.QApplication.UnicodeUTF8))
+        self.out_image_label.setText(QtGui.QApplication.translate("DrawSHPImage", "Output image name", None, QtGui.QApplication.UnicodeUTF8))
+        self.conf_shp_image.setTabText(self.conf_shp_image.indexOf(self.tab_2), QtGui.QApplication.translate("DrawSHPImage", "Projection", None, QtGui.QApplication.UnicodeUTF8))
+        self.shp_name_label.setText(QtGui.QApplication.translate("DrawSHPImage", "SHP file: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.draw_image.setText(QtGui.QApplication.translate("DrawSHPImage", "Draw", None, QtGui.QApplication.UnicodeUTF8))
+        self.clear_button.setText(QtGui.QApplication.translate("DrawSHPImage", "Clear", None, QtGui.QApplication.UnicodeUTF8))
+        self.cancel_button.setText(QtGui.QApplication.translate("DrawSHPImage", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+

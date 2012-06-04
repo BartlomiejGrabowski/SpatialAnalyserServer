@@ -51,6 +51,11 @@ class SHPDraw_i(SHPDraw__POA.Basic):
     def get_shp_file_content(self, shpFileName):
         self.logger.log.info("get_shp_file_content method invocation.")
         absPath = self.confSHPDirLocation+'/'+shpFileName
-        #Convert file content to the list of strings.
-        fileContent = open(absPath, 'r').read()
+        try:
+            #Convert file content to the list of strings.
+            fileContent = open(absPath, 'r').read()
+        except IOError as ex:
+            self.logger.error("%s exception occurred during opening shp file" % (ex))
+            raise SHPDraw.FileNotFound("Error occurred during openinf shp file", absPath)
+            sys.exit(1)
         return fileContent

@@ -10,18 +10,20 @@ import sys
 import os
 import string
 from PyQt4 import QtCore, QtGui
+import mapnik
 sys.path.append("..")
 sys.path.append("../../logger")
 sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 from Client import Client
+import draw_shp_image
 
-class Ui_DrawFromSHPFile(Client):
+class Ui_DrawFromSHPFile(Client):        
     def setupUi(self, DrawFromSHPFile):
         DrawFromSHPFile.setObjectName("DrawFromSHPFile")
         DrawFromSHPFile.resize(742, 384)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/earthsphere.ico"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawFromSHPFile.setWindowIcon(icon)
         self.get_file_list = QtGui.QPushButton(DrawFromSHPFile)
         self.get_file_list.setGeometry(QtCore.QRect(460, 30, 93, 27))
@@ -78,7 +80,7 @@ class Ui_DrawFromSHPFile(Client):
 
         self.retranslateUi(DrawFromSHPFile)
         QtCore.QObject.connect(self.get_file_list, QtCore.SIGNAL("clicked()"), self.getSHPFileList)
-        QtCore.QObject.connect(self.draw_file, QtCore.SIGNAL("clicked()"), self.drawSHPFile)
+        QtCore.QObject.connect(self.draw_file, QtCore.SIGNAL("clicked()"), self.showSHPDrawForm)
         QtCore.QObject.connect(self.files_table, QtCore.SIGNAL("cellClicked(int, int)"), self.selectRelatedRowsByCell)
         QtCore.QObject.connect(self.clear_file_list, QtCore.SIGNAL("clicked()"), self.flushDataRecords)
         QtCore.QObject.connect(self.cancel_window, QtCore.SIGNAL("clicked()"), DrawFromSHPFile,  QtCore.SLOT("close()"))
@@ -128,7 +130,7 @@ class Ui_DrawFromSHPFile(Client):
         fileItem.setText(fileName)
         #fileItem.setBackground(QtGui.QBrush(QtCore.Qt.Dense7Pattern))
         fileItem.setTextColor(QtGui.QColor(QtCore.Qt.blue))
-        fileItem.setIcon(QtGui.QIcon(QtGui.QPixmap('icons/shpfile.ico')))
+        fileItem.setIcon(QtGui.QIcon(QtGui.QPixmap(self.confIconsDir+'shpfile.ico')))
         filesList.addItem(fileItem)
         
     def selectRelatedRowsByCell(self, x, y):
@@ -158,21 +160,63 @@ class Ui_DrawFromSHPFile(Client):
                     self.files_table.selectRow(relatedRow)
                     #Add file to file related list.
                     self.addFileIntoList(self.related_files_list, f.fName)
+                    
+    def showSHPDrawForm(self):
+        #Loop thru related files list.
+        for fileName in self.relatedFiles:
+            self.downloadFile(self.confSHPDownloadsLoc, fileName)
+
+        #Show SHP draw image form.
+        self.DrawSHPImage = QtGui.QWidget()
+        self.sh = draw_shp_image.Ui_DrawSHPImage()
+        self.sh.setupUi(self.DrawSHPImage)
+        #Get first part (without extension) of file name and set as a label text.
+        self.sh.shp_file_name.setText("<font color='blue'>%s</font>" % (self.relatedFiles[0].split('.')[0]))
+        self.DrawSHPImage.show()
     
     def drawSHPFile(self):
         #Loop thru related files list.
         for fileName in self.relatedFiles:
-            self.downloadFile(self.confDownloadsLoc, fileName)
-            
+            self.downloadFile(self.confSHPDownloadsLoc, fileName)
+        #Create a map with a given width and height in pixels.
+        # Map
+        m = mapnik.Map(600,300,'+proj=latlong +datum=WGS84')
+        m.background = mapnik.Color('steelblue')
+
+        # Styles
+        poly = mapnik.PolygonSymbolizer(mapnik.Color('lavender'))
+        line = mapnik.LineSymbolizer(mapnik.Color('slategray'),.3)
+        s,r = mapnik.Style(),mapnik.Rule()
+        r.symbols.extend([poly,line])
+        s.rules.append(r)
+        m.append_style('My Style',s)
+
+        # Layer
+        lyr = mapnik.Layer('world')
+        lyr.datasource = mapnik.Shapefile(file=self.confSHPDownloadsLoc+'ne_110m_admin_0_countries')
+        lyr.srs = '+proj=latlong +datum=WGS84'
+        lyr.styles.append('My Style')
+        m.layers.append(lyr)
+
+        # Render
+        m.zoom_to_box(lyr.envelope())
+        mapnik.render_to_file(m, 'hello_world_in_pure_python.png')
+
+        
+        
     def downloadFile(self, destDir, fileName):
         #Redirect stdout to /dev/null.
-        f = open(os.devnull, 'w')
-        sys.stdout = f
+        #f = open(os.devnull, 'w')
+        #sys.stdout = f
         #Get file content to string.
         fileContent = self.client_get_shp_file_content(fileName)
-        #Create file in downloads directory. Name of file is the same as the name on server.
-        out_file = open("%s/%s" % (destDir, fileName), 'w')
-        #Write list of strings into file.
-        out_file.writelines(fileContent)
-        #Close the file.
-        out_file.close()  
+        try:
+            #Create file in downloads directory. Name of file is the same as the name on server.
+            out_file = open("%s/%s" % (destDir, fileName), 'w')
+            #Write list of strings into file.
+            out_file.writelines(fileContent)
+            #Close the file.
+            out_file.close()
+        except IOError as ex:
+            self.logger.log.error("%s exception occurred during open %s/%s file" % (ex, destDir, fileName))
+            return 1 
