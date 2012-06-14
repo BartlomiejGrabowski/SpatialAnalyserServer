@@ -23,7 +23,7 @@ sys.path.append("../../../interfaces/shp")
 from Shp_i import Shp_i
 from ShpToDB_i import ShpToDB_i
 from SHPDraw_i import SHPDraw_i
-
+import xml.etree.ElementTree as ET
 
 
 class Server(object):
@@ -31,12 +31,56 @@ class Server(object):
     def __init__(self):
         self.logger = Logger("Server", "server.log")
         self.objContext = ''
+        
+        #Open xml configuration file.
+        configurationFile = ET.parse('../conf/serverConf.xml')
+        doc = configurationFile.getroot()
+        #NamingContext XML TAG.
+        namingContextConf = doc.find('NamingContext')
+        #Fetch name of server context.
+        self.confServerContext = namingContextConf.find('ServerContext').text
+        #Fetch name of object context.
+        self.confObjectContext = namingContextConf.find('ObjectContext').text
+        #Fetch name of name service.
+        self.confNameService = namingContextConf.find('NameService').text
+        
+        #POA XML TAG.
+        POAConf = doc.find('POA')
+        #Fetch POA name.
+        self.confPOAName = POAConf.find('Name').text
+        
+        #Contexts XML TAG.
+        confContexts = doc.find('Contexts')
+        
+        #Interface Shp context.
+        confShpContext = confContexts.find('Shp')
+        #Fetch ID of Shp context.
+        self.confShpContextID = confShpContext.find('ID').text
+        #Fetch kind of Shp context.
+        self.confShpContextKind = confShpContext.find('Kind').text
+        
+        #Interface ShpToDB context.
+        confShpToDBContext = confContexts.find('ShpToDB')
+        #Fetch ID of ShpToDB context.
+        self.confShpToDBContextID = confShpToDBContext.find('ID').text
+        #Fetch kind of ShpToDB context.
+        self.confShpToDBContextKind = confShpToDBContext.find('Kind').text
+        
+        #Interface SHPDraw context.
+        confSHPDrawContext = confContexts.find('SHPDraw')
+        #Fetch ID of SHPDraw context.
+        self.confSHPDrawContextID = confSHPDrawContext.find('ID').text
+        #Fetch kind of SHPdraw context.
+        self.confSHPDrawContextKind = confSHPDrawContext.find('Kind').text
+        
+        
+        
         self.logger.log.info("Starting the server")
         self.logger.log.info("Activating CORBA ORB")
         self.orb = CORBA.ORB_init(sys.argv, CORBA.ORB_ID)
-        self.poa = self.orb.resolve_initial_references("RootPOA")
+        self.poa = self.orb.resolve_initial_references(self.confPOAName)
         
-        obj = self.orb.resolve_initial_references("NameService")
+        obj = self.orb.resolve_initial_references(self.confNameService)
         self.logger.log.info("Narrowing root context to naming context")
         rootContext = obj._narrow(CosNaming.NamingContext)
         
@@ -45,7 +89,7 @@ class Server(object):
                 sys.exit(1)
                 
         #Bind a context named "shp.my_context" to the roor context
-        name = [CosNaming.NameComponent("Server", "Context")]
+        name = [CosNaming.NameComponent(self.confServerContext, self.confObjectContext)]
         try:
             self.objContext = rootContext.bind_new_context(name)
             self.logger.log.info("Bounding new context")
@@ -92,9 +136,9 @@ if __name__ == "__main__":
     #Create SHPDraw object.
     shpDrawObj = SHPDraw_i()
     
-    server.bind_new_context("DBShp", "Object", dbObj)
+    server.bind_new_context(server.confShpContextID, server.confShpContextKind, dbObj)
     
-    server.bind_new_context("SHPShpToDB", "Object", shpObj)
+    server.bind_new_context(server.confShpToDBContextID, server.confShpToDBContextKind, shpObj)
     
-    server.bind_new_context("SHPDrawBasic", "Object", shpDrawObj)
+    server.bind_new_context(server.confSHPDrawContextID, server.confSHPDrawContextKind, shpDrawObj)
     server.activate_POA()

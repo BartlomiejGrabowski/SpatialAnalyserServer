@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT ClientConf (DownloadDir, SplashImage, NamingContext)>
+<!ELEMENT ClientConf (DownloadDir, SplashImage, NamingContext, Interfaces, ImagesDir)>
 <!ELEMENT DownloadDir (FlushContent, Location)>
+<!ELEMENT ImagesDir (Location)>
+<!ELEMENT IconsDir (Location)>
 <!ELEMENT SplashImage (Location)>
 <!ELEMENT NamingContext (ServerContext, ObjectContext)>
+<!ELEMENT Interfaces (ShpDraw, SHP)>
+<!ELEMENT ShpDraw (ID, Kind)>
+<!ELEMENT SHP (ID, Kind)>
+
 <!ELEMENT FlushContent (#PCDATA)>
 <!ELEMENT Location (#PCDATA)>
 <!ELEMENT ServerContext (#PCDATA)>
 <!ELEMENT ObjectContext (#PCDATA)>
+<!ELEMENT ID (#PCDATA)>
+<!ELEMENT Kind (#PCDATA)>

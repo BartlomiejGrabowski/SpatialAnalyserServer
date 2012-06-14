@@ -12,7 +12,7 @@ class Shp_i(DB__POA.Shp):
     '''
     def getShp(self, fileName):
         print("Calling getShp() function test \n")
-        fileName = "kupa"
+        fileName = "test"
         return fileName
 
     def __init__(self):

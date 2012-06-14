@@ -3,6 +3,28 @@
 
 <ServerConf>
 	<SHPFilesDirectory>
-		<Location>../../../data_files/gshhs</Location>
+		<Location>../../../data_files/shp</Location>
 	</SHPFilesDirectory>
+	<NamingContext>
+		<ServerContext>Server</ServerContext>
+		<ObjectContext>Context</ObjectContext>
+		<NameService>NameService</NameService>
+	</NamingContext>
+	<POA>
+		<Name>RootPOA</Name>
+	</POA>
+	<Contexts>
+		<Shp>
+			<ID>DBShp</ID>
+			<Kind>Object</Kind>
+		</Shp>
+		<ShpToDB>
+			<ID>SHPShpToDB</ID>
+			<Kind>Object</Kind>
+		</ShpToDB>
+		<SHPDraw>
+			<ID>SHPDrawBasic</ID>
+			<Kind>Object</Kind>
+		</SHPDraw>
+	</Contexts>
 </ServerConf>

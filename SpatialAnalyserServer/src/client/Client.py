@@ -42,17 +42,40 @@ class Client(object):
         configurationFile = ET.parse('../conf/clientConf.xml')
         doc = configurationFile.getroot()
         
-        downloadsConf = doc.find('DownloadDir')
+        downloadsConf = doc.find('SHPDownloadDir')
         #Fetch location of downloads folder.
-        self.confDownloadsLoc = downloadsConf.find('Location').text
+        self.confSHPDownloadsLoc = downloadsConf.find('Location').text
         #Fetch flush downloads directory flag.
-        self.confDownloadsFlush = downloadsConf.find('FlushContent').text 
+        self.confSHPDownloadsFlush = downloadsConf.find('FlushContent').text 
         
         contextConf = doc.find('NamingContext')
         #Fetch server context name.
         self.confServerContext = contextConf.find('ServerContext').text
         #Fetch object context name,
-        self.confObjectContext = contextConf.find('ObjectContext').text  
+        self.confObjectContext = contextConf.find('ObjectContext').text
+        
+        #Interfaces XML TAG.
+        interfacesConf = doc.find('Interfaces')
+        
+        #SHP INTERFACE.
+        shpConf = interfacesConf.find('SHP')
+        #Fetch ID.
+        self.confSHPIntID = shpConf.find('ID')
+        #Fetch kind of interface.
+        self.confSHPIntKind = shpConf.find('Kind')
+        
+        #SHPDraw INTERFACE.
+        shpDrawConf = interfacesConf.find('ShpDraw')
+        #Fetch ID from interface.
+        self.confSHPDrawIntID = shpDrawConf.find('ID').text
+        #Fetch kind of interface.
+        self.confSHPDrawIntKind = shpDrawConf.find('Kind').text
+        
+        #Images XML TAG.
+        iconsDirConf = doc.find('IconsDir')
+        #Fetch images location directory.
+        self.confIconsDir = iconsDirConf.find('Location').text
+        
         
     def get_reference_to_obj(self, prefix, postfix):
         self.logger.log.info("Getting reference to %s.%s object" % (prefix, postfix))
@@ -67,7 +90,7 @@ class Client(object):
     def client_send_shp_to_postgres(self, fileName, tabName):
         client = Client()
         
-        obj = client.get_reference_to_obj("SHPShpToDB", "Object")
+        obj = client.get_reference_to_obj(self.confSHPIntID, self.confSHPIntKind)
         
         client.logger.log.info("Narrowing to SHP.ShpToDB reference")
         shpRef = obj._narrow(SHP.ShpToDB)
@@ -88,7 +111,7 @@ class Client(object):
     def client_send_wbd_to_postgres(self, fileName):
         client = Client()
         
-        obj = client.get_reference_to_obj("SHPShpToDB", "Object")
+        obj = client.get_reference_to_obj(self.confSHPIntID, self.confSHPIntKind)
         
         client.logger.log.info("Narrowing to SHP.ShpToDB reference")
         shpRef = obj._narrow(SHP.ShpToDB)
@@ -111,7 +134,7 @@ class Client(object):
         client = Client()
         self.outList = list()
         
-        obj = client.get_reference_to_obj("SHPDrawBasic", "Object")
+        obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
         
         client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
         shpLstObj = obj._narrow(SHPDraw.Basic)
@@ -128,7 +151,7 @@ class Client(object):
     def client_get_shp_file_content(self, fileName):
         client = Client()
         
-        obj = client.get_reference_to_obj("SHPDrawBasic", "Object")
+        obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
         
         client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
         shpLstObj = obj._narrow(SHPDraw.Basic)
@@ -139,6 +162,6 @@ class Client(object):
             fileContent = shpLstObj.get_shp_file_content(fileName)
             return fileContent
         except SHPDraw.FileNotFound as ex:
-            client.logger.log.error("%s." % (ex.reason))
+            client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
             return 1
             

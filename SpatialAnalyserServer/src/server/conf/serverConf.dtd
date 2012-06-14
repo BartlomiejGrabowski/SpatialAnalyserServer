@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT ServerConf (SHPFilesDirectory)>
+<!ELEMENT ServerConf (SHPFilesDirectory, NamingContext, POA, Contexts)>
 <!ELEMENT SHPFilesDirectory (Location)>
+<!ELEMENT NamingContext (ServerContext, ObjectContext, NameService)>
+<!ELEMENT POA (Name)>
+<!ELEMENT Contexts (Shp, ShpToDB, SHPDraw)>
+<!ELEMENT Shp (ID, Kind)>
+<!ELEMENT ShpToDB (ID, Kind)>
+<!ELEMENT SHPDraw (ID, Kind)>
+
 <!ELEMENT Location (#PCDATA)>
+<!ELEMENT ServerContext (#PCDATA)>
+<!ELEMENT ObjectContext (#PCDATA)>
+<!ELEMENT NameService (#PCDATA)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT ID (#PCDATA)>
+<!ELEMENT Kind (#PCDATA)>
