@@ -311,18 +311,18 @@ class Ui_DrawSHPImage(Client):
             feature = layer.GetFeature(featureNum)
             featureRef = feature.GetFieldDefnRef(featureNum)
             #print featureRef.GetName()
-            featureName = feature.GetField("NAME")
-            featurePostal = feature.GetField("ADMIN")
+            #featureName = feature.GetField("NAME")
+            #featurePostal = feature.GetField("ADMIN")
             
             
-            print "Feature %d has name %s -> %s" % (featureNum, featureName, featurePostal)
+            #print "Feature %d has name %s -> %s" % (featureNum, featureName, featurePostal)
         # Styles
 
         #Create polygon style.
         polygonStyle = mapnik.Style()
         #Create new rule for polygons.
         rule = mapnik.Rule()
-        rule.filter =mapnik.Expression("[NAME] != 'Russia'")
+        #rule.filter =mapnik.Expression("[NAME] != 'Russia'")
         #Set polygon color.
         symbol = mapnik.PolygonSymbolizer(mapnik.Color(self.polygon))
         #Append symbol to rule.
@@ -330,14 +330,6 @@ class Ui_DrawSHPImage(Client):
         #Append polygon rule to set of rules.
         polygonStyle.rules.append(rule)
         
-        rule = mapnik.Rule()
-        rule.filter = mapnik.Expression("[NAME] = 'Russia'")
-        #Set polygon color.
-        symbol = mapnik.PolygonSymbolizer(mapnik.Color("#406040"))
-        #Append symbol to rule.
-        rule.symbols.append(symbol)
-        #Append polygon rule to set of rules.
-        polygonStyle.rules.append(rule)
         
         #Create new outlines rule.
         rule = mapnik.Rule()
@@ -346,12 +338,18 @@ class Ui_DrawSHPImage(Client):
         rule.symbols.append(symbol)
         polygonStyle.rules.append(rule)
         
-        #Create new label style.
-        labelStyle = mapnik.Style()
         rule = mapnik.Rule()
-        symbol = mapnik.TextSymbolizer(mapnik.Expression("[NAME]"), "DejaVu Sans Book", 12, mapnik.Color("#000000"))
+        symbol = mapnik.LineSymbolizer(mapnik.Color("#000000"), 0.1)
         rule.symbols.append(symbol)
-        labelStyle.rules.append(rule)
+        
+        polygonStyle.rules.append(rule)
+        
+        #Create new label style.
+        #labelStyle = mapnik.Style()
+        #rule = mapnik.Rule()
+        #symbol = mapnik.TextSymbolizer(mapnik.Expression("[NAME]"), "DejaVu Sans Book", 12, mapnik.Color("#000000"))
+        #rule.symbols.append(symbol)
+        #labelStyle.rules.append(rule)
         
         #Datasource.
         datasource = mapnik.Shapefile(file=self.confSHPDownloadsLoc+str(self.shp_file_name.text()))
@@ -361,15 +359,21 @@ class Ui_DrawSHPImage(Client):
         polygonLayer.datasource = datasource
         polygonLayer.styles.append("PolygonStyle")
         
-        labelLayer = mapnik.Layer("Labels")
-        labelLayer.datasource = datasource
-        labelLayer.styles.append("LabelStyle")
+        #lineLayer = mapnik.Layer("Lines")
+        #lineLayer.datasource = datasource
+        #lineLayer.styles.append("LineStyle")
+        
+        #labelLayer = mapnik.Layer("Labels")
+        #labelLayer.datasource = datasource
+        #labelLayer.styles.append("LabelStyle")
 
         m.append_style("PolygonStyle", polygonStyle)
-        m.append_style("LabelStyle", labelStyle)
+        #m.append_style("LineStyle", lineStyle)
+        #m.append_style("LabelStyle", labelStyle)
         
         m.layers.append(polygonLayer)
-        m.layers.append(labelLayer)
+        #m.layers.append(lineLayer)
+        #m.layers.append(labelLayer)
         
         # Render
         m.zoom_to_box(polygonLayer.envelope())

@@ -10,6 +10,7 @@
 from PyQt4 import QtCore, QtGui
 import send_shp
 import draw_from_shp
+import draw_from_osm
 from Client import Client
 
 class Ui_MainWindow(Client):     
@@ -24,6 +25,9 @@ class Ui_MainWindow(Client):
         self.draw_shp_from_file = QtGui.QPushButton(self.centralwidget)
         self.draw_shp_from_file.setGeometry(QtCore.QRect(630, 80, 93, 27))
         self.draw_shp_from_file.setObjectName("draw_shp_from_file")
+        self.draw_osm_from_file = QtGui.QPushButton(self.centralwidget)
+        self.draw_osm_from_file.setGeometry(QtCore.QRect(630, 120, 93, 27))
+        self.draw_osm_from_file.setObjectName("draw_osm_from_file")
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(60, 20, 241, 61))
         self.widget.setObjectName("widget")
@@ -55,12 +59,14 @@ class Ui_MainWindow(Client):
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.send_shp, QtCore.SIGNAL("clicked()"), self.sendSHP)
         QtCore.QObject.connect(self.draw_shp_from_file, QtCore.SIGNAL("clicked()"), self.drawFromSHPFile)
+        QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Client", None, QtGui.QApplication.UnicodeUTF8))
         self.send_shp.setText(QtGui.QApplication.translate("MainWindow", "Send SHP", None, QtGui.QApplication.UnicodeUTF8))
-        self.draw_shp_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw", None, QtGui.QApplication.UnicodeUTF8))
+        self.draw_shp_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw SHP", None, QtGui.QApplication.UnicodeUTF8))
+        self.draw_osm_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw OSM", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Connected to:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
@@ -75,3 +81,9 @@ class Ui_MainWindow(Client):
         self.sh = draw_from_shp.Ui_DrawFromSHPFile()
         self.sh.setupUi(self.DrawFromSHPFile)
         self.DrawFromSHPFile.show()
+        
+    def drawFromOSMFile(self):
+        self.DrawFromOSMFile = QtGui.QWidget()
+        self.sh = draw_from_osm.Ui_DrawFromOSMFile()
+        self.sh.setupUi(self.DrawFromOSMFile)
+        self.DrawFromOSMFile.show()

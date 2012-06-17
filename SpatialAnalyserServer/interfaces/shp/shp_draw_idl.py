@@ -156,6 +156,8 @@ Basic._d__get_dirLocation = ((),((omniORB.tcInternal.tv_string,0),),None)
 Basic._d__set_dirLocation = (((omniORB.tcInternal.tv_string,0),),(),None)
 Basic._d_get_shp_file_list = ((), (omniORB.typeMapping["IDL:SHPDraw/FileList:1.0"], ), {_0_SHPDraw.UnknownInternalError._NP_RepositoryId: _0_SHPDraw._d_UnknownInternalError})
 Basic._d_get_shp_file_content = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:SHPDraw/FileContent:1.0"], ), {_0_SHPDraw.FileNotFound._NP_RepositoryId: _0_SHPDraw._d_FileNotFound})
+Basic._d_get_osm_file_list = ((), (omniORB.typeMapping["IDL:SHPDraw/FileList:1.0"], ), {_0_SHPDraw.UnknownInternalError._NP_RepositoryId: _0_SHPDraw._d_UnknownInternalError})
+Basic._d_get_osm_file_content = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:SHPDraw/FileContent:1.0"], ), {_0_SHPDraw.FileNotFound._NP_RepositoryId: _0_SHPDraw._d_FileNotFound})
 
 # Basic object reference
 class _objref_Basic (CORBA.Object):
@@ -176,7 +178,13 @@ class _objref_Basic (CORBA.Object):
     def get_shp_file_content(self, *args):
         return _omnipy.invoke(self, "get_shp_file_content", _0_SHPDraw.Basic._d_get_shp_file_content, args)
 
-    __methods__ = ["_get_dirLocation", "_set_dirLocation", "get_shp_file_list", "get_shp_file_content"] + CORBA.Object.__methods__
+    def get_osm_file_list(self, *args):
+        return _omnipy.invoke(self, "get_osm_file_list", _0_SHPDraw.Basic._d_get_osm_file_list, args)
+
+    def get_osm_file_content(self, *args):
+        return _omnipy.invoke(self, "get_osm_file_content", _0_SHPDraw.Basic._d_get_osm_file_content, args)
+
+    __methods__ = ["_get_dirLocation", "_set_dirLocation", "get_shp_file_list", "get_shp_file_content", "get_osm_file_list", "get_osm_file_content"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Basic._NP_RepositoryId, _objref_Basic)
 _0_SHPDraw._objref_Basic = _objref_Basic
@@ -188,7 +196,7 @@ class Basic (PortableServer.Servant):
     _NP_RepositoryId = _0_SHPDraw.Basic._NP_RepositoryId
 
 
-    _omni_op_d = {"_get_dirLocation": _0_SHPDraw.Basic._d__get_dirLocation, "_set_dirLocation": _0_SHPDraw.Basic._d__set_dirLocation, "get_shp_file_list": _0_SHPDraw.Basic._d_get_shp_file_list, "get_shp_file_content": _0_SHPDraw.Basic._d_get_shp_file_content}
+    _omni_op_d = {"_get_dirLocation": _0_SHPDraw.Basic._d__get_dirLocation, "_set_dirLocation": _0_SHPDraw.Basic._d__set_dirLocation, "get_shp_file_list": _0_SHPDraw.Basic._d_get_shp_file_list, "get_shp_file_content": _0_SHPDraw.Basic._d_get_shp_file_content, "get_osm_file_list": _0_SHPDraw.Basic._d_get_osm_file_list, "get_osm_file_content": _0_SHPDraw.Basic._d_get_osm_file_content}
 
 Basic._omni_skeleton = Basic
 _0_SHPDraw__POA.Basic = Basic

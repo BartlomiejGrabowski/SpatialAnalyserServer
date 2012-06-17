@@ -11,7 +11,7 @@ import Queue
 sys.path.append("../performance")
 from FindDB import FindDB
 
-sys.path.append("../../src/logger")
+sys.path.append("../src/logger")
 from Logger import Logger
 
 class PostgresBasic(object):
@@ -32,7 +32,7 @@ class PostgresBasic(object):
         self.user = fdb.user
         self.passwd = fdb.passwd
         
-        self.logger = Logger("PostgresBasic")
+        self.logger = Logger("PostgresBasic", "postgres.log")
         
     def connectToDatabase(self):
         self.logger.log.info("Connecting to database: %s" % (self.db))

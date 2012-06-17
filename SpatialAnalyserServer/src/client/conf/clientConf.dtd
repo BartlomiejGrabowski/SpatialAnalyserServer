@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT ClientConf (DownloadDir, SplashImage, NamingContext, Interfaces, ImagesDir)>
-<!ELEMENT DownloadDir (FlushContent, Location)>
+<!ELEMENT ClientConf (SHPDownloadDir, SHPDownloadDir, SplashImage, NamingContext, Interfaces, ImagesDir)>
+<!ELEMENT SHPDownloadDir (FlushContent, Location)>
+<!ELEMENT OSMDownloadDir (FlushContent, Location)>
 <!ELEMENT ImagesDir (Location)>
 <!ELEMENT IconsDir (Location)>
 <!ELEMENT SplashImage (Location)>

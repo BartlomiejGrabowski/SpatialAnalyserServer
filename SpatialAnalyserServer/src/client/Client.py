@@ -33,9 +33,11 @@ class Client(object):
         self.logger.log.info("Obtain a reference to the root naming context")
         self.obj = orb.resolve_initial_references("NameService")
         self.rootContext = self.obj._narrow(CosNaming.NamingContext)
+        
         if self.rootContext is None:
             self.logger.log.error("Failed to narrow the root naming context")
             sys.exit(1)
+            
         #Retrieving xml configuration file.
         self.logger.log.info("Retrieving configuration data from XML file.")
         #Open xml configuration file.
@@ -43,10 +45,16 @@ class Client(object):
         doc = configurationFile.getroot()
         
         downloadsConf = doc.find('SHPDownloadDir')
-        #Fetch location of downloads folder.
+        #Fetch location of shp download folder.
         self.confSHPDownloadsLoc = downloadsConf.find('Location').text
-        #Fetch flush downloads directory flag.
+        #Fetch flush download directory flag.
         self.confSHPDownloadsFlush = downloadsConf.find('FlushContent').text 
+        
+        downloadsConf = doc.find('OSMDownloadDir')
+        #Fetch location of osm download folder.
+        self.confOSMDownloadsLoc = downloadsConf.find('Location').text
+        #Fetch flush download directory flag.
+        self.confOSMDownloadsFlush = downloadsConf.find('FlushContent').text
         
         contextConf = doc.find('NamingContext')
         #Fetch server context name.
@@ -60,9 +68,9 @@ class Client(object):
         #SHP INTERFACE.
         shpConf = interfacesConf.find('SHP')
         #Fetch ID.
-        self.confSHPIntID = shpConf.find('ID')
+        self.confSHPIntID = shpConf.find('ID').text
         #Fetch kind of interface.
-        self.confSHPIntKind = shpConf.find('Kind')
+        self.confSHPIntKind = shpConf.find('Kind').text
         
         #SHPDraw INTERFACE.
         shpDrawConf = interfacesConf.find('ShpDraw')
@@ -164,4 +172,40 @@ class Client(object):
         except SHPDraw.FileNotFound as ex:
             client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
             return 1
+        
+    def client_get_osm_file_list(self):
+        client = Client()
+        self.outList = list()
+        
+        obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
+        
+        client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
+        osmLstObj = obj._narrow(SHPDraw.Basic)
+        if osmLstObj is None:
+            client.logger.log.error("Object reference is no an SHPDraw::Basic")
+            sys.exit(1)
+        try:
+            self.outList = osmLstObj.get_osm_file_list()
+            return self.outList
+        except SHPDraw.UnknownInternalError as ex:
+            client.logger.log.error("%s." % (ex.reason))
+            return 1
+        
+    def client_get_osm_file_content(self, fileName):
+        client = Client()
+        
+        obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
+        
+        client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
+        osmLstObj = obj._narrow(SHPDraw.Basic)
+        if osmLstObj is None:
+            client.logger.log.error("Object reference is no an SHPDraw::Basic")
+            sys.exit(1)
+        try:
+            fileContent = osmLstObj.get_osm_file_content(fileName)
+            return fileContent
+        except SHPDraw.FileNotFound as ex:
+            client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
+            return 1
+
             

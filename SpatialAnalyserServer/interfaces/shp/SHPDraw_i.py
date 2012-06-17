@@ -29,6 +29,10 @@ class SHPDraw_i(SHPDraw__POA.Basic):
         shpDirConf = doc.find('SHPFilesDirectory')
         #Fetch location of downloads folder.
         self.confSHPDirLocation = shpDirConf.find('Location').text
+        
+        osmDirConf = doc.find('OSMFilesDirectory')
+        #Fetch location of downloads folder.
+        self.confOSMDirLocation = osmDirConf.find('Location').text
 
 
         
@@ -57,5 +61,33 @@ class SHPDraw_i(SHPDraw__POA.Basic):
         except IOError as ex:
             self.logger.error("%s exception occurred during opening shp file" % (ex))
             raise SHPDraw.FileNotFound("Error occurred during openinf shp file", absPath)
+            sys.exit(1)
+        return fileContent
+    
+    def get_osm_file_list(self):
+        self.logger.log.info("get_osm_file_list method invocation.")
+        outFileList = list()
+        try:
+            for filename in sorted(os.listdir(self.confOSMDirLocation)):
+                #Creating new file object.
+                fileObj = SHPDraw.File(filename, time.ctime(os.path.getmtime(self.confOSMDirLocation+'/'+filename)),
+                time.ctime(os.path.getctime(self.confOSMDirLocation+'/'+filename)))
+                #Append file object to the result list.   
+                outFileList.append(fileObj)
+        except OSError as ex:
+            self.logger.log.error("%s exception occurred during creating osm file list" % (ex))
+            raise SHPDraw.UnknownInternalError("Error occurred during creating osm file list")
+            sys.exit(1)
+        return outFileList
+    
+    def get_osm_file_content(self, osmFileName):
+        self.logger.log.info("get_osm_file_content method invocation.")
+        absPath = self.confOSMDirLocation+'/'+osmFileName
+        try:
+            #Convert file content to the list of strings.
+            fileContent = open(absPath, 'r').read()
+        except IOError as ex:
+            self.logger.error("%s exception occurred during opening osm file" % (ex))
+            raise SHPDraw.FileNotFound("Error occurred during openinf osm file", absPath)
             sys.exit(1)
         return fileContent

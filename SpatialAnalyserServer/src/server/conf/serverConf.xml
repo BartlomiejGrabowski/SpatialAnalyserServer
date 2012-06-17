@@ -5,6 +5,9 @@
 	<SHPFilesDirectory>
 		<Location>../../../data_files/shp</Location>
 	</SHPFilesDirectory>
+	<OSMFilesDirectory>
+		<Location>../../../data_files/osm</Location>
+	</OSMFilesDirectory>
 	<NamingContext>
 		<ServerContext>Server</ServerContext>
 		<ObjectContext>Context</ObjectContext>

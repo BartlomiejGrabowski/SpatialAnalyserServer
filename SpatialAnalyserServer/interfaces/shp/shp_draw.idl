@@ -26,5 +26,8 @@ module SHPDraw {
 		attribute string dirLocation;
 		FileList get_shp_file_list() raises (UnknownInternalError);
 		FileContent get_shp_file_content(in string fileName) raises (FileNotFound);
+
+		FileList get_osm_file_list() raises (UnknownInternalError);
+		FileContent get_osm_file_content(in string fileName) raises (FileNotFound);
 	};
 };
