@@ -1,0 +1,245 @@
+.TH "src::client::gui::draw_from_osm::Ui_DrawFromOSMFile" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::gui::draw_from_osm::Ui_DrawFromOSMFile \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Client::Client.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetupUi\fP"
+.br
+.ti -1c
+.RI "def \fBretranslateUi\fP"
+.br
+.ti -1c
+.RI "def \fBflushDataRecords\fP"
+.br
+.ti -1c
+.RI "def \fBgetOSMFileList\fP"
+.br
+.ti -1c
+.RI "def \fBaddFileIntoList\fP"
+.br
+.ti -1c
+.RI "def \fBselectRelatedRowsByCell\fP"
+.br
+.ti -1c
+.RI "def \fBshowOSMDrawForm\fP"
+.br
+.ti -1c
+.RI "def \fBdownloadFile\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBget_file_list\fP"
+.br
+.ti -1c
+.RI "\fBfiles_table\fP"
+.br
+.ti -1c
+.RI "\fBrelated_files_list\fP"
+.br
+.ti -1c
+.RI "\fBlabel\fP"
+.br
+.ti -1c
+.RI "\fBlabel_2\fP"
+.br
+.ti -1c
+.RI "\fBclear_file_list\fP"
+.br
+.ti -1c
+.RI "\fBcancel_window\fP"
+.br
+.ti -1c
+.RI "\fBdraw_file\fP"
+.br
+.ti -1c
+.RI "\fBframe\fP"
+.br
+.ti -1c
+.RI "\fBgetListFlag\fP"
+.br
+.ti -1c
+.RI "\fBoutList\fP"
+.br
+.ti -1c
+.RI "\fBrows\fP"
+.br
+.ti -1c
+.RI "\fBrelatedFiles\fP"
+.br
+.ti -1c
+.RI "\fBDrawOSMImage\fP"
+.br
+.ti -1c
+.RI "\fBsh\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Ui_DrawFromOSMFile is class displays window to drawing shapefiles. PyQT implementation.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 26 of file draw_from_osm.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::addFileIntoList ( self,  filesList,  fileName)".PP
+.nf
+
+@brief: This function is used to add file to osm file list.
+@param filesList list: Input parameter is built-in Python's list.
+@param fileName string: Input parameter is name of osm file. 
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 163 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::downloadFile ( self,  destDir,  fileName)".PP
+.nf
+
+@brief: This function is used to download file from server.
+@param destDir string: Input parameter is destination directory.
+@param fileName string: Input parameter is file name. 
+@return: This function does not return a value. Returns 1 if error occurred.
+.fi
+.PP
+ 
+.PP
+Definition at line 237 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::flushDataRecords ( self)".PP
+.nf
+
+@brief: This function is used to flush records from QTableWidget.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 125 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::getOSMFileList ( self)".PP
+.nf
+
+@brief: This function is used to get osm(OpenStreetMap) file list from server.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 136 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::retranslateUi ( self,  DrawFromOSMFile)".PP
+.nf
+
+@brief: This function is used to translate Qt's items.
+@param DrawFromOSMFile QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 107 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::selectRelatedRowsByCell ( self,  x,  y)".PP
+.nf
+
+@brief: This function is used to select related rows by cell.
+@param x int: Input parameter is x coordinate of cell.
+@param y int: Input parameter is y coordinate of cell. 
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 181 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::setupUi ( self,  DrawFromOSMFile)".PP
+.nf
+
+@brief: This function is used to setup all elements of the main window.
+@see: Ui_DrawFromOSMFile
+@param DrawFromOSMFile QtGui.QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value. 
+.fi
+.PP
+ 
+.PP
+Definition at line 33 of file draw_from_osm.py.
+.SS "def src::client::gui::draw_from_osm::Ui_DrawFromOSMFile::showOSMDrawForm ( self)".PP
+.nf
+
+@brief: This function is used to displays form allowing to draw osm files.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 216 of file draw_from_osm.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::cancel_window\fP"
+.PP
+Definition at line 86 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::clear_file_list\fP"
+.PP
+Definition at line 83 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::draw_file\fP"
+.PP
+Definition at line 89 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::DrawOSMImage\fP"
+.PP
+Definition at line 228 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::files_table\fP"
+.PP
+Definition at line 49 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::frame\fP"
+.PP
+Definition at line 92 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::get_file_list\fP"
+.PP
+Definition at line 46 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::getListFlag\fP"
+.PP
+Definition at line 134 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::label\fP"
+.PP
+Definition at line 70 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::label_2\fP"
+.PP
+Definition at line 73 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::outList\fP"
+.PP
+Definition at line 143 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::related_files_list\fP"
+.PP
+Definition at line 67 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::relatedFiles\fP"
+.PP
+Definition at line 199 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::rows\fP"
+.PP
+Definition at line 145 of file draw_from_osm.py.
+.SS "\fBsrc::client::gui::draw_from_osm::Ui_DrawFromOSMFile::sh\fP"
+.PP
+Definition at line 229 of file draw_from_osm.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

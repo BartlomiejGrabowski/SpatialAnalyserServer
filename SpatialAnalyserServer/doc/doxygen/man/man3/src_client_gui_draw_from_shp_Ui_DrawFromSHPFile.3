@@ -1,0 +1,245 @@
+.TH "src::client::gui::draw_from_shp::Ui_DrawFromSHPFile" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::gui::draw_from_shp::Ui_DrawFromSHPFile \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Client::Client.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetupUi\fP"
+.br
+.ti -1c
+.RI "def \fBretranslateUi\fP"
+.br
+.ti -1c
+.RI "def \fBflushDataRecords\fP"
+.br
+.ti -1c
+.RI "def \fBgetSHPFileList\fP"
+.br
+.ti -1c
+.RI "def \fBaddFileIntoList\fP"
+.br
+.ti -1c
+.RI "def \fBselectRelatedRowsByCell\fP"
+.br
+.ti -1c
+.RI "def \fBshowSHPDrawForm\fP"
+.br
+.ti -1c
+.RI "def \fBdownloadFile\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBget_file_list\fP"
+.br
+.ti -1c
+.RI "\fBfiles_table\fP"
+.br
+.ti -1c
+.RI "\fBrelated_files_list\fP"
+.br
+.ti -1c
+.RI "\fBlabel\fP"
+.br
+.ti -1c
+.RI "\fBlabel_2\fP"
+.br
+.ti -1c
+.RI "\fBclear_file_list\fP"
+.br
+.ti -1c
+.RI "\fBcancel_window\fP"
+.br
+.ti -1c
+.RI "\fBdraw_file\fP"
+.br
+.ti -1c
+.RI "\fBframe\fP"
+.br
+.ti -1c
+.RI "\fBgetListFlag\fP"
+.br
+.ti -1c
+.RI "\fBoutList\fP"
+.br
+.ti -1c
+.RI "\fBrows\fP"
+.br
+.ti -1c
+.RI "\fBrelatedFiles\fP"
+.br
+.ti -1c
+.RI "\fBDrawSHPImage\fP"
+.br
+.ti -1c
+.RI "\fBsh\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Ui_DrawFromSHPFile is class displays window to drawing shapefiles. PyQT implementation.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 21 of file draw_from_shp.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::addFileIntoList ( self,  filesList,  fileName)".PP
+.nf
+
+@brief: This function is used to add file to shapefile list.
+@param filesList list: Input parameter is built-in Python's list.
+@param fileName string: Input parameter is name of shapefile. 
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 160 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::downloadFile ( self,  destDir,  fileName)".PP
+.nf
+
+@brief: This function is used to download file from server.
+@param destDir string: Input parameter is destination directory.
+@param fileName string: Input parameter is file name. 
+@return: This function does not return a value. Returns 1 if error occurred.
+.fi
+.PP
+ 
+.PP
+Definition at line 235 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::flushDataRecords ( self)".PP
+.nf
+
+@brief: This function is used to flush records from QTableWidget.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 120 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::getSHPFileList ( self)".PP
+.nf
+
+@brief: This function is used to get shapefile list from server.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 131 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::retranslateUi ( self,  DrawFromSHPFile)".PP
+.nf
+
+@brief: This function is used to translate Qt's items.
+@param DrawFromSHPFile QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 102 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::selectRelatedRowsByCell ( self,  x,  y)".PP
+.nf
+
+@brief: This function is used to select related rows by cell.
+@param x int: Input parameter is x coordinate of cell.
+@param y int: Input parameter is y coordinate of cell. 
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 178 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::setupUi ( self,  DrawFromSHPFile)".PP
+.nf
+
+@brief: This function is used to setup all elements of the main window.
+@see: Ui_DrawFromSHPFile
+@param DrawFromSHPFile QtGui.QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value. 
+.fi
+.PP
+ 
+.PP
+Definition at line 28 of file draw_from_shp.py.
+.SS "def src::client::gui::draw_from_shp::Ui_DrawFromSHPFile::showSHPDrawForm ( self)".PP
+.nf
+
+@brief: This function is used to displays form allowing to draw shapefile.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 213 of file draw_from_shp.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::cancel_window\fP"
+.PP
+Definition at line 81 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::clear_file_list\fP"
+.PP
+Definition at line 78 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::draw_file\fP"
+.PP
+Definition at line 84 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::DrawSHPImage\fP"
+.PP
+Definition at line 225 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::files_table\fP"
+.PP
+Definition at line 44 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::frame\fP"
+.PP
+Definition at line 87 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::get_file_list\fP"
+.PP
+Definition at line 41 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::getListFlag\fP"
+.PP
+Definition at line 129 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::label\fP"
+.PP
+Definition at line 65 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::label_2\fP"
+.PP
+Definition at line 68 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::outList\fP"
+.PP
+Definition at line 139 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::related_files_list\fP"
+.PP
+Definition at line 62 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::relatedFiles\fP"
+.PP
+Definition at line 196 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::rows\fP"
+.PP
+Definition at line 141 of file draw_from_shp.py.
+.SS "\fBsrc::client::gui::draw_from_shp::Ui_DrawFromSHPFile::sh\fP"
+.PP
+Definition at line 226 of file draw_from_shp.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

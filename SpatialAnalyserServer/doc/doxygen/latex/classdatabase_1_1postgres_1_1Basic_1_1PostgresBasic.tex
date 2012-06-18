@@ -1,0 +1,146 @@
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic}{
+\section{database::postgres::Basic::PostgresBasic Class Reference}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic}\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a0c63793aa57f84cc529cd81dd4f107f7}{\_\-\_\-init\_\-\_\-}
+\item 
+def \hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a5de8f4acfd24dccebf94a05d735bd397}{connectToDatabase}
+\item 
+def \hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a8a483c39885798b1f233f90373010986}{createCursor}
+\item 
+def \hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac0921c1b31b0e241415cd9dfc3f20386}{executeQuery}
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ab3b6a0b3076a9500b5f327634e789294}{db}
+\item 
+\hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac62b73e044b650f2663895d2c782a93a}{user}
+\item 
+\hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a65d13fc2cb11854e0d93c21b83d15e75}{passwd}
+\item 
+\hyperlink{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_aa20ee940899a8083ae01761ea2ef3992}{logger}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}
+This class is is a helper class used to perform basic operations on the Postgres database.
+@author: Bartlomiej Grabowski
+@version: 1.0
+\end{DoxyVerb}
+ 
+
+Definition at line 17 of file Basic.py.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a0c63793aa57f84cc529cd81dd4f107f7}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}}
+\index{\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{\_\-\_\-init\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def database::postgres::Basic::PostgresBasic::\_\-\_\-init\_\-\_\- ( {\em self})}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a0c63793aa57f84cc529cd81dd4f107f7}
+\begin{DoxyVerb}
+Initialize basic Postgres database's parameters such as:
+-name of database,
+-database user name,
+-password to database.
+\end{DoxyVerb}
+ 
+
+Definition at line 24 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a5de8f4acfd24dccebf94a05d735bd397}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!connectToDatabase@{connectToDatabase}}
+\index{connectToDatabase@{connectToDatabase}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{connectToDatabase}]{\setlength{\rightskip}{0pt plus 5cm}def database::postgres::Basic::PostgresBasic::connectToDatabase ( {\em self})}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a5de8f4acfd24dccebf94a05d735bd397}
+\begin{DoxyVerb}
+@brief: This function is used to create a new connection to a Postgres database.
+@see: PostgresBasic
+@param None:
+@return: handle to a Postgres database. 
+\end{DoxyVerb}
+ 
+
+Definition at line 47 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a8a483c39885798b1f233f90373010986}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!createCursor@{createCursor}}
+\index{createCursor@{createCursor}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{createCursor}]{\setlength{\rightskip}{0pt plus 5cm}def database::postgres::Basic::PostgresBasic::createCursor ( {\em self}, \/   {\em \_\-conn})}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a8a483c39885798b1f233f90373010986}
+\begin{DoxyVerb}
+@brief: This function is used to create new cursor to a Postgres connection.
+@see: PostgresBasic
+@param _conn Int: Input parameter is a handle to a Postgres database.
+@return: cursor to a new Postgres connection. 
+\end{DoxyVerb}
+ 
+
+Definition at line 63 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac0921c1b31b0e241415cd9dfc3f20386}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!executeQuery@{executeQuery}}
+\index{executeQuery@{executeQuery}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{executeQuery}]{\setlength{\rightskip}{0pt plus 5cm}def database::postgres::Basic::PostgresBasic::executeQuery ( {\em self}, \/   {\em \_\-cursor}, \/   {\em \_\-query})}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac0921c1b31b0e241415cd9dfc3f20386}
+\begin{DoxyVerb}
+@brief: This function is used to execute a query to the Postgres database.
+@see: PostgresBasic
+@param _cursor cursor: Input parameter is a cursor to Postgres database.
+@param _query string: Input parameter is a query string.
+@return: int Returns a 0 if successful.
+\end{DoxyVerb}
+ 
+
+Definition at line 81 of file Basic.py.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ab3b6a0b3076a9500b5f327634e789294}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!db@{db}}
+\index{db@{db}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{db}]{\setlength{\rightskip}{0pt plus 5cm}{\bf database::postgres::Basic::PostgresBasic::db}}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ab3b6a0b3076a9500b5f327634e789294}
+
+
+Definition at line 40 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_aa20ee940899a8083ae01761ea2ef3992}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!logger@{logger}}
+\index{logger@{logger}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{logger}]{\setlength{\rightskip}{0pt plus 5cm}{\bf database::postgres::Basic::PostgresBasic::logger}}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_aa20ee940899a8083ae01761ea2ef3992}
+
+
+Definition at line 45 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a65d13fc2cb11854e0d93c21b83d15e75}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!passwd@{passwd}}
+\index{passwd@{passwd}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{passwd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf database::postgres::Basic::PostgresBasic::passwd}}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_a65d13fc2cb11854e0d93c21b83d15e75}
+
+
+Definition at line 42 of file Basic.py.
+
+\hypertarget{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac62b73e044b650f2663895d2c782a93a}{
+\index{database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}!user@{user}}
+\index{user@{user}!database::postgres::Basic::PostgresBasic@{database::postgres::Basic::PostgresBasic}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}{\bf database::postgres::Basic::PostgresBasic::user}}}
+\label{classdatabase_1_1postgres_1_1Basic_1_1PostgresBasic_ac62b73e044b650f2663895d2c782a93a}
+
+
+Definition at line 41 of file Basic.py.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/database/postgres/\hyperlink{Basic_8py}{Basic.py}\end{DoxyCompactItemize}

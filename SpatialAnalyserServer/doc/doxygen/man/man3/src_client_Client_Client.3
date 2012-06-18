@@ -1,0 +1,247 @@
+.TH "src::client::Client::Client" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::Client::Client \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBget_reference_to_obj\fP"
+.br
+.ti -1c
+.RI "def \fBclient_send_shp_to_postgres\fP"
+.br
+.ti -1c
+.RI "def \fBclient_send_wbd_to_postgres\fP"
+.br
+.ti -1c
+.RI "def \fBclient_get_shp_file_list\fP"
+.br
+.ti -1c
+.RI "def \fBclient_get_shp_file_content\fP"
+.br
+.ti -1c
+.RI "def \fBclient_get_osm_file_list\fP"
+.br
+.ti -1c
+.RI "def \fBclient_get_osm_file_content\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBlogger\fP"
+.br
+.ti -1c
+.RI "\fBobj\fP"
+.br
+.ti -1c
+.RI "\fBrootContext\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPDownloadsLoc\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPDownloadsFlush\fP"
+.br
+.ti -1c
+.RI "\fBconfOSMDownloadsLoc\fP"
+.br
+.ti -1c
+.RI "\fBconfOSMDownloadsFlush\fP"
+.br
+.ti -1c
+.RI "\fBconfServerContext\fP"
+.br
+.ti -1c
+.RI "\fBconfObjectContext\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPIntID\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPIntKind\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPDrawIntID\fP"
+.br
+.ti -1c
+.RI "\fBconfSHPDrawIntKind\fP"
+.br
+.ti -1c
+.RI "\fBconfIconsDir\fP"
+.br
+.ti -1c
+.RI "\fBoutList\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Client is a major client side class.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 22 of file Client.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::Client::Client::__init__ ( self)".PP
+.nf
+
+Client constructor. The constructor takes the initialization 
+of CORBA main facilities such as reference to NameService and configuration parameters.
+.fi
+.PP
+ 
+.PP
+Definition at line 29 of file Client.py.
+.SS "def src::client::Client::Client::client_get_osm_file_content ( self,  fileName)".PP
+.nf
+
+@brief: This function is used to get osm(OpenStreetMap) file content from server.
+@see: Client
+@param fileName string: Input parameter is a osm file name.
+@return: sequence<octet> Returns octet sequence or 1 if error occurred. 
+.fi
+.PP
+ 
+.PP
+Definition at line 266 of file Client.py.
+.SS "def src::client::Client::Client::client_get_osm_file_list ( self)".PP
+.nf
+
+@brief: This function is used to get osm(OpenStreetMap) file list from server.
+@see: Client
+@param None:
+@return: list Returns built-in Python's list() or 1 if error occurred. 
+.fi
+.PP
+ 
+.PP
+Definition at line 237 of file Client.py.
+.SS "def src::client::Client::Client::client_get_shp_file_content ( self,  fileName)".PP
+.nf
+
+@brief: This function is used to get shapefile content from server.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@return: sequence<octet> Returns octet sequence or 1 if error occurred. 
+.fi
+.PP
+ 
+.PP
+Definition at line 210 of file Client.py.
+.SS "def src::client::Client::Client::client_get_shp_file_list ( self)".PP
+.nf
+
+@brief: This function is used to get shapefile list from server.
+@see: Client
+@param None:
+@return: list Returns built-in Python's list() or 1 if error occurred. 
+.fi
+.PP
+ 
+.PP
+Definition at line 182 of file Client.py.
+.SS "def src::client::Client::Client::client_send_shp_to_postgres ( self,  fileName,  tabName)".PP
+.nf
+
+@brief: This function is used to send shapefile to Postgres database.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@param tabName string: Input parameter is a table name in database.
+@return: int Returns 0 if successful.  
+.fi
+.PP
+ 
+.PP
+Definition at line 115 of file Client.py.
+.SS "def src::client::Client::Client::client_send_wbd_to_postgres ( self,  fileName)".PP
+.nf
+
+@brief: This function is used to send shapefile (world border dataset) to Postgres database.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@return: int Returns 0 if successful.  
+.fi
+.PP
+ 
+.PP
+Definition at line 150 of file Client.py.
+.SS "def src::client::Client::Client::get_reference_to_obj ( self,  prefix,  postfix)".PP
+.nf
+
+@brief: This function is used to get reference to object.
+@see: Client
+@param prefix string: Input parameter is a object id.
+@param postfix string: Input parameter is a kind of object.
+@return: CORBA object.  
+.fi
+.PP
+ 
+.PP
+Definition at line 97 of file Client.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::Client::Client::confIconsDir\fP"
+.PP
+Definition at line 94 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confObjectContext\fP"
+.PP
+Definition at line 72 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confOSMDownloadsFlush\fP"
+.PP
+Definition at line 66 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confOSMDownloadsLoc\fP"
+.PP
+Definition at line 64 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confServerContext\fP"
+.PP
+Definition at line 70 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPDownloadsFlush\fP"
+.PP
+Definition at line 60 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPDownloadsLoc\fP"
+.PP
+Definition at line 58 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPDrawIntID\fP"
+.PP
+Definition at line 87 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPDrawIntKind\fP"
+.PP
+Definition at line 89 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPIntID\fP"
+.PP
+Definition at line 80 of file Client.py.
+.SS "\fBsrc::client::Client::Client::confSHPIntKind\fP"
+.PP
+Definition at line 82 of file Client.py.
+.SS "\fBsrc::client::Client::Client::logger\fP"
+.PP
+Definition at line 35 of file Client.py.
+.SS "\fBsrc::client::Client::Client::obj\fP"
+.PP
+Definition at line 42 of file Client.py.
+.SS "\fBsrc::client::Client::Client::outList\fP"
+.PP
+Definition at line 192 of file Client.py.
+.SS "\fBsrc::client::Client::Client::rootContext\fP"
+.PP
+Definition at line 44 of file Client.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

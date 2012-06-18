@@ -1,0 +1,122 @@
+.TH "database::postgres::Basic::PostgresBasic" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+database::postgres::Basic::PostgresBasic \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP"
+.br
+.ti -1c
+.RI "def \fBconnectToDatabase\fP"
+.br
+.ti -1c
+.RI "def \fBcreateCursor\fP"
+.br
+.ti -1c
+.RI "def \fBexecuteQuery\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.ti -1c
+.RI "\fBuser\fP"
+.br
+.ti -1c
+.RI "\fBpasswd\fP"
+.br
+.ti -1c
+.RI "\fBlogger\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+This class is is a helper class used to perform basic operations on the Postgres database.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 17 of file Basic.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def database::postgres::Basic::PostgresBasic::__init__ ( self)".PP
+.nf
+
+Initialize basic Postgres database's parameters such as:
+-name of database,
+-database user name,
+-password to database.
+.fi
+.PP
+ 
+.PP
+Definition at line 24 of file Basic.py.
+.SS "def database::postgres::Basic::PostgresBasic::connectToDatabase ( self)".PP
+.nf
+
+@brief: This function is used to create a new connection to a Postgres database.
+@see: PostgresBasic
+@param None:
+@return: handle to a Postgres database. 
+.fi
+.PP
+ 
+.PP
+Definition at line 47 of file Basic.py.
+.SS "def database::postgres::Basic::PostgresBasic::createCursor ( self,  _conn)".PP
+.nf
+
+@brief: This function is used to create new cursor to a Postgres connection.
+@see: PostgresBasic
+@param _conn Int: Input parameter is a handle to a Postgres database.
+@return: cursor to a new Postgres connection. 
+.fi
+.PP
+ 
+.PP
+Definition at line 63 of file Basic.py.
+.SS "def database::postgres::Basic::PostgresBasic::executeQuery ( self,  _cursor,  _query)".PP
+.nf
+
+@brief: This function is used to execute a query to the Postgres database.
+@see: PostgresBasic
+@param _cursor cursor: Input parameter is a cursor to Postgres database.
+@param _query string: Input parameter is a query string.
+@return: int Returns a 0 if successful.
+.fi
+.PP
+ 
+.PP
+Definition at line 81 of file Basic.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBdatabase::postgres::Basic::PostgresBasic::db\fP"
+.PP
+Definition at line 40 of file Basic.py.
+.SS "\fBdatabase::postgres::Basic::PostgresBasic::logger\fP"
+.PP
+Definition at line 45 of file Basic.py.
+.SS "\fBdatabase::postgres::Basic::PostgresBasic::passwd\fP"
+.PP
+Definition at line 42 of file Basic.py.
+.SS "\fBdatabase::postgres::Basic::PostgresBasic::user\fP"
+.PP
+Definition at line 41 of file Basic.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

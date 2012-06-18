@@ -23,8 +23,21 @@ sys.path.append("../../../interfaces/shp")
 from Client import Client
 import draw_osm_image
 
-class Ui_DrawFromOSMFile(Client):        
+class Ui_DrawFromOSMFile(Client):
+    '''
+    Class Ui_DrawFromOSMFile is class displays window to drawing shapefiles. PyQT implementation.
+    @author: Bartlomiej Grabowski
+    @version: 1.0
+    '''
+          
     def setupUi(self, DrawFromOSMFile):
+        '''
+        @brief: This function is used to setup all elements of the main window.
+        @see: Ui_DrawFromOSMFile
+        @param DrawFromOSMFile QtGui.QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value. 
+        '''
+        
         DrawFromOSMFile.setObjectName("DrawFromOSMFile")
         DrawFromOSMFile.resize(742, 384)
         icon = QtGui.QIcon()
@@ -92,6 +105,12 @@ class Ui_DrawFromOSMFile(Client):
         QtCore.QMetaObject.connectSlotsByName(DrawFromOSMFile)
 
     def retranslateUi(self, DrawFromOSMFile):
+        '''
+        @brief: This function is used to translate Qt's items.
+        @param DrawFromOSMFile QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value.
+        '''
+        
         DrawFromOSMFile.setWindowTitle(QtGui.QApplication.translate("DrawFromOSMFile", "Draw from OSM", None, QtGui.QApplication.UnicodeUTF8))
         self.get_file_list.setText(QtGui.QApplication.translate("DrawFromOSMFile", "Get file list", None, QtGui.QApplication.UnicodeUTF8))
         self.files_table.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("DrawFromOSMFile", "File name", None, QtGui.QApplication.UnicodeUTF8))
@@ -104,11 +123,23 @@ class Ui_DrawFromOSMFile(Client):
         self.draw_file.setText(QtGui.QApplication.translate("DrawFromOSMFile", "Draw", None, QtGui.QApplication.UnicodeUTF8))
 
     def flushDataRecords(self):
+        '''
+        @brief: This function is used to flush records from QTableWidget.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         self.files_table.clear()
         self.related_files_list.clear()
         self.getListFlag = 0
         
     def getOSMFileList(self):
+        '''
+        @brief: This function is used to get osm(OpenStreetMap) file list from server.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         self.outList = self.client_get_osm_file_list()
         self.getListFlag = 1
         self.rows = 0
@@ -130,14 +161,31 @@ class Ui_DrawFromOSMFile(Client):
             self.rows += 1 
 
     def addFileIntoList(self, filesList, fileName ):
+        '''
+        @brief: This function is used to add file to osm file list.
+        @param filesList list: Input parameter is built-in Python's list.
+        @param fileName string: Input parameter is name of osm file. 
+        @return: This function does not return a value.
+        '''
+        
+        #Create new QListWidgetItem in box with shp related files.
         fileItem = QtGui.QListWidgetItem()
+        #Set item name.
         fileItem.setText(fileName)
         fileItem.setBackground(QtGui.QBrush(QtCore.Qt.Dense7Pattern))
         fileItem.setTextColor(QtGui.QColor(QtCore.Qt.blue))
         fileItem.setIcon(QtGui.QIcon(QtGui.QPixmap(self.confIconsDir+'shpfile.ico')))
+        #Add item to list.
         filesList.addItem(fileItem)
         
     def selectRelatedRowsByCell(self, x, y):
+        '''
+        @brief: This function is used to select related rows by cell.
+        @param x int: Input parameter is x coordinate of cell.
+        @param y int: Input parameter is y coordinate of cell. 
+        @return: This function does not return a value.
+        '''
+        
         #To avoid getting value from empty cells.
         if self.getListFlag == 1:
             #First deselect all rows. Clear earlier selections.
@@ -166,6 +214,12 @@ class Ui_DrawFromOSMFile(Client):
                     self.addFileIntoList(self.related_files_list, f.fName)
                
     def showOSMDrawForm(self):
+        '''
+        @brief: This function is used to displays form allowing to draw osm files.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         #Loop thru related files list.
         for fileName in self.relatedFiles:
             self.downloadFile(self.confOSMDownloadsLoc, fileName)
@@ -181,6 +235,13 @@ class Ui_DrawFromOSMFile(Client):
         
         
     def downloadFile(self, destDir, fileName):
+        '''
+        @brief: This function is used to download file from server.
+        @param destDir string: Input parameter is destination directory.
+        @param fileName string: Input parameter is file name. 
+        @return: This function does not return a value. Returns 1 if error occurred.
+        '''
+        
         #Redirect stdout to /dev/null.
         #f = open(os.devnull, 'w')
         #sys.stdout = f

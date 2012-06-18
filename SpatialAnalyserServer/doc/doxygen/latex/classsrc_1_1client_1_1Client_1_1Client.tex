@@ -1,0 +1,334 @@
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client}{
+\section{src::client::Client::Client Class Reference}
+\label{classsrc_1_1client_1_1Client_1_1Client}\index{src::client::Client::Client@{src::client::Client::Client}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a646bf16bd36fe17146a913bb9b739c6d}{\_\-\_\-init\_\-\_\-}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a67d86b5dae13a77b7b9254d9945d1928}{get\_\-reference\_\-to\_\-obj}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_ae7e99818087a1dad8bdac1ae5984d878}{client\_\-send\_\-shp\_\-to\_\-postgres}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a81a9adc6a52a89f210fdb8d4aa65ea9d}{client\_\-send\_\-wbd\_\-to\_\-postgres}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_abaa61a1c95afdd49f337c42e53a124eb}{client\_\-get\_\-shp\_\-file\_\-list}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a0cf4d0ebe99c56c3b868d6c1b1c0d9b8}{client\_\-get\_\-shp\_\-file\_\-content}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a034e75b4d258f1390f2c1a0d71f05897}{client\_\-get\_\-osm\_\-file\_\-list}
+\item 
+def \hyperlink{classsrc_1_1client_1_1Client_1_1Client_a4c2affde5545a76be35dce61a0afd7e5}{client\_\-get\_\-osm\_\-file\_\-content}
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a963935541e9844c263bb33ac08639edb}{logger}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a0f0a7482f5da3dad9608fc6f2627a9b5}{obj}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a29aa6a88fd5d71d515ec6b8b36a909a5}{rootContext}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_aa20b14111bb124a2b354863c788cd280}{confSHPDownloadsLoc}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_ae712683cad57e9bbec1b4bdb3f811efd}{confSHPDownloadsFlush}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_aeea3aed67628a99df323255a65855162}{confOSMDownloadsLoc}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a2d0dd4c721013ddac967753f6e83f554}{confOSMDownloadsFlush}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a12748c6d9001fa2d69f58f7b053367be}{confServerContext}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a3220a33593eb2c58f5b06ad7fd25c2bf}{confObjectContext}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a76ee65177a12019477d5d2e9bd63ec59}{confSHPIntID}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_ad3a99ea194d0a275b304d028796e8a62}{confSHPIntKind}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_afaffc4cda18336ce7857755e3860bc97}{confSHPDrawIntID}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a0e1b77ef395f3150d422c959a21c610c}{confSHPDrawIntKind}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a8e8ff7747d447a77662c9893887c3927}{confIconsDir}
+\item 
+\hyperlink{classsrc_1_1client_1_1Client_1_1Client_a0d51a95d2a48b4812b6bc43429c36acc}{outList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}
+Class Client is a major client side class.
+@author: Bartlomiej Grabowski
+@version: 1.0
+\end{DoxyVerb}
+ 
+
+Definition at line 22 of file Client.py.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a646bf16bd36fe17146a913bb9b739c6d}{
+\index{src::client::Client::Client@{src::client::Client::Client}!\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}}
+\index{\_\-\_\-init\_\-\_\-@{\_\-\_\-init\_\-\_\-}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{\_\-\_\-init\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::\_\-\_\-init\_\-\_\- ( {\em self})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a646bf16bd36fe17146a913bb9b739c6d}
+\begin{DoxyVerb}
+Client constructor. The constructor takes the initialization 
+of CORBA main facilities such as reference to NameService and configuration parameters.
+\end{DoxyVerb}
+ 
+
+Definition at line 29 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a4c2affde5545a76be35dce61a0afd7e5}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-get\_\-osm\_\-file\_\-content@{client\_\-get\_\-osm\_\-file\_\-content}}
+\index{client\_\-get\_\-osm\_\-file\_\-content@{client\_\-get\_\-osm\_\-file\_\-content}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-get\_\-osm\_\-file\_\-content}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-get\_\-osm\_\-file\_\-content ( {\em self}, \/   {\em fileName})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a4c2affde5545a76be35dce61a0afd7e5}
+\begin{DoxyVerb}
+@brief: This function is used to get osm(OpenStreetMap) file content from server.
+@see: Client
+@param fileName string: Input parameter is a osm file name.
+@return: sequence<octet> Returns octet sequence or 1 if error occurred. 
+\end{DoxyVerb}
+ 
+
+Definition at line 266 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a034e75b4d258f1390f2c1a0d71f05897}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-get\_\-osm\_\-file\_\-list@{client\_\-get\_\-osm\_\-file\_\-list}}
+\index{client\_\-get\_\-osm\_\-file\_\-list@{client\_\-get\_\-osm\_\-file\_\-list}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-get\_\-osm\_\-file\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-get\_\-osm\_\-file\_\-list ( {\em self})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a034e75b4d258f1390f2c1a0d71f05897}
+\begin{DoxyVerb}
+@brief: This function is used to get osm(OpenStreetMap) file list from server.
+@see: Client
+@param None:
+@return: list Returns built-in Python's list() or 1 if error occurred. 
+\end{DoxyVerb}
+ 
+
+Definition at line 237 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a0cf4d0ebe99c56c3b868d6c1b1c0d9b8}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-get\_\-shp\_\-file\_\-content@{client\_\-get\_\-shp\_\-file\_\-content}}
+\index{client\_\-get\_\-shp\_\-file\_\-content@{client\_\-get\_\-shp\_\-file\_\-content}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-get\_\-shp\_\-file\_\-content}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-get\_\-shp\_\-file\_\-content ( {\em self}, \/   {\em fileName})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a0cf4d0ebe99c56c3b868d6c1b1c0d9b8}
+\begin{DoxyVerb}
+@brief: This function is used to get shapefile content from server.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@return: sequence<octet> Returns octet sequence or 1 if error occurred. 
+\end{DoxyVerb}
+ 
+
+Definition at line 210 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_abaa61a1c95afdd49f337c42e53a124eb}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-get\_\-shp\_\-file\_\-list@{client\_\-get\_\-shp\_\-file\_\-list}}
+\index{client\_\-get\_\-shp\_\-file\_\-list@{client\_\-get\_\-shp\_\-file\_\-list}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-get\_\-shp\_\-file\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-get\_\-shp\_\-file\_\-list ( {\em self})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_abaa61a1c95afdd49f337c42e53a124eb}
+\begin{DoxyVerb}
+@brief: This function is used to get shapefile list from server.
+@see: Client
+@param None:
+@return: list Returns built-in Python's list() or 1 if error occurred. 
+\end{DoxyVerb}
+ 
+
+Definition at line 182 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_ae7e99818087a1dad8bdac1ae5984d878}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-send\_\-shp\_\-to\_\-postgres@{client\_\-send\_\-shp\_\-to\_\-postgres}}
+\index{client\_\-send\_\-shp\_\-to\_\-postgres@{client\_\-send\_\-shp\_\-to\_\-postgres}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-send\_\-shp\_\-to\_\-postgres}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-send\_\-shp\_\-to\_\-postgres ( {\em self}, \/   {\em fileName}, \/   {\em tabName})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_ae7e99818087a1dad8bdac1ae5984d878}
+\begin{DoxyVerb}
+@brief: This function is used to send shapefile to Postgres database.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@param tabName string: Input parameter is a table name in database.
+@return: int Returns 0 if successful.  
+\end{DoxyVerb}
+ 
+
+Definition at line 115 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a81a9adc6a52a89f210fdb8d4aa65ea9d}{
+\index{src::client::Client::Client@{src::client::Client::Client}!client\_\-send\_\-wbd\_\-to\_\-postgres@{client\_\-send\_\-wbd\_\-to\_\-postgres}}
+\index{client\_\-send\_\-wbd\_\-to\_\-postgres@{client\_\-send\_\-wbd\_\-to\_\-postgres}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{client\_\-send\_\-wbd\_\-to\_\-postgres}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::client\_\-send\_\-wbd\_\-to\_\-postgres ( {\em self}, \/   {\em fileName})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a81a9adc6a52a89f210fdb8d4aa65ea9d}
+\begin{DoxyVerb}
+@brief: This function is used to send shapefile (world border dataset) to Postgres database.
+@see: Client
+@param fileName string: Input parameter is a shapefile name.
+@return: int Returns 0 if successful.  
+\end{DoxyVerb}
+ 
+
+Definition at line 150 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a67d86b5dae13a77b7b9254d9945d1928}{
+\index{src::client::Client::Client@{src::client::Client::Client}!get\_\-reference\_\-to\_\-obj@{get\_\-reference\_\-to\_\-obj}}
+\index{get\_\-reference\_\-to\_\-obj@{get\_\-reference\_\-to\_\-obj}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{get\_\-reference\_\-to\_\-obj}]{\setlength{\rightskip}{0pt plus 5cm}def src::client::Client::Client::get\_\-reference\_\-to\_\-obj ( {\em self}, \/   {\em prefix}, \/   {\em postfix})}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a67d86b5dae13a77b7b9254d9945d1928}
+\begin{DoxyVerb}
+@brief: This function is used to get reference to object.
+@see: Client
+@param prefix string: Input parameter is a object id.
+@param postfix string: Input parameter is a kind of object.
+@return: CORBA object.  
+\end{DoxyVerb}
+ 
+
+Definition at line 97 of file Client.py.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a8e8ff7747d447a77662c9893887c3927}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confIconsDir@{confIconsDir}}
+\index{confIconsDir@{confIconsDir}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confIconsDir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confIconsDir}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a8e8ff7747d447a77662c9893887c3927}
+
+
+Definition at line 94 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a3220a33593eb2c58f5b06ad7fd25c2bf}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confObjectContext@{confObjectContext}}
+\index{confObjectContext@{confObjectContext}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confObjectContext}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confObjectContext}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a3220a33593eb2c58f5b06ad7fd25c2bf}
+
+
+Definition at line 72 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a2d0dd4c721013ddac967753f6e83f554}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confOSMDownloadsFlush@{confOSMDownloadsFlush}}
+\index{confOSMDownloadsFlush@{confOSMDownloadsFlush}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confOSMDownloadsFlush}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confOSMDownloadsFlush}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a2d0dd4c721013ddac967753f6e83f554}
+
+
+Definition at line 66 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_aeea3aed67628a99df323255a65855162}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confOSMDownloadsLoc@{confOSMDownloadsLoc}}
+\index{confOSMDownloadsLoc@{confOSMDownloadsLoc}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confOSMDownloadsLoc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confOSMDownloadsLoc}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_aeea3aed67628a99df323255a65855162}
+
+
+Definition at line 64 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a12748c6d9001fa2d69f58f7b053367be}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confServerContext@{confServerContext}}
+\index{confServerContext@{confServerContext}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confServerContext}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confServerContext}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a12748c6d9001fa2d69f58f7b053367be}
+
+
+Definition at line 70 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_ae712683cad57e9bbec1b4bdb3f811efd}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPDownloadsFlush@{confSHPDownloadsFlush}}
+\index{confSHPDownloadsFlush@{confSHPDownloadsFlush}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPDownloadsFlush}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPDownloadsFlush}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_ae712683cad57e9bbec1b4bdb3f811efd}
+
+
+Definition at line 60 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_aa20b14111bb124a2b354863c788cd280}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPDownloadsLoc@{confSHPDownloadsLoc}}
+\index{confSHPDownloadsLoc@{confSHPDownloadsLoc}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPDownloadsLoc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPDownloadsLoc}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_aa20b14111bb124a2b354863c788cd280}
+
+
+Definition at line 58 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_afaffc4cda18336ce7857755e3860bc97}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPDrawIntID@{confSHPDrawIntID}}
+\index{confSHPDrawIntID@{confSHPDrawIntID}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPDrawIntID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPDrawIntID}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_afaffc4cda18336ce7857755e3860bc97}
+
+
+Definition at line 87 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a0e1b77ef395f3150d422c959a21c610c}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPDrawIntKind@{confSHPDrawIntKind}}
+\index{confSHPDrawIntKind@{confSHPDrawIntKind}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPDrawIntKind}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPDrawIntKind}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a0e1b77ef395f3150d422c959a21c610c}
+
+
+Definition at line 89 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a76ee65177a12019477d5d2e9bd63ec59}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPIntID@{confSHPIntID}}
+\index{confSHPIntID@{confSHPIntID}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPIntID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPIntID}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a76ee65177a12019477d5d2e9bd63ec59}
+
+
+Definition at line 80 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_ad3a99ea194d0a275b304d028796e8a62}{
+\index{src::client::Client::Client@{src::client::Client::Client}!confSHPIntKind@{confSHPIntKind}}
+\index{confSHPIntKind@{confSHPIntKind}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{confSHPIntKind}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::confSHPIntKind}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_ad3a99ea194d0a275b304d028796e8a62}
+
+
+Definition at line 82 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a963935541e9844c263bb33ac08639edb}{
+\index{src::client::Client::Client@{src::client::Client::Client}!logger@{logger}}
+\index{logger@{logger}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{logger}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::logger}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a963935541e9844c263bb33ac08639edb}
+
+
+Definition at line 35 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a0f0a7482f5da3dad9608fc6f2627a9b5}{
+\index{src::client::Client::Client@{src::client::Client::Client}!obj@{obj}}
+\index{obj@{obj}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{obj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::obj}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a0f0a7482f5da3dad9608fc6f2627a9b5}
+
+
+Definition at line 42 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a0d51a95d2a48b4812b6bc43429c36acc}{
+\index{src::client::Client::Client@{src::client::Client::Client}!outList@{outList}}
+\index{outList@{outList}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{outList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::outList}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a0d51a95d2a48b4812b6bc43429c36acc}
+
+
+Definition at line 192 of file Client.py.
+
+\hypertarget{classsrc_1_1client_1_1Client_1_1Client_a29aa6a88fd5d71d515ec6b8b36a909a5}{
+\index{src::client::Client::Client@{src::client::Client::Client}!rootContext@{rootContext}}
+\index{rootContext@{rootContext}!src::client::Client::Client@{src::client::Client::Client}}
+\subsubsection[{rootContext}]{\setlength{\rightskip}{0pt plus 5cm}{\bf src::client::Client::Client::rootContext}}}
+\label{classsrc_1_1client_1_1Client_1_1Client_a29aa6a88fd5d71d515ec6b8b36a909a5}
+
+
+Definition at line 44 of file Client.py.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+/home/bartek/git/SpatialAnalyserServer/SpatialAnalyserServer/src/client/\hyperlink{Client_8py}{Client.py}\end{DoxyCompactItemize}

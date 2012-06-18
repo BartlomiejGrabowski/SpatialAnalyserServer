@@ -22,8 +22,20 @@ sys.path.append("../../../interfaces/shp")
 from Client import Client
 
 class Ui_DrawOSMImage(Client):
+    '''
+    Class Ui_DrawOSMImage is class displays window to drawing osm files. PyQT implementation.
+    @author: Bartlomiej Grabowski
+    @version: 1.0
+    '''
     
     def setupUi(self, DrawOSMImage):
+        '''
+        @brief: This function is used to setup all elements of the main window.
+        @see: Ui_DrawOSMImage
+        @param DrawOSMImage QtGui.QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value. 
+        '''
+        
         DrawOSMImage.setObjectName("DrawOSMImage")
         DrawOSMImage.resize(1024, 768)
         icon = QtGui.QIcon()
@@ -55,6 +67,12 @@ class Ui_DrawOSMImage(Client):
         QtCore.QMetaObject.connectSlotsByName(DrawOSMImage)
 
     def retranslateUi(self, DrawOSMImage):
+        '''
+        @brief: This function is used to translate Qt's items.
+        @param DrawOSMImage QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value.
+        '''
+        
         DrawOSMImage.setWindowTitle(QtGui.QApplication.translate("DrawOSMImage", "Draw OSM image", None, QtGui.QApplication.UnicodeUTF8))
         self.osm_name_label.setText(QtGui.QApplication.translate("DrawOSMImage", "OSM file: ", None, QtGui.QApplication.UnicodeUTF8))
         self.draw_image_button.setText(QtGui.QApplication.translate("DrawOSMImage", "Draw", None, QtGui.QApplication.UnicodeUTF8))
@@ -64,7 +82,9 @@ class Ui_DrawOSMImage(Client):
  
     def xml2obj(self, src):
         """
-        A simple function to converts XML data into native Python object.
+        @brief: A simple function to converts XML data into native Python object.
+        @param src string: Input parameter is a path to xml file.
+        @return: xml object. 
         """
      
         non_id_char = re.compile('[^_0-9a-zA-Z]')
@@ -293,11 +313,26 @@ class Ui_DrawOSMImage(Client):
  
 ########################################
     def drawOSMFile(self):
+        '''
+        @brief: This function is used to draw picture from osm file.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         src = file(self.confOSMDownloadsLoc+str(self.file_name_label.text())+'.osm')
         myMap = self.xml2obj(src)
         self.render(myMap)
         
     def fillHighwayColor(self, lineStyle, kind, color, thickness):
+        '''
+        @brief: This function is used to fill highways color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of highway.
+        @param color string: Input parameters is highway color.
+        @param thickness float: Input parameter is line thickness.  
+        @return: This function does not return a value.
+        '''
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[highway] = '%s'" % (kind))
         #Set outline color.
@@ -321,6 +356,14 @@ class Ui_DrawOSMImage(Client):
         lineStyle.rules.append(rule)
         
     def fillLanduseColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill lands color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of land.
+        @param color string: Input parameters is land color. 
+        @return: This function does not return a value.
+        '''
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[landuse] = '%s'" % (kind))
         #Set polygon's color.
@@ -337,6 +380,15 @@ class Ui_DrawOSMImage(Client):
 
         
     def fillLaisureColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill laisure color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of laisure.
+        @param color string: Input parameters is laisure color. 
+        @return: This function does not return a value.
+        '''
+        
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[laisure] = '%s'" % (kind))
         #Set polygon's color.
@@ -345,6 +397,15 @@ class Ui_DrawOSMImage(Client):
         polygonStyle.rules.append(rule)
         
     def fillBuildingColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill building color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of building.
+        @param color string: Input parameters is building color. 
+        @return: This function does not return a value.
+        '''
+        
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[building] = '%s'" % (kind))
         #Set polygon's color.
@@ -360,6 +421,14 @@ class Ui_DrawOSMImage(Client):
         polygonStyle.rules.append(rule)
         
     def fillNaturalColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill natural color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of natural.
+        @param color string: Input parameters is natural color. 
+        @return: This function does not return a value.
+        '''
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[natural] = '%s'" % (kind))
         #Set polygon's color.
@@ -368,6 +437,15 @@ class Ui_DrawOSMImage(Client):
         polygonStyle.rules.append(rule)
         
     def fillRailwayColor(self, lineStyle, kind, color, thickness):
+        '''
+        @brief: This function is used to fill railways color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of railway.
+        @param color string: Input parameters is railway color.
+        @param thickness float: Input parameter is line thickness.  
+        @return: This function does not return a value.
+        '''
+        
         rule = mapnik.Rule()
         rule.filter = mapnik.Expression("[railway] = '%s'" % (kind))
         #Set outline color.
@@ -388,6 +466,12 @@ class Ui_DrawOSMImage(Client):
         lineStyle.rules.append(rule)
         
     def drawOSMFile1(self):
+        '''
+        @brief: This function is used to draw picture from osm file.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         src = file(self.confOSMDownloadsLoc+str(self.file_name_label.text())+'.osm')
         myMap = self.xml2obj(src)
         #Create new scene.

@@ -1,0 +1,408 @@
+.TH "src::client::gui::draw_shp_image::Ui_DrawSHPImage" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::gui::draw_shp_image::Ui_DrawSHPImage \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Client::Client.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetupUi\fP"
+.br
+.ti -1c
+.RI "def \fBretranslateUi\fP"
+.br
+.ti -1c
+.RI "def \fBclearAll\fP"
+.br
+.ti -1c
+.RI "def \fBdrawSHPFile\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBconf_shp_image\fP"
+.br
+.ti -1c
+.RI "\fBtab\fP"
+.br
+.ti -1c
+.RI "\fBbackground_image_color\fP"
+.br
+.ti -1c
+.RI "\fBbackground_label\fP"
+.br
+.ti -1c
+.RI "\fBpolygons_color\fP"
+.br
+.ti -1c
+.RI "\fBlabel\fP"
+.br
+.ti -1c
+.RI "\fBlines_color\fP"
+.br
+.ti -1c
+.RI "\fBlabel_2\fP"
+.br
+.ti -1c
+.RI "\fBtab_2\fP"
+.br
+.ti -1c
+.RI "\fBprojection_label\fP"
+.br
+.ti -1c
+.RI "\fBprojection_type\fP"
+.br
+.ti -1c
+.RI "\fBout_image_name\fP"
+.br
+.ti -1c
+.RI "\fBout_image_label\fP"
+.br
+.ti -1c
+.RI "\fBtab_3\fP"
+.br
+.ti -1c
+.RI "\fBantialiasing_checkbox\fP"
+.br
+.ti -1c
+.RI "\fBtab_4\fP"
+.br
+.ti -1c
+.RI "\fBscale_label\fP"
+.br
+.ti -1c
+.RI "\fBscale_x_label\fP"
+.br
+.ti -1c
+.RI "\fBscale_y_label\fP"
+.br
+.ti -1c
+.RI "\fBscale_x_input\fP"
+.br
+.ti -1c
+.RI "\fBscale_y_input\fP"
+.br
+.ti -1c
+.RI "\fBrotation_label\fP"
+.br
+.ti -1c
+.RI "\fBangle_label\fP"
+.br
+.ti -1c
+.RI "\fBangle_input\fP"
+.br
+.ti -1c
+.RI "\fBshear_label\fP"
+.br
+.ti -1c
+.RI "\fBshear_x_label\fP"
+.br
+.ti -1c
+.RI "\fBshear_y_label\fP"
+.br
+.ti -1c
+.RI "\fBshear_x_input\fP"
+.br
+.ti -1c
+.RI "\fBshear_y_input\fP"
+.br
+.ti -1c
+.RI "\fBline\fP"
+.br
+.ti -1c
+.RI "\fBline_2\fP"
+.br
+.ti -1c
+.RI "\fBshp_image_view\fP"
+.br
+.ti -1c
+.RI "\fBshp_name_label\fP"
+.br
+.ti -1c
+.RI "\fBshp_file_name\fP"
+.br
+.ti -1c
+.RI "\fBdraw_image\fP"
+.br
+.ti -1c
+.RI "\fBclear_button\fP"
+.br
+.ti -1c
+.RI "\fBcancel_button\fP"
+.br
+.ti -1c
+.RI "\fBprojection\fP"
+.br
+.ti -1c
+.RI "\fBbackground\fP"
+.br
+.ti -1c
+.RI "\fBpolygon\fP"
+.br
+.ti -1c
+.RI "\fBlines\fP"
+.br
+.ti -1c
+.RI "\fBoutput_name\fP"
+.br
+.ti -1c
+.RI "\fBscene\fP"
+.br
+.ti -1c
+.RI "\fBx\fP"
+.br
+.ti -1c
+.RI "\fBy\fP"
+.br
+.ti -1c
+.RI "\fBantialiasing\fP"
+.br
+.ti -1c
+.RI "\fBscale_x\fP"
+.br
+.ti -1c
+.RI "\fBscale_y\fP"
+.br
+.ti -1c
+.RI "\fBrotation_angle\fP"
+.br
+.ti -1c
+.RI "\fBshear_x\fP"
+.br
+.ti -1c
+.RI "\fBshear_y\fP"
+.br
+.ti -1c
+.RI "\fBpicture\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Ui_DrawSHPImage is class displays window to drawing shapefiles. PyQT implementation.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 21 of file draw_shp_image.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::gui::draw_shp_image::Ui_DrawSHPImage::clearAll ( self)".PP
+.nf
+
+@brief: This function is used to clear all QGraphicsView parameters.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 265 of file draw_shp_image.py.
+.SS "def src::client::gui::draw_shp_image::Ui_DrawSHPImage::drawSHPFile ( self)".PP
+.nf
+
+@brief: This function is used to draw picture from shapefile.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 285 of file draw_shp_image.py.
+.SS "def src::client::gui::draw_shp_image::Ui_DrawSHPImage::retranslateUi ( self,  DrawSHPImage)".PP
+.nf
+
+@brief: This function is used to translate Qt's items.
+@param DrawSHPImage QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 234 of file draw_shp_image.py.
+.SS "def src::client::gui::draw_shp_image::Ui_DrawSHPImage::setupUi ( self,  DrawSHPImage)".PP
+.nf
+
+@brief: This function is used to setup all elements of the main window.
+@see: Ui_DrawSHPImage
+@param DrawSHPImage QtGui.QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value. 
+.fi
+.PP
+ 
+.PP
+Definition at line 28 of file draw_shp_image.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::angle_input\fP"
+.PP
+Definition at line 154 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::angle_label\fP"
+.PP
+Definition at line 151 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::antialiasing\fP"
+.PP
+Definition at line 311 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::antialiasing_checkbox\fP"
+.PP
+Definition at line 119 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::background\fP"
+.PP
+Definition at line 297 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::background_image_color\fP"
+.PP
+Definition at line 47 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::background_label\fP"
+.PP
+Definition at line 59 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::cancel_button\fP"
+.PP
+Definition at line 203 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::clear_button\fP"
+.PP
+Definition at line 200 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::conf_shp_image\fP"
+.PP
+Definition at line 41 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::draw_image\fP"
+.PP
+Definition at line 197 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::label\fP"
+.PP
+Definition at line 73 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::label_2\fP"
+.PP
+Definition at line 88 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::line\fP"
+.PP
+Definition at line 176 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::line_2\fP"
+.PP
+Definition at line 181 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::lines\fP"
+.PP
+Definition at line 301 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::lines_color\fP"
+.PP
+Definition at line 78 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::out_image_label\fP"
+.PP
+Definition at line 112 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::out_image_name\fP"
+.PP
+Definition at line 106 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::output_name\fP"
+.PP
+Definition at line 303 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::picture\fP"
+.PP
+Definition at line 413 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::polygon\fP"
+.PP
+Definition at line 299 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::polygons_color\fP"
+.PP
+Definition at line 64 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::projection\fP"
+.PP
+Definition at line 295 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::projection_label\fP"
+.PP
+Definition at line 94 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::projection_type\fP"
+.PP
+Definition at line 99 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::rotation_angle\fP"
+.PP
+Definition at line 317 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::rotation_label\fP"
+.PP
+Definition at line 144 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_label\fP"
+.PP
+Definition at line 125 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_x\fP"
+.PP
+Definition at line 313 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_x_input\fP"
+.PP
+Definition at line 138 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_x_label\fP"
+.PP
+Definition at line 132 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_y\fP"
+.PP
+Definition at line 315 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_y_input\fP"
+.PP
+Definition at line 141 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scale_y_label\fP"
+.PP
+Definition at line 135 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::scene\fP"
+.PP
+Definition at line 305 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_label\fP"
+.PP
+Definition at line 157 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_x\fP"
+.PP
+Definition at line 319 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_x_input\fP"
+.PP
+Definition at line 170 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_x_label\fP"
+.PP
+Definition at line 164 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_y\fP"
+.PP
+Definition at line 321 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_y_input\fP"
+.PP
+Definition at line 173 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shear_y_label\fP"
+.PP
+Definition at line 167 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shp_file_name\fP"
+.PP
+Definition at line 193 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shp_image_view\fP"
+.PP
+Definition at line 187 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::shp_name_label\fP"
+.PP
+Definition at line 190 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::tab\fP"
+.PP
+Definition at line 44 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::tab_2\fP"
+.PP
+Definition at line 92 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::tab_3\fP"
+.PP
+Definition at line 117 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::tab_4\fP"
+.PP
+Definition at line 123 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::x\fP"
+.PP
+Definition at line 307 of file draw_shp_image.py.
+.SS "\fBsrc::client::gui::draw_shp_image::Ui_DrawSHPImage::y\fP"
+.PP
+Definition at line 309 of file draw_shp_image.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

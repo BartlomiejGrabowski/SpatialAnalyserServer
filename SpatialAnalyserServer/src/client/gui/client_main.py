@@ -13,8 +13,22 @@ import draw_from_shp
 import draw_from_osm
 from Client import Client
 
-class Ui_MainWindow(Client):     
+class Ui_MainWindow(Client):
+    '''
+    Class Ui_MainWindow is a major class representing the
+    main window of SpatialAnalyser application. PyQT implementation.
+    @author: Bartlomiej Grabowski
+    @version: 1.0
+    '''
+    
     def setupUi(self, MainWindow):
+        '''
+        @brief: This function is used to setup all elements of the main window.
+        @see: Ui_MainWindow
+        @param MainWindow QMainWindow: Input parameter is QtGui.QMainWindow.
+        @return: This function does not return a value. 
+        '''
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(0,0,800,400)
         self.centralwidget = QtGui.QWidget(MainWindow)
@@ -56,6 +70,7 @@ class Ui_MainWindow(Client):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        #Connect slots and signals.
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.send_shp, QtCore.SIGNAL("clicked()"), self.sendSHP)
         QtCore.QObject.connect(self.draw_shp_from_file, QtCore.SIGNAL("clicked()"), self.drawFromSHPFile)
@@ -63,6 +78,12 @@ class Ui_MainWindow(Client):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        '''
+        @brief: This function is used to translate Qt's items.
+        @param MainWindow QMainWindow: Input parameter is QtGui.QMainWindow.
+        @return: This function does not return a value.
+        '''
+        
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Client", None, QtGui.QApplication.UnicodeUTF8))
         self.send_shp.setText(QtGui.QApplication.translate("MainWindow", "Send SHP", None, QtGui.QApplication.UnicodeUTF8))
         self.draw_shp_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw SHP", None, QtGui.QApplication.UnicodeUTF8))
@@ -71,18 +92,39 @@ class Ui_MainWindow(Client):
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
     def sendSHP(self):
+        '''
+        @brief: This function is used to show form to send shapefiles to the Postgres database.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
+        #Create new form,
         self.Form = QtGui.QWidget()
+        #Create new Qt class.
         self.sh = send_shp.Ui_SendSHP()
+        #Setup form.
         self.sh.setupUi(self.Form)
         self.Form.show()
         
     def drawFromSHPFile(self):
+        '''
+        @brief: This function is used to show form to drawing shapefiles.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         self.DrawFromSHPFile = QtGui.QWidget()
         self.sh = draw_from_shp.Ui_DrawFromSHPFile()
         self.sh.setupUi(self.DrawFromSHPFile)
         self.DrawFromSHPFile.show()
         
     def drawFromOSMFile(self):
+        '''
+        @brief: This function is used to show form to drawing osm(OpenStreetMap) files.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         self.DrawFromOSMFile = QtGui.QWidget()
         self.sh = draw_from_osm.Ui_DrawFromOSMFile()
         self.sh.setupUi(self.DrawFromOSMFile)

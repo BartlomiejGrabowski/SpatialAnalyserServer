@@ -18,8 +18,21 @@ sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 from Client import Client
 
-class Ui_DrawSHPImage(Client):        
+class Ui_DrawSHPImage(Client):
+    '''
+    Class Ui_DrawSHPImage is class displays window to drawing shapefiles. PyQT implementation.
+    @author: Bartlomiej Grabowski
+    @version: 1.0
+    '''
+           
     def setupUi(self, DrawSHPImage):
+        '''
+        @brief: This function is used to setup all elements of the main window.
+        @see: Ui_DrawSHPImage
+        @param DrawSHPImage QtGui.QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value. 
+        '''
+        
         DrawSHPImage.setObjectName("DrawSHPImage")
         DrawSHPImage.resize(796, 594)
         icon = QtGui.QIcon()
@@ -219,6 +232,12 @@ class Ui_DrawSHPImage(Client):
         QtCore.QMetaObject.connectSlotsByName(DrawSHPImage)
 
     def retranslateUi(self, DrawSHPImage):
+        '''
+        @brief: This function is used to translate Qt's items.
+        @param DrawSHPImage QWidget: Input parameter is QtGui.QWidget.
+        @return: This function does not return a value.
+        '''
+        
         DrawSHPImage.setWindowTitle(QtGui.QApplication.translate("DrawSHPImage", "Draw from SHP", None, QtGui.QApplication.UnicodeUTF8))
         self.background_label.setText(QtGui.QApplication.translate("DrawSHPImage", "Background color", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("DrawSHPImage", "Polygons color", None, QtGui.QApplication.UnicodeUTF8))
@@ -244,6 +263,12 @@ class Ui_DrawSHPImage(Client):
         self.cancel_button.setText(QtGui.QApplication.translate("DrawSHPImage", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
 
     def clearAll(self):
+        '''
+        @brief: This function is used to clear all QGraphicsView parameters.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         #Clear scene.
         self.scene.clear()
         #Clear scale coordinates.
@@ -258,6 +283,12 @@ class Ui_DrawSHPImage(Client):
         
         
     def drawSHPFile(self):
+        '''
+        @brief: This function is used to draw picture from shapefile.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
         #Create a map with a given width and height in pixels.
         # Map
         #Fetch projection type.

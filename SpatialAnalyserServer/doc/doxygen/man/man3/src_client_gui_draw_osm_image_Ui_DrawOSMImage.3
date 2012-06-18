@@ -1,0 +1,164 @@
+.TH "src::client::gui::draw_osm_image::Ui_DrawOSMImage" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::gui::draw_osm_image::Ui_DrawOSMImage \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Client::Client.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetupUi\fP"
+.br
+.ti -1c
+.RI "def \fBretranslateUi\fP"
+.br
+.ti -1c
+.RI "def \fBxml2obj\fP"
+.br
+.ti -1c
+.RI "def \fBrender\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBosm_name_label\fP"
+.br
+.ti -1c
+.RI "\fBfile_name_label\fP"
+.br
+.ti -1c
+.RI "\fBosm_image_view\fP"
+.br
+.ti -1c
+.RI "\fBdraw_image_button\fP"
+.br
+.ti -1c
+.RI "\fBclear_image_button\fP"
+.br
+.ti -1c
+.RI "\fBcancel_window_button\fP"
+.br
+.ti -1c
+.RI "\fBdata\fP"
+.br
+.ti -1c
+.RI "\fBstack\fP"
+.br
+.ti -1c
+.RI "\fBroot\fP"
+.br
+.ti -1c
+.RI "\fBcurrent\fP"
+.br
+.ti -1c
+.RI "\fBtext_parts\fP"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB_attrs\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Ui_DrawOSMImage is class displays window to drawing osm files. PyQT implementation.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 24 of file draw_osm_image.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::gui::draw_osm_image::Ui_DrawOSMImage::render ( self,  myMap)"
+.PP
+Definition at line 173 of file draw_osm_image.py.
+.SS "def src::client::gui::draw_osm_image::Ui_DrawOSMImage::retranslateUi ( self,  DrawOSMImage)".PP
+.nf
+
+@brief: This function is used to translate Qt's items.
+@param DrawOSMImage QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 69 of file draw_osm_image.py.
+.SS "def src::client::gui::draw_osm_image::Ui_DrawOSMImage::setupUi ( self,  DrawOSMImage)".PP
+.nf
+
+@brief: This function is used to setup all elements of the main window.
+@see: Ui_DrawOSMImage
+@param DrawOSMImage QtGui.QWidget: Input parameter is QtGui.QWidget.
+@return: This function does not return a value. 
+.fi
+.PP
+ 
+.PP
+Definition at line 31 of file draw_osm_image.py.
+.SS "def src::client::gui::draw_osm_image::Ui_DrawOSMImage::xml2obj ( self,  src)".PP
+.nf
+
+@brief: A simple function to converts XML data into native Python object.
+@param src string: Input parameter is a path to xml file.
+@return: xml object. 
+.fi
+.PP
+ 
+.PP
+Definition at line 83 of file draw_osm_image.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::_attrs\fP\fC [private]\fP"
+.PP
+Definition at line 96 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::cancel_window_button\fP"
+.PP
+Definition at line 60 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::clear_image_button\fP"
+.PP
+Definition at line 57 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::current\fP"
+.PP
+Definition at line 137 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::data\fP"
+.PP
+Definition at line 97 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::draw_image_button\fP"
+.PP
+Definition at line 54 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::file_name_label\fP"
+.PP
+Definition at line 47 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::osm_image_view\fP"
+.PP
+Definition at line 51 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::osm_name_label\fP"
+.PP
+Definition at line 44 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::root\fP"
+.PP
+Definition at line 136 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::stack\fP"
+.PP
+Definition at line 135 of file draw_osm_image.py.
+.SS "\fBsrc::client::gui::draw_osm_image::Ui_DrawOSMImage::text_parts\fP"
+.PP
+Definition at line 138 of file draw_osm_image.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.

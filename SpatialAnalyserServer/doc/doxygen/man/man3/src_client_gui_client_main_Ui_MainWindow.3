@@ -1,0 +1,195 @@
+.TH "src::client::gui::client_main::Ui_MainWindow" 3 "18 Jun 2012" "Version 1.0.0" "SpatialAnalyzer" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src::client::gui::client_main::Ui_MainWindow \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits Client::Client.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBsetupUi\fP"
+.br
+.ti -1c
+.RI "def \fBretranslateUi\fP"
+.br
+.ti -1c
+.RI "def \fBsendSHP\fP"
+.br
+.ti -1c
+.RI "def \fBdrawFromSHPFile\fP"
+.br
+.ti -1c
+.RI "def \fBdrawFromOSMFile\fP"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBcentralwidget\fP"
+.br
+.ti -1c
+.RI "\fBsend_shp\fP"
+.br
+.ti -1c
+.RI "\fBdraw_shp_from_file\fP"
+.br
+.ti -1c
+.RI "\fBdraw_osm_from_file\fP"
+.br
+.ti -1c
+.RI "\fBwidget\fP"
+.br
+.ti -1c
+.RI "\fBhorizontalLayout\fP"
+.br
+.ti -1c
+.RI "\fBlabel\fP"
+.br
+.ti -1c
+.RI "\fBlabel_server\fP"
+.br
+.ti -1c
+.RI "\fBmenubar\fP"
+.br
+.ti -1c
+.RI "\fBstatusbar\fP"
+.br
+.ti -1c
+.RI "\fBForm\fP"
+.br
+.ti -1c
+.RI "\fBsh\fP"
+.br
+.ti -1c
+.RI "\fBDrawFromSHPFile\fP"
+.br
+.ti -1c
+.RI "\fBDrawFromOSMFile\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+.PP
+.nf
+
+Class Ui_MainWindow is a major class representing the
+main window of SpatialAnalyser application. PyQT implementation.
+@author: Bartlomiej Grabowski
+@version: 1.0
+.fi
+.PP
+ 
+.PP
+Definition at line 16 of file client_main.py.
+.SH "Member Function Documentation"
+.PP 
+.SS "def src::client::gui::client_main::Ui_MainWindow::drawFromOSMFile ( self)".PP
+.nf
+
+@brief: This function is used to show form to drawing osm(OpenStreetMap) files.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 121 of file client_main.py.
+.SS "def src::client::gui::client_main::Ui_MainWindow::drawFromSHPFile ( self)".PP
+.nf
+
+@brief: This function is used to show form to drawing shapefiles.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 109 of file client_main.py.
+.SS "def src::client::gui::client_main::Ui_MainWindow::retranslateUi ( self,  MainWindow)".PP
+.nf
+
+@brief: This function is used to translate Qt's items.
+@param MainWindow QMainWindow: Input parameter is QtGui.QMainWindow.
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 80 of file client_main.py.
+.SS "def src::client::gui::client_main::Ui_MainWindow::sendSHP ( self)".PP
+.nf
+
+@brief: This function is used to show form to send shapefiles to the Postgres database.
+@param None:
+@return: This function does not return a value.
+.fi
+.PP
+ 
+.PP
+Definition at line 94 of file client_main.py.
+.SS "def src::client::gui::client_main::Ui_MainWindow::setupUi ( self,  MainWindow)".PP
+.nf
+
+@brief: This function is used to setup all elements of the main window.
+@see: Ui_MainWindow
+@param MainWindow QMainWindow: Input parameter is QtGui.QMainWindow.
+@return: This function does not return a value. 
+.fi
+.PP
+ 
+.PP
+Definition at line 24 of file client_main.py.
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::centralwidget\fP"
+.PP
+Definition at line 34 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::draw_osm_from_file\fP"
+.PP
+Definition at line 42 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::draw_shp_from_file\fP"
+.PP
+Definition at line 39 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::DrawFromOSMFile\fP"
+.PP
+Definition at line 128 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::DrawFromSHPFile\fP"
+.PP
+Definition at line 116 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::Form\fP"
+.PP
+Definition at line 102 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::horizontalLayout\fP"
+.PP
+Definition at line 48 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::label\fP"
+.PP
+Definition at line 50 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::label_server\fP"
+.PP
+Definition at line 57 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::menubar\fP"
+.PP
+Definition at line 65 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::send_shp\fP"
+.PP
+Definition at line 36 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::sh\fP"
+.PP
+Definition at line 104 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::statusbar\fP"
+.PP
+Definition at line 69 of file client_main.py.
+.SS "\fBsrc::client::gui::client_main::Ui_MainWindow::widget\fP"
+.PP
+Definition at line 45 of file client_main.py.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for SpatialAnalyzer from the source code.
