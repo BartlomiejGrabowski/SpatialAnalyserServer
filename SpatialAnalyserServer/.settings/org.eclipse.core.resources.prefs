@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 #Sat Jun 16 18:59:04 CEST 2012
+=======
+#Mon Jun 04 20:57:18 CEST 2012
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 eclipse.preferences.version=1
 encoding//src/client/gui/client_main.py=utf-8
 encoding//src/client/gui/draw_from_shp.py=utf-8
 encoding//src/client/gui/draw_from_shp1.py=utf-8
+<<<<<<< HEAD
 encoding//src/client/gui/draw_osm_image.py=utf-8
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 encoding//src/client/gui/draw_shp_image.py=utf-8
 encoding//src/client/gui/send_shp.py=utf-8

@@ -54,6 +54,7 @@ class Client(object):
         doc = configurationFile.getroot()
         
         downloadsConf = doc.find('SHPDownloadDir')
+<<<<<<< HEAD
         #Fetch location of shp download folder.
         self.confSHPDownloadsLoc = downloadsConf.find('Location').text
         #Fetch flush download directory flag.
@@ -64,6 +65,12 @@ class Client(object):
         self.confOSMDownloadsLoc = downloadsConf.find('Location').text
         #Fetch flush download directory flag.
         self.confOSMDownloadsFlush = downloadsConf.find('FlushContent').text
+=======
+        #Fetch location of downloads folder.
+        self.confSHPDownloadsLoc = downloadsConf.find('Location').text
+        #Fetch flush downloads directory flag.
+        self.confSHPDownloadsFlush = downloadsConf.find('FlushContent').text 
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         
         contextConf = doc.find('NamingContext')
         #Fetch server context name.
@@ -77,9 +84,15 @@ class Client(object):
         #SHP INTERFACE.
         shpConf = interfacesConf.find('SHP')
         #Fetch ID.
+<<<<<<< HEAD
         self.confSHPIntID = shpConf.find('ID').text
         #Fetch kind of interface.
         self.confSHPIntKind = shpConf.find('Kind').text
+=======
+        self.confSHPIntID = shpConf.find('ID')
+        #Fetch kind of interface.
+        self.confSHPIntKind = shpConf.find('Kind')
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         
         #SHPDraw INTERFACE.
         shpDrawConf = interfacesConf.find('ShpDraw')
@@ -123,7 +136,10 @@ class Client(object):
         
         client = Client()
         
+<<<<<<< HEAD
         #Get reference to object. 
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         obj = client.get_reference_to_obj(self.confSHPIntID, self.confSHPIntKind)
         
         client.logger.log.info("Narrowing to SHP.ShpToDB reference")
@@ -157,7 +173,10 @@ class Client(object):
         
         client = Client()
         
+<<<<<<< HEAD
         #Get reference to object.
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         obj = client.get_reference_to_obj(self.confSHPIntID, self.confSHPIntKind)
         
         client.logger.log.info("Narrowing to SHP.ShpToDB reference")
@@ -191,7 +210,10 @@ class Client(object):
         #Output list.
         self.outList = list()
         
+<<<<<<< HEAD
         #Get reference to object.
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
         
         client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
@@ -217,7 +239,10 @@ class Client(object):
         
         client = Client()
         
+<<<<<<< HEAD
         #Get reference to object.
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
         
         client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
@@ -232,6 +257,7 @@ class Client(object):
             return fileContent
         except SHPDraw.FileNotFound as ex:
             client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
+<<<<<<< HEAD
             return 1
         
     def client_get_osm_file_list(self):
@@ -261,6 +287,8 @@ class Client(object):
             return self.outList
         except SHPDraw.UnknownInternalError as ex:
             client.logger.log.error("%s." % (ex.reason))
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
             return 1
         
     def client_get_osm_file_content(self, fileName):

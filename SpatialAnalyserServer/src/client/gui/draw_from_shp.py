@@ -18,6 +18,7 @@ sys.path.append("../../../interfaces/shp")
 from Client import Client
 import draw_shp_image
 
+<<<<<<< HEAD
 class Ui_DrawFromSHPFile(Client):
     '''
     Class Ui_DrawFromSHPFile is class displays window to drawing shapefiles. PyQT implementation.
@@ -25,6 +26,9 @@ class Ui_DrawFromSHPFile(Client):
     @version: 1.0
     '''
           
+=======
+class Ui_DrawFromSHPFile(Client):        
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
     def setupUi(self, DrawFromSHPFile):
         '''
         @brief: This function is used to setup all elements of the main window.
@@ -172,7 +176,10 @@ class Ui_DrawFromSHPFile(Client):
         #fileItem.setBackground(QtGui.QBrush(QtCore.Qt.Dense7Pattern))
         fileItem.setTextColor(QtGui.QColor(QtCore.Qt.blue))
         fileItem.setIcon(QtGui.QIcon(QtGui.QPixmap(self.confIconsDir+'shpfile.ico')))
+<<<<<<< HEAD
         #Add item to list.
+=======
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         filesList.addItem(fileItem)
         
     def selectRelatedRowsByCell(self, x, y):
@@ -211,6 +218,7 @@ class Ui_DrawFromSHPFile(Client):
                     self.addFileIntoList(self.related_files_list, f.fName)
                     
     def showSHPDrawForm(self):
+<<<<<<< HEAD
         '''
         @brief: This function is used to displays form allowing to draw shapefile.
         @param None:
@@ -230,6 +238,48 @@ class Ui_DrawFromSHPFile(Client):
         #Show a form that allows draw image from shp file.
         self.DrawSHPImage.show()
     
+=======
+        #Loop thru related files list.
+        for fileName in self.relatedFiles:
+            self.downloadFile(self.confSHPDownloadsLoc, fileName)
+
+        #Show SHP draw image form.
+        self.DrawSHPImage = QtGui.QWidget()
+        self.sh = draw_shp_image.Ui_DrawSHPImage()
+        self.sh.setupUi(self.DrawSHPImage)
+        #Get first part (without extension) of file name and set as a label text.
+        self.sh.shp_file_name.setText("<font color='blue'>%s</font>" % (self.relatedFiles[0].split('.')[0]))
+        self.DrawSHPImage.show()
+    
+    def drawSHPFile(self):
+        #Loop thru related files list.
+        for fileName in self.relatedFiles:
+            self.downloadFile(self.confSHPDownloadsLoc, fileName)
+        #Create a map with a given width and height in pixels.
+        # Map
+        m = mapnik.Map(600,300,'+proj=latlong +datum=WGS84')
+        m.background = mapnik.Color('steelblue')
+
+        # Styles
+        poly = mapnik.PolygonSymbolizer(mapnik.Color('lavender'))
+        line = mapnik.LineSymbolizer(mapnik.Color('slategray'),.3)
+        s,r = mapnik.Style(),mapnik.Rule()
+        r.symbols.extend([poly,line])
+        s.rules.append(r)
+        m.append_style('My Style',s)
+
+        # Layer
+        lyr = mapnik.Layer('world')
+        lyr.datasource = mapnik.Shapefile(file=self.confSHPDownloadsLoc+'ne_110m_admin_0_countries')
+        lyr.srs = '+proj=latlong +datum=WGS84'
+        lyr.styles.append('My Style')
+        m.layers.append(lyr)
+
+        # Render
+        m.zoom_to_box(lyr.envelope())
+        mapnik.render_to_file(m, 'hello_world_in_pure_python.png')
+
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         
         
     def downloadFile(self, destDir, fileName):

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!ELEMENT ServerConf (SHPFilesDirectory, OSMFilesDirectory, NamingContext, POA, Contexts)>
 <!ELEMENT SHPFilesDirectory (Location)>
 <!ELEMENT OSMFilesDirectory (Location)>
+=======
+<!ELEMENT ServerConf (SHPFilesDirectory, NamingContext, POA, Contexts)>
+<!ELEMENT SHPFilesDirectory (Location)>
+>>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 <!ELEMENT NamingContext (ServerContext, ObjectContext, NameService)>
 <!ELEMENT POA (Name)>
 <!ELEMENT Contexts (Shp, ShpToDB, SHPDraw)>
