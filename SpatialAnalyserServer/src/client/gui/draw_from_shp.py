@@ -18,17 +18,14 @@ sys.path.append("../../../interfaces/shp")
 from Client import Client
 import draw_shp_image
 
-<<<<<<< HEAD
+
 class Ui_DrawFromSHPFile(Client):
     '''
     Class Ui_DrawFromSHPFile is class displays window to drawing shapefiles. PyQT implementation.
     @author: Bartlomiej Grabowski
     @version: 1.0
     '''
-          
-=======
-class Ui_DrawFromSHPFile(Client):        
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
+         
     def setupUi(self, DrawFromSHPFile):
         '''
         @brief: This function is used to setup all elements of the main window.
@@ -176,10 +173,7 @@ class Ui_DrawFromSHPFile(Client):
         #fileItem.setBackground(QtGui.QBrush(QtCore.Qt.Dense7Pattern))
         fileItem.setTextColor(QtGui.QColor(QtCore.Qt.blue))
         fileItem.setIcon(QtGui.QIcon(QtGui.QPixmap(self.confIconsDir+'shpfile.ico')))
-<<<<<<< HEAD
         #Add item to list.
-=======
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         filesList.addItem(fileItem)
         
     def selectRelatedRowsByCell(self, x, y):
@@ -218,7 +212,6 @@ class Ui_DrawFromSHPFile(Client):
                     self.addFileIntoList(self.related_files_list, f.fName)
                     
     def showSHPDrawForm(self):
-<<<<<<< HEAD
         '''
         @brief: This function is used to displays form allowing to draw shapefile.
         @param None:
@@ -238,7 +231,6 @@ class Ui_DrawFromSHPFile(Client):
         #Show a form that allows draw image from shp file.
         self.DrawSHPImage.show()
     
-=======
         #Loop thru related files list.
         for fileName in self.relatedFiles:
             self.downloadFile(self.confSHPDownloadsLoc, fileName)
@@ -278,8 +270,6 @@ class Ui_DrawFromSHPFile(Client):
         # Render
         m.zoom_to_box(lyr.envelope())
         mapnik.render_to_file(m, 'hello_world_in_pure_python.png')
-
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         
         
     def downloadFile(self, destDir, fileName):

@@ -62,7 +62,6 @@ class SHPDraw_i(SHPDraw__POA.Basic):
             self.logger.error("%s exception occurred during opening shp file" % (ex))
             raise SHPDraw.FileNotFound("Error occurred during openinf shp file", absPath)
             sys.exit(1)
-<<<<<<< HEAD
         return fileContent
     
     def get_osm_file_list(self):
@@ -91,6 +90,4 @@ class SHPDraw_i(SHPDraw__POA.Basic):
             self.logger.error("%s exception occurred during opening osm file" % (ex))
             raise SHPDraw.FileNotFound("Error occurred during openinf osm file", absPath)
             sys.exit(1)
-=======
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
         return fileContent

@@ -5,12 +5,9 @@
 	<SHPFilesDirectory>
 		<Location>../../../data_files/shp</Location>
 	</SHPFilesDirectory>
-<<<<<<< HEAD
 	<OSMFilesDirectory>
 		<Location>../../../data_files/osm</Location>
 	</OSMFilesDirectory>
-=======
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 	<NamingContext>
 		<ServerContext>Server</ServerContext>
 		<ObjectContext>Context</ObjectContext>
