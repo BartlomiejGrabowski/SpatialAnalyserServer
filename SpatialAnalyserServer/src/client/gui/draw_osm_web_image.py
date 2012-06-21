@@ -219,6 +219,55 @@ class Ui_DrawOSMImage(object):
         rule.symbols.append(symbol)
         lineStyle.rules.append(rule)
         
+    def fillWaterwayColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill waterways color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of waterway.
+        @param color string: Input parameters is waterway color. 
+        @return: This function does not return a value.
+        '''
+        
+        
+        rule = mapnik.Rule()
+        rule.filter = mapnik.Expression("[waterway] = '%s'" % (kind))
+        #Set polygon's color.
+        symbol = mapnik.PolygonSymbolizer(mapnik.Color(color))
+        #symbol.fill.color = 'black'
+        rule.symbols.append(symbol)
+        polygonStyle.rules.append(rule)
+        
+        symbol = mapnik.TextSymbolizer(mapnik.Expression("[name]"), 'DejaVu Sans Book', 10, mapnik.Color('black'))
+        
+        #symbol.label_placement = mapnik.label_placement.LINE_PLACEMENT
+        rule.symbols.append(symbol)
+        polygonStyle.rules.append(rule)
+        
+    def fillPlaceColor(self, polygonStyle, kind, color):
+        '''
+        @brief: This function is used to fill places color.
+        @param lineStyle mapnik.Style: Input parameter is mapnik style.
+        @param kind string: Input parameter is kind of place.
+        @param color string: Input parameters is place color. 
+        @return: This function does not return a value.
+        '''
+        
+        
+        rule = mapnik.Rule()
+        rule.filter = mapnik.Expression("[place] = '%s'" % (kind))
+        #Set polygon's color.
+        symbol = mapnik.PolygonSymbolizer(mapnik.Color(color))
+        #symbol.fill.color = 'black'
+        rule.symbols.append(symbol)
+        polygonStyle.rules.append(rule)
+        
+        symbol = mapnik.TextSymbolizer(mapnik.Expression("[name]"), 'DejaVu Sans Book', 10, mapnik.Color('black'))
+        
+        #symbol.label_placement = mapnik.label_placement.LINE_PLACEMENT
+        rule.symbols.append(symbol)
+        polygonStyle.rules.append(rule)
+        
+        
     def drawOSMWeb(self):
         '''
         @brief: This function is used to draw picture from osm file.
@@ -245,13 +294,58 @@ class Ui_DrawOSMImage(object):
         polygonStyle = mapnik.Style()
         #Create new rule for polygons.
         
+        #PLACES.
+        
+        #Coloring suburbs.
+        self.fillPlaceColor(polygonStyle, 'suburb', 'white')
+        
         #NATURALS.
         
         #Coloring water.
         self.fillNaturalColor(polygonStyle, 'water', 'lightblue')
         
+        #Coloring marshes.
+        self.fillNaturalColor(polygonStyle, 'marsh', 'blue')
+        
         #Coloring beaches.
         self.fillNaturalColor(polygonStyle, 'beach', '#FFFF66')
+        
+        #Coloring lands.
+        self.fillNaturalColor(polygonStyle, 'land', '#CCCC99')
+        
+        #Coloring coastlines.
+        self.fillNaturalColor(polygonStyle, 'coastline', '#8BCCE5')
+        
+        #Coloring scrubs.
+        self.fillNaturalColor(polygonStyle, 'scrub', '#99EE9C')
+        
+        #Coloring woods.
+        self.fillNaturalColor(polygonStyle, 'wood', '#99DB9C')
+        
+        #Coloring heaths.
+        self.fillNaturalColor(polygonStyle, 'heath', '#EFEDA5')
+        
+        #Coloring fells.
+        self.fillNaturalColor(polygonStyle, 'fell', '#CDDB69')
+        
+        
+        #WATERWAYS.
+        
+        #Coloring rivers.
+        self.fillWaterwayColor(polygonStyle, 'river', 'lightblue')
+        
+        #Coloring drains.
+        self.fillWaterwayColor(polygonStyle, 'drain', 'lightblue')        
+        
+        #Coloring streams.
+        self.fillWaterwayColor(polygonStyle, 'stream', 'lightblue')
+        
+        #Coloring canals.
+        self.fillWaterwayColor(polygonStyle, 'canal', 'lightblue')
+        
+        #Coloring riverbanks.
+        self.fillWaterwayColor(polygonStyle, 'riverbank', 'lightblue')
+        
         
         #Coloring forests.
         self.fillLanduseColor(polygonStyle, 'forest', '#CFECA8')
@@ -265,9 +359,21 @@ class Ui_DrawOSMImage(object):
         #Coloring grasses.
         self.fillLanduseColor(polygonStyle, 'grass', '#28d25c')
         
+        #Coloring industrials.
+        self.fillLanduseColor(polygonStyle, 'industrial', '#FEADB8')
         
+        #Coloring retails.
+        self.fillLanduseColor(polygonStyle, 'retail', '#F0DADA')
+        
+        #Coloring cemeteries.
+        self.fillLanduseColor(polygonStyle, 'cemetery', '#A9CAAE')
+        
+        #Coloring allotments.
+        self.fillLanduseColor(polygonStyle, 'allotments', '#C8B084')
+             
         
         #BUILDINGS.
+        
         #Coloring blocks.
         self.fillBuildingColor(polygonStyle, 'residential', '#F3D6B6')
         
@@ -277,6 +383,9 @@ class Ui_DrawOSMImage(object):
         
         #Coloring parks.
         self.fillLaisureColor(polygonStyle, 'park', '#00CC99')
+        
+        #Coloring commons.
+        self.fillLaisureColor(polygonStyle, 'common', '#CFECA8')
         
         
         #Create new outlines style.
