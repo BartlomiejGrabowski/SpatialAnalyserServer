@@ -2,6 +2,7 @@ from PyQt4 import QtGui, QtCore
 import client_main
 import xml.etree.ElementTree as ET
 
+
 class Splash(object):
     def __init__(self):
         configurationFile = ET.parse('../conf/clientConf.xml')

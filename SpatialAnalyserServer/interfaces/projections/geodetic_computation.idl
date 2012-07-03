@@ -1,0 +1,53 @@
+module Projection {
+	typedef float latitude;
+	typedef float longitude;
+	typedef float azimuth;
+	typedef float distance;
+	typedef short number_of_points;
+
+	struct Fwd_transformation {
+		latitude end_latitude;
+		longitude end_longitude;
+		azimuth back_azimuth;
+	};
+
+	struct Inv_transformation {
+		azimuth trans_azimuth;
+		azimuth back_azimuth;
+		distance dist;
+	};
+
+	struct Npt {
+		longitude end_longitude;
+		latitude end_latitude;
+	};
+
+	typedef sequence<Npt> Npts;
+
+	exception ArgumentsNotInOrder {
+		string reason;
+	};
+
+	interface Geodetic {
+
+		//get_fwd_transformation - Returns longitudes, latitudes and back azimuths 
+		//of terminus points given longitudes (lons) and latitudes (lats) of initial points, 
+		//plus forward azimuths (az) and distances (dist).
+
+		Fwd_transformation get_fwd_transformation(in longitude lons, in latitude lats, in azimuth az, in distance dist)
+			raises (ArgumentsNotInOrder);
+
+		//get_inv_transformation - Returns forward and back azimuths, plus distances between 
+		//initial points (specified by lons1, lats1) and terminus points (specified by lons2, lats2).
+
+		Inv_transformation get_inv_transformation(in longitude lons1, in latitude lats1, in longitude lons2, in latitude lats2)
+			raises (ArgumentsNotInOrder);
+
+		//Given a single initial point and terminus point (specified by python floats lon1,lat1 and lon2,lat2), 
+		//returns a list of longitude/latitude pairs describing npts equally spaced intermediate 
+		//points along the geodesic between the initial and terminus points.
+
+		Npts get_intermediate_points(in longitude lons1, in latitude lats1, in longitude lons2, in latitude lats2, in number_of_points nop )
+			raises (ArgumentsNotInOrder);
+	};
+};

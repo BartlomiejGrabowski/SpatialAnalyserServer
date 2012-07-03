@@ -9,10 +9,11 @@
 >>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 <!ELEMENT NamingContext (ServerContext, ObjectContext, NameService)>
 <!ELEMENT POA (Name)>
-<!ELEMENT Contexts (Shp, ShpToDB, SHPDraw)>
+<!ELEMENT Contexts (Shp, ShpToDB, SHPDraw, Geodetic)>
 <!ELEMENT Shp (ID, Kind)>
 <!ELEMENT ShpToDB (ID, Kind)>
 <!ELEMENT SHPDraw (ID, Kind)>
+<!ELEMENT Geodetic (ID, Kind)>
 
 <!ELEMENT Location (#PCDATA)>
 <!ELEMENT ServerContext (#PCDATA)>

@@ -29,5 +29,9 @@
 			<ID>SHPDrawBasic</ID>
 			<Kind>Object</Kind>
 		</SHPDraw>
+		<Geodetic>
+			<ID>ProjectionGeodetic</ID>
+			<Kind>Object</Kind>
+		</Geodetic>
 	</Contexts>
 </ServerConf>

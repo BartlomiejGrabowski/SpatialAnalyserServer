@@ -12,6 +12,8 @@ import send_shp
 import draw_from_shp
 import draw_from_osm
 import draw_osm_www
+import sys
+sys.path.append("../../../interfaces/projections")
 from Client import Client
 
 class Ui_MainWindow(Client):
@@ -46,6 +48,9 @@ class Ui_MainWindow(Client):
         self.draw_osm_from_web = QtGui.QPushButton(self.centralwidget)
         self.draw_osm_from_web.setGeometry(QtCore.QRect(630, 160, 93, 27))
         self.draw_osm_from_web.setObjectName("draw_osm_from_web")
+        self.geodetic_computation = QtGui.QPushButton(self.centralwidget)
+        self.geodetic_computation.setGeometry(QtCore.QRect(630, 200, 93, 27))
+        self.geodetic_computation.setObjectName("geodetic_computation")
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(60, 20, 241, 61))
         self.widget.setObjectName("widget")
@@ -80,6 +85,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.draw_shp_from_file, QtCore.SIGNAL("clicked()"), self.drawFromSHPFile)
         QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QObject.connect(self.draw_osm_from_web, QtCore.SIGNAL("clicked()"), self.drawFromOSMWeb)
+        QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.geodetic)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -94,6 +100,7 @@ class Ui_MainWindow(Client):
         self.draw_shp_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw SHP", None, QtGui.QApplication.UnicodeUTF8))
         self.draw_osm_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw OSM", None, QtGui.QApplication.UnicodeUTF8))
         self.draw_osm_from_web.setText(QtGui.QApplication.translate("MainWindow", "Draw WWW", None, QtGui.QApplication.UnicodeUTF8))
+        self.geodetic_computation.setText(QtGui.QApplication.translate("MainWindow", "Geodetic", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Connected to:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
@@ -147,3 +154,11 @@ class Ui_MainWindow(Client):
         self.sh = draw_osm_www.Ui_DrawOSMFromWeb()
         self.sh.setupUi(self.DrawFromOSMWeb)
         self.DrawFromOSMWeb.show()
+        
+    def geodetic(self):
+        self.client_get_fwd_transformation(176.2345, 38.2888, 30, 5200)
+        self.client_get_inv_transformation(176.234436, 38.167445, 176.234466, 38.167405)
+        out = self.client_get_intermediate_points(176.234436, 38.167445, 176.234466, 38.167405, 3)
+        for point in out:
+            print point.end_longitude
+            print point.end_latitude

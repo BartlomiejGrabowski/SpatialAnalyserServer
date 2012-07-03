@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <!ELEMENT ClientConf (SHPDownloadDir, SHPDownloadDir, SplashImage, NamingContext, Interfaces, ImagesDir)>
 <!ELEMENT SHPDownloadDir (FlushContent, Location)>
 <!ELEMENT OSMDownloadDir (FlushContent, Location)>
-=======
 <!ELEMENT ClientConf (DownloadDir, SplashImage, NamingContext, Interfaces, ImagesDir)>
 <!ELEMENT DownloadDir (FlushContent, Location)>
->>>>>>> e4c450059ebc9624d89d515d50ca172e65a57b46
 <!ELEMENT ImagesDir (Location)>
 <!ELEMENT IconsDir (Location)>
 <!ELEMENT SplashImage (Location)>
 <!ELEMENT NamingContext (ServerContext, ObjectContext)>
-<!ELEMENT Interfaces (ShpDraw, SHP)>
+<!ELEMENT Interfaces (ShpDraw, SHP, Geodetic)>
 <!ELEMENT ShpDraw (ID, Kind)>
 <!ELEMENT SHP (ID, Kind)>
+<!ELEMENT Geodetic (ID, Kind)>
 
 <!ELEMENT FlushContent (#PCDATA)>
 <!ELEMENT Location (#PCDATA)>

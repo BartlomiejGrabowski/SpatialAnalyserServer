@@ -32,5 +32,9 @@
 			<ID>SHPShpToDB</ID>
 			<Kind>Object</Kind>
 		</SHP>
+		<Geodetic>
+			<ID>ProjectionGeodetic</ID>
+			<Kind>Object</Kind>
+		</Geodetic>
 	</Interfaces>
 </ClientConf>

@@ -15,6 +15,7 @@ sys.path.append("..")
 sys.path.append("../../logger")
 sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
+sys.path.append("../../../interfaces/projections")
 from Client import Client
 import draw_shp_image
 

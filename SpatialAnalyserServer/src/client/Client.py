@@ -17,6 +17,7 @@ from Logger import Logger
 import DB
 import SHP
 import SHPDraw
+import Projection
 import xml.etree.ElementTree as ET
 
 class Client(object):
@@ -97,6 +98,13 @@ class Client(object):
         self.confSHPDrawIntID = shpDrawConf.find('ID').text
         #Fetch kind of interface.
         self.confSHPDrawIntKind = shpDrawConf.find('Kind').text
+        
+        #Geodetic INTERFACE.
+        geodeticConf = interfacesConf.find('Geodetic')
+        #Fetch ID from interface.
+        self.confGeodeticIntID = geodeticConf.find('ID').text
+        #Fetch kind of interface.
+        self.confGeodeticIntKind = geodeticConf.find('Kind').text
         
         #Images XML TAG.
         iconsDirConf = doc.find('IconsDir')
@@ -302,4 +310,102 @@ class Client(object):
             client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
             return 1
 
-            
+    def client_get_fwd_transformation(self, lons, lats, az, dist):
+        '''
+        @brief: This function is used to get forward transformation.
+        @see: Client
+        @param lons float: Input parameter is longitude value.
+        @param lats float: Input parameter is latitude value.
+        @param az float: Input parameter is azimuth value.
+        @param dist float: Input parameter is distance value.
+        @return: Returns longitudes, latitudes and back azimuths or 1 if error occurred.
+        '''
+        client = Client()
+        
+        #Forward transformation.
+        self.fwdTransformation = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+        try:
+            self.fwdTransformation = geodeticObj.get_fwd_transformation(lons, lats, az, dist)
+            print(self.fwdTransformation.end_latitude)
+            print(self.fwdTransformation.end_longitude)
+            print(self.fwdTransformation.back_azimuth)
+            return self.fwdTransformation
+        except Projection.ArgumentsNotInOrder as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        
+    def client_get_inv_transformation(self, lons1, lats1, lons2, lats2):
+        '''
+        @brief: This function is used to get inverse transformation.
+        @see: Client
+        @param lons1 float: Input parameter is start longitude value.
+        @param lats1 float: Input parameter is start latitude value.
+        @param lons2 float: Input parameter is end longitude value.
+        @param lats2 float: Input parameter is end latitude value.
+        @return: Returns forward and back azimuths, plus distances between initial points or 1 if error occurred.
+        '''
+        client = Client()
+        
+        #Forward transformation.
+        self.invTransformation = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+        try:
+            self.invTransformation = geodeticObj.get_inv_transformation(lons1, lats1, lons2, lats2)
+            print(self.invTransformation.trans_azimuth)
+            print(self.invTransformation.back_azimuth)
+            print(self.invTransformation.dist)
+            return self.invTransformation
+        except Projection.ArgumentsNotInOrder as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        
+    def client_get_intermediate_points(self, lons1, lats1, lons2, lats2, npts):
+        '''
+        @brief: This function is used to get forward transformation.
+        @see: Client
+        @param lons1 float: Input parameter is start longitude value.
+        @param lats1 float: Input parameter is start latitude value.
+        @param lons2 float: Input parameter is end longitude value.
+        @param lats2 float: Input parameter is end latitude value.
+        @param npts integer: Input parameter is a number of points between start and end point. 
+        @return: returns a list of longitude/latitude pairs describing npts or 1 if error occurred.
+        '''
+        client = Client()
+        
+        #Forward transformation.
+        self.nptsList = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+        try:
+            self.nptsList = geodeticObj.get_intermediate_points(lons1, lats1, lons2, lats2, npts)
+            return self.nptsList
+        except Projection.ArgumentsNotInOrder as ex:
+            client.logger.log.error(ex.reason)
+            return 1
