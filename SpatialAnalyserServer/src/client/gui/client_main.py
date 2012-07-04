@@ -162,3 +162,18 @@ class Ui_MainWindow(Client):
         for point in out:
             print point.end_longitude
             print point.end_latitude
+            
+        projection_list = self.client_get_projection_list()
+        for projection in projection_list:
+            print(projection.proj_name)
+            print(projection.proj_desc)
+            
+        ellipsoid_list = self.client_get_ellipsoid_list()
+        for ellipsoid in ellipsoid_list:
+            print(ellipsoid.ellps_name)
+            print(ellipsoid.ellps_desc)
+            
+        coor = self.client_transform_coordinate_systems('epsg:26915', 'epsg:26715', -92.199881, 38.56694, 0)
+        print(coor.x2)
+        print(coor.y2)
+        print(coor.z2)

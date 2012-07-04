@@ -75,6 +75,78 @@ _0_Projection._tc_number_of_points = omniORB.tcInternal.createTypeCode(_0_Projec
 omniORB.registerType(number_of_points._NP_RepositoryId, _0_Projection._ad_number_of_points, _0_Projection._tc_number_of_points)
 del number_of_points
 
+# typedef ... projection_name
+class projection_name:
+    _NP_RepositoryId = "IDL:Projection/projection_name:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.projection_name = projection_name
+_0_Projection._d_projection_name  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_projection_name = (omniORB.tcInternal.tv_alias, projection_name._NP_RepositoryId, "projection_name", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_projection_name = omniORB.tcInternal.createTypeCode(_0_Projection._ad_projection_name)
+omniORB.registerType(projection_name._NP_RepositoryId, _0_Projection._ad_projection_name, _0_Projection._tc_projection_name)
+del projection_name
+
+# typedef ... projection_desc
+class projection_desc:
+    _NP_RepositoryId = "IDL:Projection/projection_desc:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.projection_desc = projection_desc
+_0_Projection._d_projection_desc  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_projection_desc = (omniORB.tcInternal.tv_alias, projection_desc._NP_RepositoryId, "projection_desc", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_projection_desc = omniORB.tcInternal.createTypeCode(_0_Projection._ad_projection_desc)
+omniORB.registerType(projection_desc._NP_RepositoryId, _0_Projection._ad_projection_desc, _0_Projection._tc_projection_desc)
+del projection_desc
+
+# typedef ... ellipsoid_name
+class ellipsoid_name:
+    _NP_RepositoryId = "IDL:Projection/ellipsoid_name:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.ellipsoid_name = ellipsoid_name
+_0_Projection._d_ellipsoid_name  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_ellipsoid_name = (omniORB.tcInternal.tv_alias, ellipsoid_name._NP_RepositoryId, "ellipsoid_name", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_ellipsoid_name = omniORB.tcInternal.createTypeCode(_0_Projection._ad_ellipsoid_name)
+omniORB.registerType(ellipsoid_name._NP_RepositoryId, _0_Projection._ad_ellipsoid_name, _0_Projection._tc_ellipsoid_name)
+del ellipsoid_name
+
+# typedef ... ellipsoid_desc
+class ellipsoid_desc:
+    _NP_RepositoryId = "IDL:Projection/ellipsoid_desc:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.ellipsoid_desc = ellipsoid_desc
+_0_Projection._d_ellipsoid_desc  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_ellipsoid_desc = (omniORB.tcInternal.tv_alias, ellipsoid_desc._NP_RepositoryId, "ellipsoid_desc", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_ellipsoid_desc = omniORB.tcInternal.createTypeCode(_0_Projection._ad_ellipsoid_desc)
+omniORB.registerType(ellipsoid_desc._NP_RepositoryId, _0_Projection._ad_ellipsoid_desc, _0_Projection._tc_ellipsoid_desc)
+del ellipsoid_desc
+
+# typedef ... input_projection
+class input_projection:
+    _NP_RepositoryId = "IDL:Projection/input_projection:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.input_projection = input_projection
+_0_Projection._d_input_projection  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_input_projection = (omniORB.tcInternal.tv_alias, input_projection._NP_RepositoryId, "input_projection", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_input_projection = omniORB.tcInternal.createTypeCode(_0_Projection._ad_input_projection)
+omniORB.registerType(input_projection._NP_RepositoryId, _0_Projection._ad_input_projection, _0_Projection._tc_input_projection)
+del input_projection
+
+# typedef ... output_projection
+class output_projection:
+    _NP_RepositoryId = "IDL:Projection/output_projection:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.output_projection = output_projection
+_0_Projection._d_output_projection  = (omniORB.tcInternal.tv_string,1024)
+_0_Projection._ad_output_projection = (omniORB.tcInternal.tv_alias, output_projection._NP_RepositoryId, "output_projection", (omniORB.tcInternal.tv_string,1024))
+_0_Projection._tc_output_projection = omniORB.tcInternal.createTypeCode(_0_Projection._ad_output_projection)
+omniORB.registerType(output_projection._NP_RepositoryId, _0_Projection._ad_output_projection, _0_Projection._tc_output_projection)
+del output_projection
+
 # struct Fwd_transformation
 _0_Projection.Fwd_transformation = omniORB.newEmptyClass()
 class Fwd_transformation (omniORB.StructBase):
@@ -122,6 +194,52 @@ _0_Projection._tc_Npt = omniORB.tcInternal.createTypeCode(_0_Projection._d_Npt)
 omniORB.registerType(Npt._NP_RepositoryId, _0_Projection._d_Npt, _0_Projection._tc_Npt)
 del Npt
 
+# struct Proj
+_0_Projection.Proj = omniORB.newEmptyClass()
+class Proj (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Projection/Proj:1.0"
+
+    def __init__(self, proj_name, proj_desc):
+        self.proj_name = proj_name
+        self.proj_desc = proj_desc
+
+_0_Projection.Proj = Proj
+_0_Projection._d_Proj  = (omniORB.tcInternal.tv_struct, Proj, Proj._NP_RepositoryId, "Proj", "proj_name", omniORB.typeMapping["IDL:Projection/projection_name:1.0"], "proj_desc", omniORB.typeMapping["IDL:Projection/projection_desc:1.0"])
+_0_Projection._tc_Proj = omniORB.tcInternal.createTypeCode(_0_Projection._d_Proj)
+omniORB.registerType(Proj._NP_RepositoryId, _0_Projection._d_Proj, _0_Projection._tc_Proj)
+del Proj
+
+# struct Ellipsoid
+_0_Projection.Ellipsoid = omniORB.newEmptyClass()
+class Ellipsoid (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Projection/Ellipsoid:1.0"
+
+    def __init__(self, ellps_name, ellps_desc):
+        self.ellps_name = ellps_name
+        self.ellps_desc = ellps_desc
+
+_0_Projection.Ellipsoid = Ellipsoid
+_0_Projection._d_Ellipsoid  = (omniORB.tcInternal.tv_struct, Ellipsoid, Ellipsoid._NP_RepositoryId, "Ellipsoid", "ellps_name", omniORB.typeMapping["IDL:Projection/ellipsoid_name:1.0"], "ellps_desc", omniORB.typeMapping["IDL:Projection/ellipsoid_desc:1.0"])
+_0_Projection._tc_Ellipsoid = omniORB.tcInternal.createTypeCode(_0_Projection._d_Ellipsoid)
+omniORB.registerType(Ellipsoid._NP_RepositoryId, _0_Projection._d_Ellipsoid, _0_Projection._tc_Ellipsoid)
+del Ellipsoid
+
+# struct Coordinates
+_0_Projection.Coordinates = omniORB.newEmptyClass()
+class Coordinates (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Projection/Coordinates:1.0"
+
+    def __init__(self, x2, y2, z2):
+        self.x2 = x2
+        self.y2 = y2
+        self.z2 = z2
+
+_0_Projection.Coordinates = Coordinates
+_0_Projection._d_Coordinates  = (omniORB.tcInternal.tv_struct, Coordinates, Coordinates._NP_RepositoryId, "Coordinates", "x2", omniORB.tcInternal.tv_float, "y2", omniORB.tcInternal.tv_float, "z2", omniORB.tcInternal.tv_float)
+_0_Projection._tc_Coordinates = omniORB.tcInternal.createTypeCode(_0_Projection._d_Coordinates)
+omniORB.registerType(Coordinates._NP_RepositoryId, _0_Projection._d_Coordinates, _0_Projection._tc_Coordinates)
+del Coordinates
+
 # typedef ... Npts
 class Npts:
     _NP_RepositoryId = "IDL:Projection/Npts:1.0"
@@ -133,6 +251,30 @@ _0_Projection._ad_Npts = (omniORB.tcInternal.tv_alias, Npts._NP_RepositoryId, "N
 _0_Projection._tc_Npts = omniORB.tcInternal.createTypeCode(_0_Projection._ad_Npts)
 omniORB.registerType(Npts._NP_RepositoryId, _0_Projection._ad_Npts, _0_Projection._tc_Npts)
 del Npts
+
+# typedef ... Proj_list
+class Proj_list:
+    _NP_RepositoryId = "IDL:Projection/Proj_list:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.Proj_list = Proj_list
+_0_Projection._d_Proj_list  = (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Projection/Proj:1.0"], 0)
+_0_Projection._ad_Proj_list = (omniORB.tcInternal.tv_alias, Proj_list._NP_RepositoryId, "Proj_list", (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Projection/Proj:1.0"], 0))
+_0_Projection._tc_Proj_list = omniORB.tcInternal.createTypeCode(_0_Projection._ad_Proj_list)
+omniORB.registerType(Proj_list._NP_RepositoryId, _0_Projection._ad_Proj_list, _0_Projection._tc_Proj_list)
+del Proj_list
+
+# typedef ... Ellipsoid_list
+class Ellipsoid_list:
+    _NP_RepositoryId = "IDL:Projection/Ellipsoid_list:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Projection.Ellipsoid_list = Ellipsoid_list
+_0_Projection._d_Ellipsoid_list  = (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Projection/Ellipsoid:1.0"], 0)
+_0_Projection._ad_Ellipsoid_list = (omniORB.tcInternal.tv_alias, Ellipsoid_list._NP_RepositoryId, "Ellipsoid_list", (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Projection/Ellipsoid:1.0"], 0))
+_0_Projection._tc_Ellipsoid_list = omniORB.tcInternal.createTypeCode(_0_Projection._ad_Ellipsoid_list)
+omniORB.registerType(Ellipsoid_list._NP_RepositoryId, _0_Projection._ad_Ellipsoid_list, _0_Projection._tc_Ellipsoid_list)
+del Ellipsoid_list
 
 # exception ArgumentsNotInOrder
 _0_Projection.ArgumentsNotInOrder = omniORB.newEmptyClass()
@@ -170,6 +312,9 @@ omniORB.registerType(Geodetic._NP_RepositoryId, _0_Projection._d_Geodetic, _0_Pr
 Geodetic._d_get_fwd_transformation = ((omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/azimuth:1.0"], omniORB.typeMapping["IDL:Projection/distance:1.0"]), (omniORB.typeMapping["IDL:Projection/Fwd_transformation:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
 Geodetic._d_get_inv_transformation = ((omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"]), (omniORB.typeMapping["IDL:Projection/Inv_transformation:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
 Geodetic._d_get_intermediate_points = ((omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/number_of_points:1.0"]), (omniORB.typeMapping["IDL:Projection/Npts:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
+Geodetic._d_get_projection_list = ((), (omniORB.typeMapping["IDL:Projection/Proj_list:1.0"], ), None)
+Geodetic._d_get_ellipsoid_list = ((), (omniORB.typeMapping["IDL:Projection/Ellipsoid_list:1.0"], ), None)
+Geodetic._d_transform_coordinate_systems = ((omniORB.typeMapping["IDL:Projection/input_projection:1.0"], omniORB.typeMapping["IDL:Projection/output_projection:1.0"], omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float), (omniORB.typeMapping["IDL:Projection/Coordinates:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
 
 # Geodetic object reference
 class _objref_Geodetic (CORBA.Object):
@@ -187,7 +332,16 @@ class _objref_Geodetic (CORBA.Object):
     def get_intermediate_points(self, *args):
         return _omnipy.invoke(self, "get_intermediate_points", _0_Projection.Geodetic._d_get_intermediate_points, args)
 
-    __methods__ = ["get_fwd_transformation", "get_inv_transformation", "get_intermediate_points"] + CORBA.Object.__methods__
+    def get_projection_list(self, *args):
+        return _omnipy.invoke(self, "get_projection_list", _0_Projection.Geodetic._d_get_projection_list, args)
+
+    def get_ellipsoid_list(self, *args):
+        return _omnipy.invoke(self, "get_ellipsoid_list", _0_Projection.Geodetic._d_get_ellipsoid_list, args)
+
+    def transform_coordinate_systems(self, *args):
+        return _omnipy.invoke(self, "transform_coordinate_systems", _0_Projection.Geodetic._d_transform_coordinate_systems, args)
+
+    __methods__ = ["get_fwd_transformation", "get_inv_transformation", "get_intermediate_points", "get_projection_list", "get_ellipsoid_list", "transform_coordinate_systems"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Geodetic._NP_RepositoryId, _objref_Geodetic)
 _0_Projection._objref_Geodetic = _objref_Geodetic
@@ -199,7 +353,7 @@ class Geodetic (PortableServer.Servant):
     _NP_RepositoryId = _0_Projection.Geodetic._NP_RepositoryId
 
 
-    _omni_op_d = {"get_fwd_transformation": _0_Projection.Geodetic._d_get_fwd_transformation, "get_inv_transformation": _0_Projection.Geodetic._d_get_inv_transformation, "get_intermediate_points": _0_Projection.Geodetic._d_get_intermediate_points}
+    _omni_op_d = {"get_fwd_transformation": _0_Projection.Geodetic._d_get_fwd_transformation, "get_inv_transformation": _0_Projection.Geodetic._d_get_inv_transformation, "get_intermediate_points": _0_Projection.Geodetic._d_get_intermediate_points, "get_projection_list": _0_Projection.Geodetic._d_get_projection_list, "get_ellipsoid_list": _0_Projection.Geodetic._d_get_ellipsoid_list, "transform_coordinate_systems": _0_Projection.Geodetic._d_transform_coordinate_systems}
 
 Geodetic._omni_skeleton = Geodetic
 _0_Projection__POA.Geodetic = Geodetic

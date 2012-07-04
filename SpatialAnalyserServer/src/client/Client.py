@@ -409,3 +409,80 @@ class Client(object):
         except Projection.ArgumentsNotInOrder as ex:
             client.logger.log.error(ex.reason)
             return 1
+        
+    def client_get_projection_list(self):
+        '''
+        @brief: This function is used to get projection list.
+        @see: Client
+        @param: Function takes no input parameters.
+        @return: returns a list of projection or 1 if error occurred.
+        '''
+        client = Client()
+        
+        self.projectionList = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+            
+        self.projectionList = geodeticObj.get_projection_list()
+
+        return self.projectionList
+    
+    def client_get_ellipsoid_list(self):
+        '''
+        @brief: This function is used to get ellipsoid list.
+        @see: Client
+        @param: Function takes no input parameters.
+        @return: returns a list of ellipsoid or 1 if error occurred.
+        '''
+        client = Client()
+        
+        self.ellipsoidList = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+            
+        self.ellipsoidList = geodeticObj.get_ellipsoid_list()
+
+        return self.ellipsoidList
+    
+    def client_transform_coordinate_systems(self, in_projection, out_projection, x1, y1, z1=0):
+        '''
+        @brief: This function is used to get coordinate system after transform from another.
+        @see: Client
+        @param: Function takes no input parameters.
+        @return: returns x2,y2,z2 in the coordinate system defined by out_projection.
+        '''
+        client = Client()
+        
+        self.output_coordinates = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confGeodeticIntID, self.confGeodeticIntKind)
+        
+        client.logger.log.info("Narrowing reference to Projection.Geodetic reference")
+        #Narrow reference to Geodetic interface.
+        geodeticObj = obj._narrow(Projection.Geodetic)
+        if geodeticObj is None:
+            client.logger.log.error("Object reference is no an Projection::Geodetic")
+            sys.exit(1)
+        try:    
+            self.output_coordinates = geodeticObj.transform_coordinate_systems(in_projection, out_projection, x1, y1, z1)
+            return self.output_coordinates
+        except Projection.ArgumentsNotInOrder as ex:
+            client.logger.log.error(ex.reason)
+            return 1

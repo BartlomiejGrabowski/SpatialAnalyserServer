@@ -5,6 +5,16 @@ module Projection {
 	typedef float distance;
 	typedef short number_of_points;
 
+	typedef string<1024> projection_name;
+	typedef string<1024> projection_desc;
+
+	typedef string<1024> ellipsoid_name;
+	typedef string<1024> ellipsoid_desc;
+	
+	typedef string<1024> input_projection;
+	typedef string<1024> output_projection;
+
+
 	struct Fwd_transformation {
 		latitude end_latitude;
 		longitude end_longitude;
@@ -22,7 +32,25 @@ module Projection {
 		latitude end_latitude;
 	};
 
+	struct Proj {
+		projection_name proj_name;
+		projection_desc proj_desc;
+	};
+
+	struct Ellipsoid {
+		ellipsoid_name ellps_name;
+		ellipsoid_desc ellps_desc;
+	};
+
+	struct Coordinates {
+		float x2;
+		float y2;
+		float z2;
+	};
+
 	typedef sequence<Npt> Npts;
+	typedef sequence<Proj> Proj_list;
+	typedef sequence<Ellipsoid> Ellipsoid_list;
 
 	exception ArgumentsNotInOrder {
 		string reason;
@@ -49,5 +77,20 @@ module Projection {
 
 		Npts get_intermediate_points(in longitude lons1, in latitude lats1, in longitude lons2, in latitude lats2, in number_of_points nop )
 			raises (ArgumentsNotInOrder);
+
+		//Function get_projection_list returns a list of available projection. The function takes no input parameters.
+
+		Proj_list get_projection_list();
+
+		//Function get_projection_list returns a list of available ellipsoid. The function takes no input parameters.
+
+		Ellipsoid_list get_ellipsoid_list();
+
+		//transform_coordinate_systems - Transforms points between two coordinate systems defined by the Proj instances p1 (Input_projection) and 
+		//p2 (Output_projection).
+		//The points x1,y1,z1 in the coordinate system defined by p1 are transformed to x2,y2,z2 in the coordinate system defined by p2.
+
+		Coordinates transform_coordinate_systems(in input_projection in_projection, in output_projection out_projection, in float x1, 
+							in float y1, in float z1) raises (ArgumentsNotInOrder); 
 	};
 };
