@@ -1,0 +1,42 @@
+module Info {
+	typedef string<1024> driver_name;
+	typedef short raster_x_size;
+	typedef short raster_y_size;
+	typedef short raster_bands;
+	typedef string<1024> associated_file;
+	typedef string<1024> coordinate_system;
+	typedef string<1024> gcp_info;
+	typedef string<1024> metadata_item;
+	typedef string<1024> dataset;
+	typedef float origin;
+	typedef float pixel_size;
+
+	typedef sequence<origin> origins;
+	typedef sequence<metadata_item> metadata_list;
+	
+	
+	struct Pixel_X_Y_size {
+		pixel_size x_size;
+		pixel_size y_size;
+	};
+
+	struct GCP {
+		short ID;
+		float GCP_pixel;
+		float GCP_line;
+		float GCP_x;
+		float GCP_y;
+		float GCP_z;
+		gcp_info GCP_information;
+	};
+
+	exception DatasetOpenFailed {
+		string reason;
+	};
+
+	interface Raster {
+		//Function returns raster pixel size (in format: (x, y)).
+		Pixel_X_Y_size get_pixel_size(in dataset hDataset) raises (DatasetOpenFailed);
+
+	};
+};

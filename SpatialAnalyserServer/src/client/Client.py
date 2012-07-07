@@ -17,6 +17,7 @@ from Logger import Logger
 import DB
 import SHP
 import SHPDraw
+import Info
 import Projection
 import xml.etree.ElementTree as ET
 
@@ -105,6 +106,13 @@ class Client(object):
         self.confGeodeticIntID = geodeticConf.find('ID').text
         #Fetch kind of interface.
         self.confGeodeticIntKind = geodeticConf.find('Kind').text
+        
+        #Raster INTERFACE.
+        rasterConf = interfacesConf.find('Raster')
+        #Fetch ID from interface.
+        self.confRasterIntID = rasterConf.find('ID').text
+        #Fetch kind of interface.
+        self.confRasterIntKind = rasterConf.find('Kind').text
         
         #Images XML TAG.
         iconsDirConf = doc.find('IconsDir')
@@ -484,5 +492,30 @@ class Client(object):
             self.output_coordinates = geodeticObj.transform_coordinate_systems(in_projection, out_projection, x1, y1, z1)
             return self.output_coordinates
         except Projection.ArgumentsNotInOrder as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        
+    def client_get_pixel_size(self, dataset_path):
+        ''' @brief Function gets pixel size from raster data set.
+            @param dataset_path String Path to raster data set source.
+            @return: List Function returns raster pixel size (in format: (x, y)).
+        '''
+        client = Client()
+        
+        self.pixel_size = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.pixel_size = rasterObj.get_pixel_size(dataset_path)
+            return self.pixel_size
+        except Info.DatasetOpenFailed as ex:
             client.logger.log.error(ex.reason)
             return 1

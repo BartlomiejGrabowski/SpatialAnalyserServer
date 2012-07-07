@@ -33,5 +33,9 @@
 			<ID>ProjectionGeodetic</ID>
 			<Kind>Object</Kind>
 		</Geodetic>
+		<Raster>
+			<ID>InfoRaster</ID>
+			<Kind>Object</Kind>
+		</Raster>
 	</Contexts>
 </ServerConf>

@@ -19,12 +19,15 @@ from Basic import PostgresBasic
 sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 sys.path.append("../../../interfaces/projections")
+sys.path.append("../../../interfaces/info")
 
 # Import interface implementation.
 from Shp_i import Shp_i
 from ShpToDB_i import ShpToDB_i
 from SHPDraw_i import SHPDraw_i
 from GeodeticComputation_i import GeodeticComputation_i
+from RasterInfo_i import RasterInfo_i
+
 
 import xml.etree.ElementTree as ET
 
@@ -82,6 +85,13 @@ class Server(object):
         self.confGeodeticContextID = confGeodeticContext.find('ID').text
         #Fetch kind of Geodetic context.
         self.confGeodeticContextKind = confGeodeticContext.find('Kind').text
+        
+        #Interface Raster context.
+        confRasterContext = confContexts.find('Raster')
+        #Fetch ID of Raster context.
+        self.confRasterContextID = confRasterContext.find('ID').text
+        #Fetch kind of Raster context.
+        self.confRasterContextKind = confRasterContext.find('Kind').text
         
         
         
@@ -145,8 +155,10 @@ if __name__ == "__main__":
     shpObj = ShpToDB_i()
     #Create SHPDraw object.
     shpDrawObj = SHPDraw_i()
-    #Create Geodetic context.
+    #Create Geodetic object.
     geodeticObj = GeodeticComputation_i()
+    #Create Raster object.
+    rasterObj = RasterInfo_i()
     
     server.bind_new_context(server.confShpContextID, server.confShpContextKind, dbObj)
     
@@ -155,4 +167,6 @@ if __name__ == "__main__":
     server.bind_new_context(server.confSHPDrawContextID, server.confSHPDrawContextKind, shpDrawObj)
     
     server.bind_new_context(server.confGeodeticContextID, server.confGeodeticContextKind, geodeticObj)
+    
+    server.bind_new_context(server.confRasterContextID, server.confRasterContextKind, rasterObj)
     server.activate_POA()

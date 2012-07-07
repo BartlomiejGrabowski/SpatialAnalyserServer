@@ -8,10 +8,11 @@
 <!ELEMENT IconsDir (Location)>
 <!ELEMENT SplashImage (Location)>
 <!ELEMENT NamingContext (ServerContext, ObjectContext)>
-<!ELEMENT Interfaces (ShpDraw, SHP, Geodetic)>
+<!ELEMENT Interfaces (ShpDraw, SHP, Geodetic, Raster)>
 <!ELEMENT ShpDraw (ID, Kind)>
 <!ELEMENT SHP (ID, Kind)>
 <!ELEMENT Geodetic (ID, Kind)>
+<!ELEMENT Raster (ID, Kind)>
 
 <!ELEMENT FlushContent (#PCDATA)>
 <!ELEMENT Location (#PCDATA)>
