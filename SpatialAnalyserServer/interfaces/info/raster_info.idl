@@ -30,6 +30,11 @@ module Info {
 		gcp_info GCP_information;
 	};
 
+	struct Driver {
+		driver_name short_name;
+		driver_name long_name;
+	};
+
 	exception DatasetOpenFailed {
 		string reason;
 	};
@@ -37,6 +42,9 @@ module Info {
 	interface Raster {
 		//Function returns raster pixel size (in format: (x, y)).
 		Pixel_X_Y_size get_pixel_size(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns driver names (struct contains long driver name and short driver name.
+		Driver get_driver_name(in dataset hDataset) raises (DatasetOpenFailed);
 
 	};
 };

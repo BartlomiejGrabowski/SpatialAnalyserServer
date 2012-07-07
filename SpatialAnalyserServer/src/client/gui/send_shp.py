@@ -15,6 +15,7 @@ sys.path.append("../../logger")
 sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 sys.path.append("../../../interfaces/projections")
+sys.path.append("../../../interfaces/info")
 from Client import Client
 
 

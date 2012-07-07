@@ -206,6 +206,21 @@ _0_Info._tc_GCP = omniORB.tcInternal.createTypeCode(_0_Info._d_GCP)
 omniORB.registerType(GCP._NP_RepositoryId, _0_Info._d_GCP, _0_Info._tc_GCP)
 del GCP
 
+# struct Driver
+_0_Info.Driver = omniORB.newEmptyClass()
+class Driver (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Info/Driver:1.0"
+
+    def __init__(self, short_name, long_name):
+        self.short_name = short_name
+        self.long_name = long_name
+
+_0_Info.Driver = Driver
+_0_Info._d_Driver  = (omniORB.tcInternal.tv_struct, Driver, Driver._NP_RepositoryId, "Driver", "short_name", omniORB.typeMapping["IDL:Info/driver_name:1.0"], "long_name", omniORB.typeMapping["IDL:Info/driver_name:1.0"])
+_0_Info._tc_Driver = omniORB.tcInternal.createTypeCode(_0_Info._d_Driver)
+omniORB.registerType(Driver._NP_RepositoryId, _0_Info._d_Driver, _0_Info._tc_Driver)
+del Driver
+
 # exception DatasetOpenFailed
 _0_Info.DatasetOpenFailed = omniORB.newEmptyClass()
 class DatasetOpenFailed (CORBA.UserException):
@@ -240,6 +255,7 @@ omniORB.registerType(Raster._NP_RepositoryId, _0_Info._d_Raster, _0_Info._tc_Ras
 
 # Raster operations and attributes
 Raster._d_get_pixel_size = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Pixel_X_Y_size:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_driver_name = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Driver:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 
 # Raster object reference
 class _objref_Raster (CORBA.Object):
@@ -251,7 +267,10 @@ class _objref_Raster (CORBA.Object):
     def get_pixel_size(self, *args):
         return _omnipy.invoke(self, "get_pixel_size", _0_Info.Raster._d_get_pixel_size, args)
 
-    __methods__ = ["get_pixel_size"] + CORBA.Object.__methods__
+    def get_driver_name(self, *args):
+        return _omnipy.invoke(self, "get_driver_name", _0_Info.Raster._d_get_driver_name, args)
+
+    __methods__ = ["get_pixel_size", "get_driver_name"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Raster._NP_RepositoryId, _objref_Raster)
 _0_Info._objref_Raster = _objref_Raster
@@ -263,7 +282,7 @@ class Raster (PortableServer.Servant):
     _NP_RepositoryId = _0_Info.Raster._NP_RepositoryId
 
 
-    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size}
+    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size, "get_driver_name": _0_Info.Raster._d_get_driver_name}
 
 Raster._omni_skeleton = Raster
 _0_Info__POA.Raster = Raster

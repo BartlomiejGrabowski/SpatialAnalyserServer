@@ -40,10 +40,6 @@ class RasterInfo_i(Info__POA.Raster):
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
-        if dataset is None:
-            raise Info.DatasetOpenFailed(ex)
-            sys.exit(1)
-            
         #(x, y).
         self.pixel_size = list()
         
@@ -58,4 +54,29 @@ class RasterInfo_i(Info__POA.Raster):
         self.pixel_size = Info.Pixel_X_Y_size(pixel_x_size, pixel_y_size)
         
         return self.pixel_size
+    
+    def get_driver_name(self, dataset_path):
+        ''' @brief Function gets driver name.
+            @param dataset_path String Path to raster data set source.
+            @return: List Function returns raster driver name (long and short name).
+        '''
+        self.driver_name = list()
+                
+        try:
+            dataset = gdal.Open(dataset_path, GA_ReadOnly)
+        except Exception as ex:
+            self.logger.error('Exception occurred during creating data set.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)
         
+        try:
+            driver_short_name = dataset.GetDriver().ShortName
+            driver_long_name = dataset.GetDriver().LongName
+            self.driver_name = Info.Driver(driver_short_name, driver_long_name)
+        except Exception as ex:
+            self.logger.error('Exception occurred during getting driver name.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)
+            
+        return self.driver_name
+            

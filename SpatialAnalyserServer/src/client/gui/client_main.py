@@ -91,7 +91,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QObject.connect(self.draw_osm_from_web, QtCore.SIGNAL("clicked()"), self.drawFromOSMWeb)
         QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.geodetic)
-        QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.raster_info)
+        QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.raster_info1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -185,7 +185,10 @@ class Ui_MainWindow(Client):
         print(coor.y2)
         print(coor.z2)
         
-    def raster_info(self):
-        pixel_size = self.client_get_pixel_size('../../data_files/L71044034_03420050418_B10.TIF')
+    def raster_info1(self):
+        pixel_size = self.client_get_pixel_size('../../../data_files/tif/L71044034_03420050418_B10.TIF')
         print(pixel_size.x_size)
         print(pixel_size.y_size)
+        driver_name= self.client_get_driver_name('../../../data_files/tif/L71044034_03420050418_B10.TIF')
+        print(driver_name.short_name)
+        print(driver_name.long_name)

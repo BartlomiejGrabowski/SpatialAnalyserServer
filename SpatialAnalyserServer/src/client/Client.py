@@ -11,8 +11,6 @@ import CosNaming
 #sys.path.append("../logger")
 from Logger import Logger
 
-#sys.path.append("../../interfaces/db")
-#sys.path.append("../../interfaces/shp")
 
 import DB
 import SHP
@@ -496,9 +494,10 @@ class Client(object):
             return 1
         
     def client_get_pixel_size(self, dataset_path):
-        ''' @brief Function gets pixel size from raster data set.
-            @param dataset_path String Path to raster data set source.
-            @return: List Function returns raster pixel size (in format: (x, y)).
+        ''' 
+        @brief Function gets pixel size from raster data set.
+        @param dataset_path String Path to raster data set source.
+        @return: List Function returns raster pixel size (in format: (x, y)).
         '''
         client = Client()
         
@@ -519,3 +518,29 @@ class Client(object):
         except Info.DatasetOpenFailed as ex:
             client.logger.log.error(ex.reason)
             return 1
+        
+    def client_get_driver_name(self, dataset_path):
+        ''' @brief Function gets driver name.
+            @param dataset_path String Path to raster data set source.
+            @return: List Function returns raster driver name (long and short name).
+        '''
+        
+        client = Client()
+        
+        self.driver_name = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.driver_name = rasterObj.get_driver_name(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.driver_name
