@@ -8,16 +8,20 @@ module Info {
 	typedef string<1024> gcp_info;
 	typedef string<1024> metadata_item;
 	typedef string<1024> dataset;
-	typedef float origin;
+	typedef string<1024> projection;
 	typedef float pixel_size;
 
-	typedef sequence<origin> origins;
 	typedef sequence<metadata_item> metadata_list;
 	
 	
 	struct Pixel_X_Y_size {
 		pixel_size x_size;
 		pixel_size y_size;
+	};
+
+	struct Origin {
+		float top_left_x;
+		float top_left_y;
 	};
 
 	struct GCP {
@@ -35,6 +39,11 @@ module Info {
 		driver_name long_name;
 	};
 
+	struct Raster_size {
+		raster_x_size x_size;
+		raster_y_size y_size;
+	};
+
 	exception DatasetOpenFailed {
 		string reason;
 	};
@@ -43,8 +52,21 @@ module Info {
 		//Function returns raster pixel size (in format: (x, y)).
 		Pixel_X_Y_size get_pixel_size(in dataset hDataset) raises (DatasetOpenFailed);
 
-		//Function returns driver names (struct contains long driver name and short driver name.
+		//Function returns driver name (struct contains long driver name and short driver name).
 		Driver get_driver_name(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns origin. Top left x and top left y points.
+		Origin get_origin(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns raster size (struct contains x size and y size).
+		Raster_size get_raster_size(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns information about projection.
+		projection get_projection_info(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns number of raster bands.
+		raster_bands get_raster_bands(in dataset hDataset) raises (DatasetOpenFailed);
+
 
 	};
 };

@@ -123,17 +123,17 @@ _0_Info._tc_dataset = omniORB.tcInternal.createTypeCode(_0_Info._ad_dataset)
 omniORB.registerType(dataset._NP_RepositoryId, _0_Info._ad_dataset, _0_Info._tc_dataset)
 del dataset
 
-# typedef ... origin
-class origin:
-    _NP_RepositoryId = "IDL:Info/origin:1.0"
+# typedef ... projection
+class projection:
+    _NP_RepositoryId = "IDL:Info/projection:1.0"
     def __init__(self, *args, **kw):
         raise RuntimeError("Cannot construct objects of this type.")
-_0_Info.origin = origin
-_0_Info._d_origin  = omniORB.tcInternal.tv_float
-_0_Info._ad_origin = (omniORB.tcInternal.tv_alias, origin._NP_RepositoryId, "origin", omniORB.tcInternal.tv_float)
-_0_Info._tc_origin = omniORB.tcInternal.createTypeCode(_0_Info._ad_origin)
-omniORB.registerType(origin._NP_RepositoryId, _0_Info._ad_origin, _0_Info._tc_origin)
-del origin
+_0_Info.projection = projection
+_0_Info._d_projection  = (omniORB.tcInternal.tv_string,1024)
+_0_Info._ad_projection = (omniORB.tcInternal.tv_alias, projection._NP_RepositoryId, "projection", (omniORB.tcInternal.tv_string,1024))
+_0_Info._tc_projection = omniORB.tcInternal.createTypeCode(_0_Info._ad_projection)
+omniORB.registerType(projection._NP_RepositoryId, _0_Info._ad_projection, _0_Info._tc_projection)
+del projection
 
 # typedef ... pixel_size
 class pixel_size:
@@ -146,18 +146,6 @@ _0_Info._ad_pixel_size = (omniORB.tcInternal.tv_alias, pixel_size._NP_Repository
 _0_Info._tc_pixel_size = omniORB.tcInternal.createTypeCode(_0_Info._ad_pixel_size)
 omniORB.registerType(pixel_size._NP_RepositoryId, _0_Info._ad_pixel_size, _0_Info._tc_pixel_size)
 del pixel_size
-
-# typedef ... origins
-class origins:
-    _NP_RepositoryId = "IDL:Info/origins:1.0"
-    def __init__(self, *args, **kw):
-        raise RuntimeError("Cannot construct objects of this type.")
-_0_Info.origins = origins
-_0_Info._d_origins  = (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/origin:1.0"], 0)
-_0_Info._ad_origins = (omniORB.tcInternal.tv_alias, origins._NP_RepositoryId, "origins", (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/origin:1.0"], 0))
-_0_Info._tc_origins = omniORB.tcInternal.createTypeCode(_0_Info._ad_origins)
-omniORB.registerType(origins._NP_RepositoryId, _0_Info._ad_origins, _0_Info._tc_origins)
-del origins
 
 # typedef ... metadata_list
 class metadata_list:
@@ -185,6 +173,21 @@ _0_Info._d_Pixel_X_Y_size  = (omniORB.tcInternal.tv_struct, Pixel_X_Y_size, Pixe
 _0_Info._tc_Pixel_X_Y_size = omniORB.tcInternal.createTypeCode(_0_Info._d_Pixel_X_Y_size)
 omniORB.registerType(Pixel_X_Y_size._NP_RepositoryId, _0_Info._d_Pixel_X_Y_size, _0_Info._tc_Pixel_X_Y_size)
 del Pixel_X_Y_size
+
+# struct Origin
+_0_Info.Origin = omniORB.newEmptyClass()
+class Origin (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Info/Origin:1.0"
+
+    def __init__(self, top_left_x, top_left_y):
+        self.top_left_x = top_left_x
+        self.top_left_y = top_left_y
+
+_0_Info.Origin = Origin
+_0_Info._d_Origin  = (omniORB.tcInternal.tv_struct, Origin, Origin._NP_RepositoryId, "Origin", "top_left_x", omniORB.tcInternal.tv_float, "top_left_y", omniORB.tcInternal.tv_float)
+_0_Info._tc_Origin = omniORB.tcInternal.createTypeCode(_0_Info._d_Origin)
+omniORB.registerType(Origin._NP_RepositoryId, _0_Info._d_Origin, _0_Info._tc_Origin)
+del Origin
 
 # struct GCP
 _0_Info.GCP = omniORB.newEmptyClass()
@@ -221,6 +224,21 @@ _0_Info._tc_Driver = omniORB.tcInternal.createTypeCode(_0_Info._d_Driver)
 omniORB.registerType(Driver._NP_RepositoryId, _0_Info._d_Driver, _0_Info._tc_Driver)
 del Driver
 
+# struct Raster_size
+_0_Info.Raster_size = omniORB.newEmptyClass()
+class Raster_size (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Info/Raster_size:1.0"
+
+    def __init__(self, x_size, y_size):
+        self.x_size = x_size
+        self.y_size = y_size
+
+_0_Info.Raster_size = Raster_size
+_0_Info._d_Raster_size  = (omniORB.tcInternal.tv_struct, Raster_size, Raster_size._NP_RepositoryId, "Raster_size", "x_size", omniORB.typeMapping["IDL:Info/raster_x_size:1.0"], "y_size", omniORB.typeMapping["IDL:Info/raster_y_size:1.0"])
+_0_Info._tc_Raster_size = omniORB.tcInternal.createTypeCode(_0_Info._d_Raster_size)
+omniORB.registerType(Raster_size._NP_RepositoryId, _0_Info._d_Raster_size, _0_Info._tc_Raster_size)
+del Raster_size
+
 # exception DatasetOpenFailed
 _0_Info.DatasetOpenFailed = omniORB.newEmptyClass()
 class DatasetOpenFailed (CORBA.UserException):
@@ -256,6 +274,10 @@ omniORB.registerType(Raster._NP_RepositoryId, _0_Info._d_Raster, _0_Info._tc_Ras
 # Raster operations and attributes
 Raster._d_get_pixel_size = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Pixel_X_Y_size:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 Raster._d_get_driver_name = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Driver:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_origin = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Origin:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_raster_size = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Raster_size:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_projection_info = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/projection:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_raster_bands = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/raster_bands:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 
 # Raster object reference
 class _objref_Raster (CORBA.Object):
@@ -270,7 +292,19 @@ class _objref_Raster (CORBA.Object):
     def get_driver_name(self, *args):
         return _omnipy.invoke(self, "get_driver_name", _0_Info.Raster._d_get_driver_name, args)
 
-    __methods__ = ["get_pixel_size", "get_driver_name"] + CORBA.Object.__methods__
+    def get_origin(self, *args):
+        return _omnipy.invoke(self, "get_origin", _0_Info.Raster._d_get_origin, args)
+
+    def get_raster_size(self, *args):
+        return _omnipy.invoke(self, "get_raster_size", _0_Info.Raster._d_get_raster_size, args)
+
+    def get_projection_info(self, *args):
+        return _omnipy.invoke(self, "get_projection_info", _0_Info.Raster._d_get_projection_info, args)
+
+    def get_raster_bands(self, *args):
+        return _omnipy.invoke(self, "get_raster_bands", _0_Info.Raster._d_get_raster_bands, args)
+
+    __methods__ = ["get_pixel_size", "get_driver_name", "get_origin", "get_raster_size", "get_projection_info", "get_raster_bands"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Raster._NP_RepositoryId, _objref_Raster)
 _0_Info._objref_Raster = _objref_Raster
@@ -282,7 +316,7 @@ class Raster (PortableServer.Servant):
     _NP_RepositoryId = _0_Info.Raster._NP_RepositoryId
 
 
-    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size, "get_driver_name": _0_Info.Raster._d_get_driver_name}
+    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size, "get_driver_name": _0_Info.Raster._d_get_driver_name, "get_origin": _0_Info.Raster._d_get_origin, "get_raster_size": _0_Info.Raster._d_get_raster_size, "get_projection_info": _0_Info.Raster._d_get_projection_info, "get_raster_bands": _0_Info.Raster._d_get_raster_bands}
 
 Raster._omni_skeleton = Raster
 _0_Info__POA.Raster = Raster

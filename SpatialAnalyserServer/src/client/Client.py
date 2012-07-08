@@ -544,3 +544,103 @@ class Client(object):
             client.logger.log.error(ex.reason)
             return 1
         return self.driver_name
+    
+    def client_get_origin(self, dataset_path):
+        ''' @brief Function gets origin of raster data set.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns origin. Top left x and top left y points.
+        '''
+        
+        client = Client()
+        
+        self.origin = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.origin = rasterObj.get_origin(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.origin
+    
+    def client_get_raster_size(self, dataset_path):
+        ''' @brief Function gets raster size.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns raster size (struct contains x size and y size).
+        '''
+        
+        client = Client()
+        
+        self.raster_size = list()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.raster_size = rasterObj.get_raster_size(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.raster_size
+    
+    def client_get_projection_info(self, dataset_path):
+        ''' @brief Function gets informations about projection.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns information about projection.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.projection_info = rasterObj.get_projection_info(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.projection_info
+    
+    def client_get_raster_bands(self, dataset_path):
+        ''' @brief Function gets informations about number of raster bands.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns number of raster bands.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.raster_bands = rasterObj.get_raster_bands(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.raster_bands
