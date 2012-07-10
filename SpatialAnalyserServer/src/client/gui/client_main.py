@@ -12,6 +12,7 @@ import send_shp
 import draw_from_shp
 import draw_from_osm
 import draw_osm_www
+import geo_services
 import sys
 sys.path.append("../../../interfaces/info")
 sys.path.append("../../../interfaces/projections")
@@ -90,7 +91,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.draw_shp_from_file, QtCore.SIGNAL("clicked()"), self.drawFromSHPFile)
         QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QObject.connect(self.draw_osm_from_web, QtCore.SIGNAL("clicked()"), self.drawFromOSMWeb)
-        QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.geodetic)
+        QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.showGeoService)
         QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.raster_info1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -161,6 +162,18 @@ class Ui_MainWindow(Client):
         self.sh = draw_osm_www.Ui_DrawOSMFromWeb()
         self.sh.setupUi(self.DrawFromOSMWeb)
         self.DrawFromOSMWeb.show()
+        
+    def showGeoService(self):
+        '''
+        @brief: This function is used to show form to transforming some geodetic projection to the other.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
+        self.ShowGeoService = QtGui.QWidget()
+        self.sh = geo_services.Ui_GeoServices()
+        self.sh.setupUi(self.ShowGeoService)
+        self.ShowGeoService.show()
         
     def geodetic(self):
         self.client_get_fwd_transformation(176.2345, 38.2888, 30, 5200)

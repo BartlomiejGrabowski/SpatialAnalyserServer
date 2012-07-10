@@ -342,9 +342,6 @@ class Client(object):
             sys.exit(1)
         try:
             self.fwdTransformation = geodeticObj.get_fwd_transformation(lons, lats, az, dist)
-            print(self.fwdTransformation.end_latitude)
-            print(self.fwdTransformation.end_longitude)
-            print(self.fwdTransformation.back_azimuth)
             return self.fwdTransformation
         except Projection.ArgumentsNotInOrder as ex:
             client.logger.log.error(ex.reason)
