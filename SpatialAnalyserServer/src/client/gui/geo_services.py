@@ -196,6 +196,30 @@ class Ui_GeoServices(Client):
         self.exit_btn = QtGui.QPushButton(GeoServices)
         self.exit_btn.setGeometry(QtCore.QRect(820, 580, 91, 27))
         self.exit_btn.setObjectName("pushButton")
+        self.raster_properties_text = QtGui.QTextBrowser(self.tab_2)
+        self.raster_properties_text.setGeometry(QtCore.QRect(8, 90, 911, 441))
+        self.raster_properties_text.setObjectName("raster_properties_text")
+        self.select_file_btn = QtGui.QPushButton(self.tab_2)
+        self.select_file_btn.setGeometry(QtCore.QRect(120, 30, 91, 27))
+        self.select_file_btn.setObjectName("select_file_btn")
+        self.get_info_btn = QtGui.QPushButton(self.tab_2)
+        self.get_info_btn.setGeometry(QtCore.QRect(10, 30, 91, 27))
+        self.get_info_btn.setObjectName("get_info_btn")
+        self.get_info_btn.setEnabled(False)
+        self.path_to_file = QtGui.QLineEdit(self.tab_2)
+        self.path_to_file.setGeometry(QtCore.QRect(307, 30, 611, 27))
+        self.path_to_file.setObjectName("path_to_file")
+        self.label_20 = QtGui.QLabel(self.tab_2)
+        self.label_20.setGeometry(QtCore.QRect(260, 40, 41, 17))
+        self.label_20.setObjectName("label_20")
+        self.services_tab.addTab(self.tab_2, "")
+        self.label_21 = QtGui.QLabel(GeoServices)
+        self.label_21.setGeometry(QtCore.QRect(10, 590, 62, 17))
+        self.label_21.setObjectName("label_21")
+        self.status_label = QtGui.QLabel(GeoServices)
+        self.status_label.setGeometry(QtCore.QRect(80, 590, 711, 17))
+        self.status_label.setText("")
+        self.status_label.setObjectName("status_label")
 
         self.retranslateUi(GeoServices)
         QtCore.QObject.connect(self.exit_btn , QtCore.SIGNAL("clicked()"), GeoServices, QtCore.SLOT("close()"))
@@ -205,6 +229,8 @@ class Ui_GeoServices(Client):
         QtCore.QObject.connect(self.inv_clear_all, QtCore.SIGNAL("clicked()"), self.clearInvFrame)
         QtCore.QObject.connect(self.inter_ok, QtCore.SIGNAL("clicked()"), self.calculateInterPoints)
         QtCore.QObject.connect(self.inter_clear_all, QtCore.SIGNAL("clicked()"), self.clearInterFrame)
+        QtCore.QObject.connect(self.select_file_btn, QtCore.SIGNAL("clicked()"), self.selectRasterFile)
+        QtCore.QObject.connect(self.get_info_btn, QtCore.SIGNAL("clicked()"), self.getRasterFileInfo)
         self.services_tab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(GeoServices)
 
@@ -241,6 +267,10 @@ class Ui_GeoServices(Client):
         self.services_tab.setTabText(self.services_tab.indexOf(self.tab), QtGui.QApplication.translate("GeoServices", "Projection transformations", None, QtGui.QApplication.UnicodeUTF8))
         self.services_tab.setTabText(self.services_tab.indexOf(self.tab_2), QtGui.QApplication.translate("GeoServices", "Raster properties", None, QtGui.QApplication.UnicodeUTF8))
         self.exit_btn.setText(QtGui.QApplication.translate("GeoServices", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.select_file_btn.setText(QtGui.QApplication.translate("GeoServices", "Select File", None, QtGui.QApplication.UnicodeUTF8))
+        self.get_info_btn.setText(QtGui.QApplication.translate("GeoServices", "Get info", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_20.setText(QtGui.QApplication.translate("GeoServices", "Path:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_21.setText(QtGui.QApplication.translate("GeoServices", "Status:", None, QtGui.QApplication.UnicodeUTF8))
 
     def doForwardTransformation(self):
         ''' 
@@ -262,11 +292,13 @@ class Ui_GeoServices(Client):
             self.fwd_output.append('End longitude: %s' % (self.fwd_transformation.end_longitude))
             self.fwd_output.append('End latitude: %s' % (self.fwd_transformation.end_latitude))
             self.fwd_output.append('Back azimuth: %s' % (self.fwd_transformation.back_azimuth))
+            self.status_label.setText('OK')
         except ValueError:
             err_type, err_value, err_traceback = sys.exc_info()
             print('Error type: %s' % (err_type))
             print('Error value: %s' % (err_value))
             print('Error traceback: %s' % (err_traceback))
+            self.status_label.setText('Error: %s' % (err_value))
        
     def clearFwdFrame(self):
         '''
@@ -305,11 +337,13 @@ class Ui_GeoServices(Client):
             self.inv_output.append('Azimuth: %s' % (self.inv_transformation.trans_azimuth))
             self.inv_output.append('Back azimuth: %s' % (self.inv_transformation.back_azimuth))
             self.inv_output.append('Distance: %s' % (self.inv_transformation.dist))
+            self.status_label.setText('OK')
         except ValueError:
             err_type, err_value, err_traceback = sys.exc_info()
             print('Error type: %s' % (err_type))
             print('Error value: %s' % (err_value))
-            print('Error traceback: %s' % (err_traceback))    
+            print('Error traceback: %s' % (err_traceback))
+            self.status_label.setText('Error: %s' % (err_value))  
         
     def clearInvFrame(self):
         '''
@@ -349,11 +383,13 @@ class Ui_GeoServices(Client):
             self.inter_output.append('\n')
             for point in self.intermediate_points:
                 self.inter_output.append('(%s, %s)' % (point.end_longitude, point.end_latitude))
+            self.status_label.setText('OK')
         except ValueError:
             err_type, err_value, err_traceback = sys.exc_info()
             print('Error type: %s' % (err_type))
             print('Error value: %s' % (err_value))
-            print('Error traceback: %s' % (err_traceback))    
+            print('Error traceback: %s' % (err_traceback))
+            self.status_label.setText('Error: %s' % (err_value))   
         
     def clearInterFrame(self):
         '''
@@ -368,3 +404,24 @@ class Ui_GeoServices(Client):
         self.inter_nop_input.clear()
         self.inter_output.clear()              
         
+        
+    def selectRasterFile(self):
+        '''
+        @brief This function is used to select input raster file.
+        @param None
+        @return This function does not return a value.
+        '''     
+        fname = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Open')
+        if not fname.isEmpty(): 
+            self.path_to_file.setText(fname)
+            self.get_info_btn.setEnabled(True)
+            
+    def getRasterFileInfo(self):
+        '''
+        @brief This function is used to fetch raster file properties.
+        Shows them on the QTextBrowser.
+        @param None
+        @return This function does not return a value.
+        ''' 
+        raster_file_name = os.path.basename(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Raster file name:</font> %s" % (raster_file_name))
