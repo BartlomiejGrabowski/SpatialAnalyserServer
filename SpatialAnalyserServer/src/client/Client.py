@@ -641,3 +641,100 @@ class Client(object):
             client.logger.log.error(ex.reason)
             return 1
         return self.raster_bands
+    
+    def client_get_metadata_list(self, dataset_path):
+        ''' @brief Function gets informations about metadata.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns list of metadata related to raster source.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.metadata_list = rasterObj.get_metadata_list(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.metadata_list
+    
+    def client_get_coordinate_system_info(self, dataset_path):
+        ''' @brief Function gets informations about related coordinate system.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns string that contains information about coordinate system.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.coordinate_system = rasterObj.get_coordinate_system_info(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.coordinate_system
+    
+    def client_get_image_structure_info(self, dataset_path):
+        ''' @brief Function gets information about image structure.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns list of strings that contain information about image structure.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.metadata_list = rasterObj.get_image_structure_info(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.metadata_list
+    
+        
+    def client_get_image_corners(self, dataset_path):
+        ''' @brief Function gets information about image corners.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns list of image corners.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confRasterIntID, self.confRasterIntKind)
+        
+        client.logger.log.info("Narrowing reference to Info.Raster reference")
+        #Narrow reference to Raster interface.
+        rasterObj = obj._narrow(Info.Raster)
+        if rasterObj is None:
+            client.logger.log.error("Object reference is no an Info::Raster")
+            sys.exit(1)
+        try:
+            self.corner_list = rasterObj.get_image_corners(dataset_path)
+        except Info.DatasetOpenFailed as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.corner_list

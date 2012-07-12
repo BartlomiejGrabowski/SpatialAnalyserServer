@@ -159,6 +159,18 @@ _0_Info._tc_metadata_list = omniORB.tcInternal.createTypeCode(_0_Info._ad_metada
 omniORB.registerType(metadata_list._NP_RepositoryId, _0_Info._ad_metadata_list, _0_Info._tc_metadata_list)
 del metadata_list
 
+# typedef ... image_structure
+class image_structure:
+    _NP_RepositoryId = "IDL:Info/image_structure:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Info.image_structure = image_structure
+_0_Info._d_image_structure  = (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/metadata_item:1.0"], 0)
+_0_Info._ad_image_structure = (omniORB.tcInternal.tv_alias, image_structure._NP_RepositoryId, "image_structure", (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/metadata_item:1.0"], 0))
+_0_Info._tc_image_structure = omniORB.tcInternal.createTypeCode(_0_Info._ad_image_structure)
+omniORB.registerType(image_structure._NP_RepositoryId, _0_Info._ad_image_structure, _0_Info._tc_image_structure)
+del image_structure
+
 # struct Pixel_X_Y_size
 _0_Info.Pixel_X_Y_size = omniORB.newEmptyClass()
 class Pixel_X_Y_size (omniORB.StructBase):
@@ -188,6 +200,21 @@ _0_Info._d_Origin  = (omniORB.tcInternal.tv_struct, Origin, Origin._NP_Repositor
 _0_Info._tc_Origin = omniORB.tcInternal.createTypeCode(_0_Info._d_Origin)
 omniORB.registerType(Origin._NP_RepositoryId, _0_Info._d_Origin, _0_Info._tc_Origin)
 del Origin
+
+# struct Coordinate
+_0_Info.Coordinate = omniORB.newEmptyClass()
+class Coordinate (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:Info/Coordinate:1.0"
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+_0_Info.Coordinate = Coordinate
+_0_Info._d_Coordinate  = (omniORB.tcInternal.tv_struct, Coordinate, Coordinate._NP_RepositoryId, "Coordinate", "x", omniORB.tcInternal.tv_float, "y", omniORB.tcInternal.tv_float)
+_0_Info._tc_Coordinate = omniORB.tcInternal.createTypeCode(_0_Info._d_Coordinate)
+omniORB.registerType(Coordinate._NP_RepositoryId, _0_Info._d_Coordinate, _0_Info._tc_Coordinate)
+del Coordinate
 
 # struct GCP
 _0_Info.GCP = omniORB.newEmptyClass()
@@ -239,6 +266,18 @@ _0_Info._tc_Raster_size = omniORB.tcInternal.createTypeCode(_0_Info._d_Raster_si
 omniORB.registerType(Raster_size._NP_RepositoryId, _0_Info._d_Raster_size, _0_Info._tc_Raster_size)
 del Raster_size
 
+# typedef ... corners
+class corners:
+    _NP_RepositoryId = "IDL:Info/corners:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Info.corners = corners
+_0_Info._d_corners  = (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/Coordinate:1.0"], 0)
+_0_Info._ad_corners = (omniORB.tcInternal.tv_alias, corners._NP_RepositoryId, "corners", (omniORB.tcInternal.tv_sequence, omniORB.typeMapping["IDL:Info/Coordinate:1.0"], 0))
+_0_Info._tc_corners = omniORB.tcInternal.createTypeCode(_0_Info._ad_corners)
+omniORB.registerType(corners._NP_RepositoryId, _0_Info._ad_corners, _0_Info._tc_corners)
+del corners
+
 # exception DatasetOpenFailed
 _0_Info.DatasetOpenFailed = omniORB.newEmptyClass()
 class DatasetOpenFailed (CORBA.UserException):
@@ -278,6 +317,10 @@ Raster._d_get_origin = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniOR
 Raster._d_get_raster_size = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/Raster_size:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 Raster._d_get_projection_info = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/projection:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 Raster._d_get_raster_bands = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/raster_bands:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_metadata_list = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/metadata_list:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_coordinate_system_info = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/coordinate_system:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_image_structure_info = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/image_structure:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
+Raster._d_get_image_corners = ((omniORB.typeMapping["IDL:Info/dataset:1.0"], ), (omniORB.typeMapping["IDL:Info/corners:1.0"], ), {_0_Info.DatasetOpenFailed._NP_RepositoryId: _0_Info._d_DatasetOpenFailed})
 
 # Raster object reference
 class _objref_Raster (CORBA.Object):
@@ -304,7 +347,19 @@ class _objref_Raster (CORBA.Object):
     def get_raster_bands(self, *args):
         return _omnipy.invoke(self, "get_raster_bands", _0_Info.Raster._d_get_raster_bands, args)
 
-    __methods__ = ["get_pixel_size", "get_driver_name", "get_origin", "get_raster_size", "get_projection_info", "get_raster_bands"] + CORBA.Object.__methods__
+    def get_metadata_list(self, *args):
+        return _omnipy.invoke(self, "get_metadata_list", _0_Info.Raster._d_get_metadata_list, args)
+
+    def get_coordinate_system_info(self, *args):
+        return _omnipy.invoke(self, "get_coordinate_system_info", _0_Info.Raster._d_get_coordinate_system_info, args)
+
+    def get_image_structure_info(self, *args):
+        return _omnipy.invoke(self, "get_image_structure_info", _0_Info.Raster._d_get_image_structure_info, args)
+
+    def get_image_corners(self, *args):
+        return _omnipy.invoke(self, "get_image_corners", _0_Info.Raster._d_get_image_corners, args)
+
+    __methods__ = ["get_pixel_size", "get_driver_name", "get_origin", "get_raster_size", "get_projection_info", "get_raster_bands", "get_metadata_list", "get_coordinate_system_info", "get_image_structure_info", "get_image_corners"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Raster._NP_RepositoryId, _objref_Raster)
 _0_Info._objref_Raster = _objref_Raster
@@ -316,7 +371,7 @@ class Raster (PortableServer.Servant):
     _NP_RepositoryId = _0_Info.Raster._NP_RepositoryId
 
 
-    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size, "get_driver_name": _0_Info.Raster._d_get_driver_name, "get_origin": _0_Info.Raster._d_get_origin, "get_raster_size": _0_Info.Raster._d_get_raster_size, "get_projection_info": _0_Info.Raster._d_get_projection_info, "get_raster_bands": _0_Info.Raster._d_get_raster_bands}
+    _omni_op_d = {"get_pixel_size": _0_Info.Raster._d_get_pixel_size, "get_driver_name": _0_Info.Raster._d_get_driver_name, "get_origin": _0_Info.Raster._d_get_origin, "get_raster_size": _0_Info.Raster._d_get_raster_size, "get_projection_info": _0_Info.Raster._d_get_projection_info, "get_raster_bands": _0_Info.Raster._d_get_raster_bands, "get_metadata_list": _0_Info.Raster._d_get_metadata_list, "get_coordinate_system_info": _0_Info.Raster._d_get_coordinate_system_info, "get_image_structure_info": _0_Info.Raster._d_get_image_structure_info, "get_image_corners": _0_Info.Raster._d_get_image_corners}
 
 Raster._omni_skeleton = Raster
 _0_Info__POA.Raster = Raster

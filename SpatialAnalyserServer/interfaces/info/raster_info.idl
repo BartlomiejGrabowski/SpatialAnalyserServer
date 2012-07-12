@@ -12,6 +12,7 @@ module Info {
 	typedef float pixel_size;
 
 	typedef sequence<metadata_item> metadata_list;
+	typedef sequence<metadata_item> image_structure;
 	
 	
 	struct Pixel_X_Y_size {
@@ -22,6 +23,11 @@ module Info {
 	struct Origin {
 		float top_left_x;
 		float top_left_y;
+	};
+
+	struct Coordinate {
+		float x;
+		float y;
 	};
 
 	struct GCP {
@@ -43,6 +49,8 @@ module Info {
 		raster_x_size x_size;
 		raster_y_size y_size;
 	};
+
+	typedef sequence<Coordinate> corners;
 
 	exception DatasetOpenFailed {
 		string reason;
@@ -67,6 +75,16 @@ module Info {
 		//Function returns number of raster bands.
 		raster_bands get_raster_bands(in dataset hDataset) raises (DatasetOpenFailed);
 
+		//Function returns list of metadata.
+		metadata_list get_metadata_list(in dataset hDataset) raises (DatasetOpenFailed);
 
+		//Function returns informations about related coordinate system.
+		coordinate_system get_coordinate_system_info(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns information about image structure.
+		image_structure get_image_structure_info(in dataset hDataset) raises (DatasetOpenFailed);
+
+		//Function returns all corners of raster image.
+		corners get_image_corners(in dataset hDataset) raises (DatasetOpenFailed);
 	};
 };

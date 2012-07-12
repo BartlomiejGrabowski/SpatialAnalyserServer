@@ -174,4 +174,152 @@ class RasterInfo_i(Info__POA.Raster):
         Info.raster_bands = dataset.RasterCount
         
         return Info.raster_bands
+    
+    def get_metadata_list(self, dataset_path):
+        ''' @brief Function gets informations about metadata.
+            @param dataset_path String Path to raster data set source.
+            @return: Function returns list of metadata related to raster source.
+        '''
+        self.logger.log.info("get_metadata_list method invocation.")
+        
+        try:
+            dataset = gdal.Open(dataset_path, GA_ReadOnly)
+            metadata = dataset.GetMetadata_List()
+            metadata_list = list()
+        
+            if metadata is not None and len(metadata) > 0 :
+                for item in metadata:
+                    metadata_list.append(item)
+                    
+        except Exception as ex:
+            self.logger.error('Exception occurred during creating data set.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)
+              
+        return metadata_list
+    
+    def get_coordinate_system_info(self, dataset_path):
+        ''' @brief Function gets informations about related coordinate system.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns string that contains information about coordinate system.
+        '''
+        self.logger.log.info("get_coordinate_system_info method invocation.")
+        
+        try:
+            dataset = gdal.Open(dataset_path, GA_ReadOnly)
+            pszProjection = dataset.GetProjectionRef()
             
+            #Report projection    
+            if pszProjection is not None:
+
+                spatialRef = osr.SpatialReference()
+                if spatialRef.ImportFromWkt(pszProjection ) == gdal.CE_None:
+                    wkt = spatialRef.ExportToPrettyWkt(False)
+
+                    return wkt
+                else:
+                    return pszProjection
+        except Exception as ex:
+            self.logger.error('Exception occurred during creating data set.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)
+            
+    def get_image_structure_info(self, dataset_path):
+        ''' @brief Function gets information about image structure.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns list of strings that contain information about image structure.
+        '''
+        self.logger.log.info("get_image_structure_info method invocation.")
+        
+        try:
+            dataset = gdal.Open(dataset_path, GA_ReadOnly)
+            metadata_list = list()
+            #Report IMAGE_STRUCTURE.
+            papszMetadata = dataset.GetMetadata_List("IMAGE_STRUCTURE")
+            if len(papszMetadata) > 0:
+                for metadata in papszMetadata:
+                    metadata_list.append(metadata)
+
+        except Exception as ex:
+            self.logger.error('Exception occurred during creating data set.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)
+            
+        return metadata_list
+    
+    def get_image_corners(self, dataset_path):
+        ''' @brief Function gets information about image corners.
+            @param dataset_path String Path to raster data set source.
+            @return Function returns list of image corners.
+        '''
+        self.logger.log.info("get_image_corners method invocation.")
+        
+        try:
+            dataset = gdal.Open(dataset_path, GA_ReadOnly)
+            pszProjection = dataset.GetGCPProjection()
+            self.corner_list = list()
+            hTransform = None
+            if pszProjection is not None and len(pszProjection) > 0:
+                hProj = osr.SpatialReference( pszProjection )
+                if hProj is not None:
+                    hLatLong = hProj.CloneGeogCS()
+    
+                if hLatLong is not None:
+                    gdal.PushErrorHandler( 'CPLQuietErrorHandler' )
+                    hTransform = osr.CoordinateTransformation( hProj, hLatLong )
+                    gdal.PopErrorHandler()
+                    if gdal.GetLastErrorMsg().find( 'Unable to load PROJ.4 library' ) != -1:
+                        hTransform = None
+                        
+            corner = self.GDALInfoReportCorner(dataset, hTransform, 0.0, 0.0 )
+            self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
+            
+            corner = self.GDALInfoReportCorner(dataset, hTransform, 0.0, dataset.RasterYSize)
+            self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
+            
+            corner = self.GDALInfoReportCorner(dataset, hTransform, dataset.RasterXSize, 0.0)
+            self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
+            
+            corner = self.GDALInfoReportCorner(dataset, hTransform, dataset.RasterXSize, \
+                                                dataset.RasterYSize)
+            self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
+            
+            corner = self.GDALInfoReportCorner(dataset, hTransform, dataset.RasterXSize/2.0, \
+                                               dataset.RasterYSize/2.0)
+            self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
+                
+        except Exception as ex:
+            self.logger.error('Exception occurred during creating data set.')
+            raise Info.DatasetOpenFailed(ex)
+            sys.exit(1)           
+        return self.corner_list            
+                    
+    def GDALInfoReportCorner(self, hDataset, hTransform, x, y):
+        corner = list()
+        adfGeoTransform = hDataset.GetGeoTransform()
+        if adfGeoTransform is not None:
+            dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x \
+                + adfGeoTransform[2] * y
+            dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x \
+                + adfGeoTransform[5] * y
+    
+        else:
+            corner.append(x)
+            corner.append(y)
+            return corner
+    
+        if abs(dfGeoX) < 181 and abs(dfGeoY) < 91:
+            corner.append(dfGeoX)
+            corner.append(dfGeoY)
+    
+        else:
+            corner.append(dfGeoX)
+            corner.append(dfGeoY)
+    
+        if hTransform is not None:
+            pnt = hTransform.TransformPoint(dfGeoX, dfGeoY, 0)
+            if pnt is not None:
+                corner.append(gdal.DecToDMS( pnt[0], "Long", 2))
+                corner.append(gdal.DecToDMS( pnt[1], "Lat", 2))
+    
+        return corner

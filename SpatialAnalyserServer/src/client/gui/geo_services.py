@@ -425,3 +425,61 @@ class Ui_GeoServices(Client):
         ''' 
         raster_file_name = os.path.basename(str(self.path_to_file.text()))
         self.raster_properties_text.append("<font color='green'>Raster file name:</font> %s" % (raster_file_name))
+        
+        #driver name.
+        driver_name = self.client_get_driver_name(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Short driver name:</font> %s" % (driver_name.short_name))
+        self.raster_properties_text.append("<font color='green'>Long driver name:</font> %s" % (driver_name.long_name))
+        
+        #raster size.
+        raster_size = self.client_get_raster_size(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Raster x size:</font> %s" % (raster_size.x_size))
+        self.raster_properties_text.append("<font color='green'>Raster y size:</font> %s" % (raster_size.y_size))
+        
+        #pixel size.
+        pixel_size = self.client_get_pixel_size(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Pixel x size:</font> %s" % (pixel_size.x_size))
+        self.raster_properties_text.append("<font color='green'>Pixel y size:</font> %s" % (pixel_size.y_size))
+        
+        #origin
+        origin = self.client_get_origin(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Origin x:</font> %s" % (origin.top_left_x))
+        self.raster_properties_text.append("<font color='green'>Origin y:</font> %s" % (origin.top_left_y))
+        
+        #projection
+        projection = self.client_get_projection_info(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Projection:</font> %s" % (projection))
+        
+        #raster bands.
+        raster_bands = self.client_get_raster_bands(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Number of raster bands:</font> %s" % (raster_bands))
+        
+        #metadata list
+        metadata_list = self.client_get_metadata_list(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Metadata:</font>")
+        for metadata in metadata_list:
+            self.raster_properties_text.append('\t%s' % (metadata))
+            
+        #coordinate system.
+        coordinate_system = self.client_get_coordinate_system_info(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Coordinate system:</font> %s" % (coordinate_system))
+        
+        #image structure.
+        image_structure = self.client_get_image_structure_info(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Image structure:</font>")
+        for item in image_structure:
+            self.raster_properties_text.append('\t%s' % (item))
+            
+        #image corners.
+        corner_list = self.client_get_image_corners(str(self.path_to_file.text()))
+        self.raster_properties_text.append("<font color='green'>Corner list:</font>")
+        self.raster_properties_text.append('\tUpper Left: (%s, %s)' \
+                                            % (corner_list[0].x, corner_list[0].y))
+        self.raster_properties_text.append('\tLower Left: (%s, %s)' \
+                                            % (corner_list[1].x, corner_list[1].y))
+        self.raster_properties_text.append('\tUpper Right: (%s, %s)' \
+                                            % (corner_list[2].x, corner_list[2].y))
+        self.raster_properties_text.append('\tUpper Right: (%s, %s)' \
+                                            % (corner_list[3].x, corner_list[3].y))
+        self.raster_properties_text.append('\tCenter: (%s, %s)' \
+                                            % (corner_list[4].x, corner_list[4].y))
