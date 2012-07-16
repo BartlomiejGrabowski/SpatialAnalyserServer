@@ -91,6 +91,6 @@ module Projection {
 		//The points x1,y1,z1 in the coordinate system defined by p1 are transformed to x2,y2,z2 in the coordinate system defined by p2.
 
 		Coordinates transform_coordinate_systems(in input_projection in_projection, in output_projection out_projection, in float x1, 
-							in float y1, in float z1) raises (ArgumentsNotInOrder); 
+							in float y1, in float z1, in string ellipsoide) raises (ArgumentsNotInOrder); 
 	};
 };

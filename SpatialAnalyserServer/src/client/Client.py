@@ -463,7 +463,7 @@ class Client(object):
 
         return self.ellipsoidList
     
-    def client_transform_coordinate_systems(self, in_projection, out_projection, x1, y1, z1=0):
+    def client_transform_coordinate_systems(self, in_projection, out_projection, x1, y1, z1=0, ellipsoid=''):
         '''
         @brief: This function is used to get coordinate system after transform from another.
         @see: Client
@@ -484,7 +484,7 @@ class Client(object):
             client.logger.log.error("Object reference is no an Projection::Geodetic")
             sys.exit(1)
         try:    
-            self.output_coordinates = geodeticObj.transform_coordinate_systems(in_projection, out_projection, x1, y1, z1)
+            self.output_coordinates = geodeticObj.transform_coordinate_systems(in_projection, out_projection, x1, y1, z1, ellipsoid)
             return self.output_coordinates
         except Projection.ArgumentsNotInOrder as ex:
             client.logger.log.error(ex.reason)

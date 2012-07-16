@@ -314,7 +314,7 @@ Geodetic._d_get_inv_transformation = ((omniORB.typeMapping["IDL:Projection/longi
 Geodetic._d_get_intermediate_points = ((omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/longitude:1.0"], omniORB.typeMapping["IDL:Projection/latitude:1.0"], omniORB.typeMapping["IDL:Projection/number_of_points:1.0"]), (omniORB.typeMapping["IDL:Projection/Npts:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
 Geodetic._d_get_projection_list = ((), (omniORB.typeMapping["IDL:Projection/Proj_list:1.0"], ), None)
 Geodetic._d_get_ellipsoid_list = ((), (omniORB.typeMapping["IDL:Projection/Ellipsoid_list:1.0"], ), None)
-Geodetic._d_transform_coordinate_systems = ((omniORB.typeMapping["IDL:Projection/input_projection:1.0"], omniORB.typeMapping["IDL:Projection/output_projection:1.0"], omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float), (omniORB.typeMapping["IDL:Projection/Coordinates:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
+Geodetic._d_transform_coordinate_systems = ((omniORB.typeMapping["IDL:Projection/input_projection:1.0"], omniORB.typeMapping["IDL:Projection/output_projection:1.0"], omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float, omniORB.tcInternal.tv_float, (omniORB.tcInternal.tv_string,0)), (omniORB.typeMapping["IDL:Projection/Coordinates:1.0"], ), {_0_Projection.ArgumentsNotInOrder._NP_RepositoryId: _0_Projection._d_ArgumentsNotInOrder})
 
 # Geodetic object reference
 class _objref_Geodetic (CORBA.Object):

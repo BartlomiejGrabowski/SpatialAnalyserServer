@@ -220,6 +220,98 @@ class Ui_GeoServices(Client):
         self.status_label.setGeometry(QtCore.QRect(80, 590, 711, 17))
         self.status_label.setText("")
         self.status_label.setObjectName("status_label")
+        self.tab_3 = QtGui.QWidget()
+        self.tab_3.setObjectName("tab_3")
+        self.groupBox = QtGui.QGroupBox(self.tab_3)
+        self.groupBox.setGeometry(QtCore.QRect(10, 10, 391, 511))
+        self.groupBox.setObjectName("groupBox")
+        self.input_proj_frame = QtGui.QFrame(self.groupBox)
+        self.input_proj_frame.setGeometry(QtCore.QRect(10, 20, 371, 471))
+        self.input_proj_frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.input_proj_frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.input_proj_frame.setObjectName("input_proj_frame")
+        self.label_22 = QtGui.QLabel(self.input_proj_frame)
+        self.label_22.setGeometry(QtCore.QRect(10, 20, 111, 20))
+        self.label_22.setObjectName("label_22")
+        self.input_projection_input = QtGui.QComboBox(self.input_proj_frame)
+        self.input_projection_input.setGeometry(QtCore.QRect(130, 10, 231, 31))
+        self.input_projection_input.setObjectName("input_projection_input")
+        self.label_23 = QtGui.QLabel(self.input_proj_frame)
+        self.label_23.setGeometry(QtCore.QRect(10, 60, 120, 20))
+        self.label_23.setObjectName("label_23")
+        self.output_projection_input = QtGui.QComboBox(self.input_proj_frame)
+        self.output_projection_input.setGeometry(QtCore.QRect(130, 50, 231, 31))
+        self.output_projection_input.setObjectName("output_projection_input")
+        self.label_24 = QtGui.QLabel(self.input_proj_frame)
+        self.label_24.setGeometry(QtCore.QRect(10, 190, 111, 17))
+        self.label_24.setObjectName("label_24")
+        self.coor_x_input = QtGui.QLineEdit(self.input_proj_frame)
+        self.coor_x_input.setGeometry(QtCore.QRect(130, 180, 113, 27))
+        self.coor_x_input.setObjectName("coor_x_input")
+        self.coor_y_input = QtGui.QLineEdit(self.input_proj_frame)
+        self.coor_y_input.setGeometry(QtCore.QRect(130, 230, 113, 27))
+        self.coor_y_input.setObjectName("coor_y_input")
+        self.label_25 = QtGui.QLabel(self.input_proj_frame)
+        self.label_25.setGeometry(QtCore.QRect(10, 240, 111, 17))
+        self.label_25.setObjectName("label_25")
+        self.label_26 = QtGui.QLabel(self.input_proj_frame)
+        self.label_26.setGeometry(QtCore.QRect(10, 290, 111, 17))
+        self.label_26.setObjectName("label_26")
+        self.coor_z_input = QtGui.QLineEdit(self.input_proj_frame)
+        self.coor_z_input.setGeometry(QtCore.QRect(130, 280, 113, 27))
+        self.coor_z_input.setObjectName("coor_z_input")
+        self.groupBox_2 = QtGui.QGroupBox(self.tab_3)
+        self.groupBox_2.setGeometry(QtCore.QRect(520, 10, 391, 511))
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.output_proj_frame = QtGui.QFrame(self.groupBox_2)
+        self.output_proj_frame.setGeometry(QtCore.QRect(10, 20, 371, 471))
+        self.output_proj_frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.output_proj_frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.output_proj_frame.setObjectName("output_proj_frame")
+        self.coor_output = QtGui.QTextEdit(self.output_proj_frame)
+        self.coor_output.setGeometry(QtCore.QRect(10, 10, 351, 231))
+        self.coor_output.setObjectName("coor_output")
+        self.services_tab.addTab(self.tab_3, "")
+        self.label_27 = QtGui.QLabel(self.input_proj_frame)
+        self.label_27.setGeometry(QtCore.QRect(10, 320, 241, 17))
+        self.label_27.setObjectName("label_27")
+        self.label_28 = QtGui.QLabel(self.input_proj_frame)
+        self.label_28.setGeometry(QtCore.QRect(10, 360, 62, 17))
+        self.label_28.setObjectName("label_28")
+        self.label_29 = QtGui.QLabel(self.input_proj_frame)
+        self.label_29.setGeometry(QtCore.QRect(10, 380, 62, 17))
+        self.label_29.setObjectName("label_29")
+        self.input_proj_desc = QtGui.QLabel(self.input_proj_frame)
+        self.input_proj_desc.setGeometry(QtCore.QRect(50, 360, 311, 17))
+        self.input_proj_desc.setText("")
+        self.input_proj_desc.setObjectName("input_proj_desc")
+        self.output_proj_desc = QtGui.QLabel(self.input_proj_frame)
+        self.output_proj_desc.setGeometry(QtCore.QRect(60, 380, 311, 17))
+        self.output_proj_desc.setText("")
+        self.output_proj_desc.setObjectName("output_proj_desc")
+        self.convert_projection_btn = QtGui.QPushButton(self.input_proj_frame)
+        self.convert_projection_btn.setGeometry(QtCore.QRect(260, 430, 91, 27))
+        self.convert_projection_btn.setObjectName("convert_projection_btn")
+        self.label_30 = QtGui.QLabel(self.input_proj_frame)
+        self.label_30.setGeometry(QtCore.QRect(10, 100, 120, 20))
+        self.label_30.setObjectName("label_30")
+        self.ellipsoid_input = QtGui.QComboBox(self.input_proj_frame)
+        self.ellipsoid_input.setGeometry(QtCore.QRect(130, 90, 231, 31))
+        self.ellipsoid_input.setObjectName("ellipsoid_input")
+        self.additional_param_input = QtGui.QLineEdit(self.input_proj_frame)
+        self.additional_param_input.setGeometry(QtCore.QRect(130, 130, 113, 27))
+        self.additional_param_input.setObjectName("additional_param_input")
+        self.label_31 = QtGui.QLabel(self.input_proj_frame)
+        self.label_31.setGeometry(QtCore.QRect(10, 140, 121, 17))
+        self.label_31.setObjectName("label_31")
+        self.label_32 = QtGui.QLabel(self.input_proj_frame)
+        self.label_32.setGeometry(QtCore.QRect(10, 400, 62, 17))
+        self.label_32.setObjectName("label_32")
+        self.ellipsoid_desc = QtGui.QLabel(self.input_proj_frame)
+        self.ellipsoid_desc.setGeometry(QtCore.QRect(70, 400, 291, 20))
+        self.ellipsoid_desc.setText("")
+        self.ellipsoid_desc.setObjectName("ellipsoid_desc")
+        
 
         self.retranslateUi(GeoServices)
         QtCore.QObject.connect(self.exit_btn , QtCore.SIGNAL("clicked()"), GeoServices, QtCore.SLOT("close()"))
@@ -231,8 +323,35 @@ class Ui_GeoServices(Client):
         QtCore.QObject.connect(self.inter_clear_all, QtCore.SIGNAL("clicked()"), self.clearInterFrame)
         QtCore.QObject.connect(self.select_file_btn, QtCore.SIGNAL("clicked()"), self.selectRasterFile)
         QtCore.QObject.connect(self.get_info_btn, QtCore.SIGNAL("clicked()"), self.getRasterFileInfo)
+        QtCore.QObject.connect(self.input_projection_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentInDesc)
+        QtCore.QObject.connect(self.output_projection_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentOutDesc)
+        QtCore.QObject.connect(self.ellipsoid_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentEllpsDesc)
+        QtCore.QObject.connect(self.convert_projection_btn, QtCore.SIGNAL("clicked()"), self.convertProjection)
         self.services_tab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(GeoServices)
+        
+        #Fill all combo boxes the data.
+        projections = self.client_get_projection_list()
+        self.projection_search = dict()
+        for projection in projections:
+            self.projection_search.update({projection.proj_name : projection.proj_desc})
+            self.input_projection_input.addItem(projection.proj_name)
+            self.output_projection_input.addItem(projection.proj_name)
+            
+        ellipsoids = self.client_get_ellipsoid_list()
+        self.ellipsoid_search = dict()
+        for ellipsoid in ellipsoids:
+            self.ellipsoid_search.update({ellipsoid.ellps_name : ellipsoid.ellps_desc})
+            self.ellipsoid_input.addItem(ellipsoid.ellps_name)
+            
+         
+        #Set initial projection description.    
+        self.input_proj_desc.setText(self.projection_search[str(self.input_projection_input.currentText())])
+        self.output_proj_desc.setText(self.projection_search[str(self.output_projection_input.currentText())])
+        
+        #Set initial ellipsoid description.
+        self.ellipsoid_desc.setText(self.ellipsoid_search[str(self.ellipsoid_input.currentText())])
+                
 
     def retranslateUi(self, GeoServices):
         GeoServices.setWindowTitle(QtGui.QApplication.translate("GeoServices", "Geo-services", None, QtGui.QApplication.UnicodeUTF8))
@@ -271,7 +390,88 @@ class Ui_GeoServices(Client):
         self.get_info_btn.setText(QtGui.QApplication.translate("GeoServices", "Get info", None, QtGui.QApplication.UnicodeUTF8))
         self.label_20.setText(QtGui.QApplication.translate("GeoServices", "Path:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_21.setText(QtGui.QApplication.translate("GeoServices", "Status:", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("GeoServices", "Input pramterers", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_22.setText(QtGui.QApplication.translate("GeoServices", "Input projection:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_23.setText(QtGui.QApplication.translate("GeoServices", "Output projection:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_24.setText(QtGui.QApplication.translate("GeoServices", "Coordinate X:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_25.setText(QtGui.QApplication.translate("GeoServices", "Coordinate Y:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_26.setText(QtGui.QApplication.translate("GeoServices", "Coordinate Z:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_27.setText(QtGui.QApplication.translate("GeoServices", "Brief description of the projection:", None, QtGui.QApplication.UnicodeUTF8))
+        self.convert_projection_btn.setText(QtGui.QApplication.translate("GeoServices", "Convert", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_28.setText(QtGui.QApplication.translate("GeoServices", "Input:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_29.setText(QtGui.QApplication.translate("GeoServices", "Output:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_30.setText(QtGui.QApplication.translate("GeoServices", "Ellipsoid:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_31.setText(QtGui.QApplication.translate("GeoServices", "Additional param:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_32.setText(QtGui.QApplication.translate("GeoServices", "Ellipsoid:", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("GeoServices", "Output parameters", None, QtGui.QApplication.UnicodeUTF8))
+        self.services_tab.setTabText(self.services_tab.indexOf(self.tab_3), QtGui.QApplication.translate("GeoServices", "Change transformation", None, QtGui.QApplication.UnicodeUTF8))
 
+    def getCurrentInDesc(self, curr_item):
+        '''
+        @brief This function is used to update projection description.
+        @param curr_item QString.
+        @return This function does not return a value.
+        '''
+        self.input_proj_desc.setText(self.projection_search[str(curr_item)])
+        
+    def getCurrentOutDesc(self, curr_item):
+        '''
+        @brief This function is used to update projection description.
+        @param curr_item QString.
+        @return This function does not return a value.
+        '''
+        self.output_proj_desc.setText(self.projection_search[str(curr_item)])
+        
+    def getCurrentEllpsDesc(self, curr_item):
+        '''
+        @brief This function is used to update ellipsoid description.
+        @param curr_item QString.
+        @return This function does not return a value.
+        '''
+        self.ellipsoid_desc.setText(self.ellipsoid_search[str(curr_item)])
+      
+    def convertProjection(self):
+        '''
+        @brief This function is used to convert one projection to another.
+        @param None.
+        @return This function does not return a value.
+        '''
+        try:
+            x = float(self.coor_x_input.text())
+            y = float(self.coor_y_input.text())
+            if self.coor_z_input is None:
+                z = 0
+                self.status_label.setText('Coordinate \'Z\' will be set automatically to a value 0.')
+            else:
+                z = float(self.coor_z_input.text())
+            in_projection = str(self.input_projection_input.currentText())
+            out_projection = str(self.output_projection_input.currentText())
+            ellipsoid = str(self.ellipsoid_input.currentText())
+            params = str(self.additional_param_input.text())
+            
+            if not params is '':
+                self.new_coordinate_system = self.client_transform_coordinate_systems(in_projection+':'+params,
+                                                                                      out_projection+':'+params,
+                                                                                      x, y, 0, ellipsoid)
+            else:
+                #Convert transformation.
+                self.new_coordinate_system =  self.client_transform_coordinate_systems(in_projection, out_projection,
+                                                                                   x, y, 0, ellipsoid)
+            
+            #Fill output field.
+            self.coor_output.clear()
+            self.coor_output.append("<font color='blue'>%s -> %s</font>" % (in_projection, out_projection))
+            self.coor_output.append("<font color='green'>Coordinate X:</font> %s" % (self.new_coordinate_system.x2))
+            self.coor_output.append("<font color='green'>Coordinate Y:</font> %s" % (self.new_coordinate_system.y2))
+            self.coor_output.append("<font color='green'>Coordinate Z:</font> %s" % (self.new_coordinate_system.z2))
+            self.status_label.setText('OK')
+        except (ValueError, RuntimeError):
+            err_type, err_value, err_traceback = sys.exc_info()
+            print('Error type: %s' % (err_type))
+            print('Error value: %s' % (err_value))
+            print('Error traceback: %s' % (err_traceback))
+            self.status_label.setText('Error: %s' % (err_value)) 
+        
     def doForwardTransformation(self):
         ''' 
         @brief This function is used to compute forward transformation.

@@ -50,7 +50,7 @@ class GeodeticComputation_i(Projection__POA.Geodetic):
             azimuth, back_azimuth, distance = geod.inv(lons1, lats1, lons2, lats2)            
             inv_transform = Projection.Inv_transformation(azimuth, back_azimuth, distance)
         except ValueError as ex:
-            self.logger.error("%s exception occurred during creating forward trasformation" % (ex))
+            self.logger.log.error("%s exception occurred during creating forward trasformation" % (ex))
             raise Projection.ArgumentsNotInOrder("Error occurred during creating forward trasformation")
             sys.exit(1)
         return inv_transform
@@ -76,7 +76,7 @@ class GeodeticComputation_i(Projection__POA.Geodetic):
                 npts_out_list.append(intermediate_point)
                 
         except ValueError as ex:
-            self.logger.error("%s exception occurred during creating forward trasformation" % (ex))
+            self.logger.log.error("%s exception occurred during creating forward trasformation" % (ex))
             raise Projection.ArgumentsNotInOrder("Error occurred during creating forward trasformation")
             sys.exit(1)
         return npts_out_list
@@ -123,7 +123,7 @@ class GeodeticComputation_i(Projection__POA.Geodetic):
         
         return out_ellipsoid_list
     
-    def transform_coordinate_systems(self, in_projection, out_projection, x1, y1, z1=0):
+    def transform_coordinate_systems(self, in_projection, out_projection, x1, y1, z1=0, ellipsoid=''):
         ''' Function transform_coordinate_systems - Transforms points between two coordinate systems defined 
         by the Proj instances p1 (input_projection) and p2 (output_projection).
         The points x1,y1,z1 in the coordinate system defined by p1 are transformed to x2,y2,z2 in the coordinate system defined by p
@@ -133,13 +133,20 @@ class GeodeticComputation_i(Projection__POA.Geodetic):
         
         try:
             #Create two different coordinate systems.
-            self.input_proj = pyproj.Proj(init=in_projection)
-            self.output_proj = pyproj.Proj(init=out_projection)
+            if not ellipsoid is '':
+                print('projxx in: %s, proj out:%s, ellipsoid:%s' % (in_projection, out_projection, ellipsoid))
+                self.input_proj = pyproj.Proj(proj=in_projection, ellps=ellipsoid)
+                self.output_proj = pyproj.Proj(proj=out_projection, ellps=ellipsoid)
+            else:
+                print('proj in: %s, proj out:%s, ellipsoid:%s' % (in_projection, out_projection, ellipsoid))
+                self.input_proj = pyproj.Proj(proj=in_projection)
+                self.output_proj = pyproj.Proj(proj=out_projection)
+                
             x2, y2, z2 = pyproj.transform(self.input_proj, self.output_proj, x1, y1, z1)
             self.output_coordinates = Projection.Coordinates(x2, y2, z2)
             return self.output_coordinates
-        except ValueError as ex:
-            self.logger.error("%s exception occurred during transform coordinate between two different systems" % (ex))
+        except (ValueError, RuntimeError) as ex:
+            self.logger.log.error("%s exception occurred during transform coordinate between two different systems" % (ex))
             raise Projection.ArgumentsNotInOrder("Error occurred during transform coordinate between two different systems")
             sys.exit(1)
             
