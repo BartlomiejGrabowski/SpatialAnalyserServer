@@ -17,6 +17,7 @@ import SHP
 import SHPDraw
 import Info
 import Projection
+import Geo
 import xml.etree.ElementTree as ET
 
 class Client(object):
@@ -111,6 +112,13 @@ class Client(object):
         self.confRasterIntID = rasterConf.find('ID').text
         #Fetch kind of interface.
         self.confRasterIntKind = rasterConf.find('Kind').text
+        
+        #Basic INTERFACE.
+        basicConf = interfacesConf.find('Basic')
+        #Fetch ID from interface.
+        self.confBasicIntID = basicConf.find('ID').text
+        #Fetch kind of interface.
+        self.confBasicIntKind = basicConf.find('Kind').text
         
         #Images XML TAG.
         iconsDirConf = doc.find('IconsDir')
@@ -373,9 +381,6 @@ class Client(object):
             sys.exit(1)
         try:
             self.invTransformation = geodeticObj.get_inv_transformation(lons1, lats1, lons2, lats2)
-            print(self.invTransformation.trans_azimuth)
-            print(self.invTransformation.back_azimuth)
-            print(self.invTransformation.dist)
             return self.invTransformation
         except Projection.ArgumentsNotInOrder as ex:
             client.logger.log.error(ex.reason)
@@ -738,3 +743,276 @@ class Client(object):
             client.logger.log.error(ex.reason)
             return 1
         return self.corner_list
+    
+    def client_distance_haversine(self, lat1, lon1, lat2, lon2):
+        """ @brief Compute distance between two points in km using haversine formula.
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return float Distance between source and destination point. """
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.distance = basicObj.distance_haversine(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.distance
+    
+    def client_distance_sloc(self, lat1, lon1, lat2, lon2):
+        """ @brief Compute distance between two points in km using
+            spherical law of cosines formula.
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return float Distance between source and destination point. """
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.distance = basicObj.distance_sloc(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.distance
+    
+    def client_initial_bearing(self, lat1, lon1, lat2, lon2):
+        """ @brief Bearing from one point to another in degrees (0-360).
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return float Initial bearing between two points."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.bearing = basicObj.initial_bearing(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.bearing
+    
+    def client_final_bearing(self, lat1, lon1, lat2, lon2):
+        """ @brief Bearing from one point to another in degrees (0-360).
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return float Final bearing between two points."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.bearing = basicObj.final_bearing(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.bearing
+    
+    def client_midpoint(self, lat1, lon1, lat2, lon2):
+        """ @brief This is the half-way point along a great circle
+            path between the two points.
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return {lat3/lon3} float: Midpoint coordinates."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.midpoint = basicObj.midpoint(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.midpoint
+    
+    def client_intersection(self, lat1, lon1, brng1, lat2, lon2, brng2):
+        """ @brief Intersection of two paths given start points and bearings.
+            @param {lat1/lon1} float: Source point.
+            @param brng1 float: Initial bearing from source point.
+            @param {lat2/lon2} float: Destination point.
+            @param brng2 float: Initial bearing from destination point.
+            @return {lat3/lon3} float: Point of intersection of two path defined by point and bearing."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.intersection = basicObj.intersection(lat1, lon1, brng1, lat2, lon2, brng2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.intersection
+    
+    def client_rhumb_distance(self, lat1, lon1, lat2, lon2):
+        """ @brief Returns the distance from point to the supplied point, 
+            in km, traveling along a rhumb line.
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point
+            @return distance float: Returns distance traveling along rhumb line."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.distance = basicObj.rhumb_distance(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.distance
+    
+    def client_rhumb_bearing(self, lat1, lon1, lat2, lon2):
+        """ @brief Returns the bearing from this point to the supplied point along rhumb line, in degrees.
+            @param {lat1/lon1} float: Coordinates of source point.
+            @param {lat2/lon2} float: Coordinates of destination point.
+            @return float: Bearing in degrees from North."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.bearing = basicObj.rhumb_bearing(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.bearing
+    
+    def client_rhumb_destination_point(self, lat1, lon1, brng, dist):
+        """ @brief Returns the destination point from this point having traveled the given
+            distance (in km) on the given bearing along a rhumb line.
+            @param lat1/lon1 float: Latitude/longitude of source point.
+            @param brng float: Bearing in degrees from North.
+            @param dist float: Distance in km.
+            @return {Lat/Lon} float Destination point."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.destination_point = basicObj.rhumb_destination_point(lat1, lon1, brng, dist)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.destination_point
+    
+    def client_rhumb_midpoint(self, lat1, lon1, lat2, lon2):
+        """ @brief Returns the loxodromic midpoint (along a rhumb line) between 
+            this point and the supplied point.
+            @param {lat1/lon1} float: Source point.
+            @param {lat2/lon2} float: Destination point.
+            @return {Lat/Lon} float: Midpoint between this point and the supplied point."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.midpoint = basicObj.rhumb_midpoint(lat1, lon1, lat2, lon2)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.midpoint
+    
+    def client_destination_point(self, lat1, lon1, brng, dist):
+        """ @brief Returns the destination point from source point.
+            @param {lat1/lon1} float: Latitude/Longitude of source point.
+            @param brng float: Initial bearing in degrees.
+            @param dist float: Distance in km.
+            @return {lat2/lon2} float: Destination point."""
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confBasicIntID, self.confBasicIntKind)
+        
+        client.logger.log.info("Narrowing reference to Geo.Basic reference")
+        #Narrow reference to Raster interface.
+        basicObj = obj._narrow(Geo.Basic)
+        if basicObj is None:
+            client.logger.log.error("Object reference is no an Geo::Basic")
+            sys.exit(1)
+        try:
+            self.destination = basicObj.destination_point(lat1, lon1, brng, dist)
+        except (Geo.LatitudeRangeException, Geo.LongitudeRangeException, Geo.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.destination

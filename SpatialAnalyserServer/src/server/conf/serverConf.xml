@@ -37,5 +37,9 @@
 			<ID>InfoRaster</ID>
 			<Kind>Object</Kind>
 		</Raster>
+		<Basic>
+			<ID>GeoBasic</ID>
+			<Kind>Object</Kind>
+		</Basic>
 	</Contexts>
 </ServerConf>

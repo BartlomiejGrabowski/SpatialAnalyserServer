@@ -39,11 +39,6 @@ class Ui_DrawSHPImage(Client):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawSHPImage.setWindowIcon(icon)
-
-class Ui_DrawSHPImage(object):        
-    def setupUi(self, DrawSHPImage):
-        DrawSHPImage.setObjectName("DrawSHPImage")
-        DrawSHPImage.resize(796, 594)
         self.conf_shp_image = QtGui.QTabWidget(DrawSHPImage)
         self.conf_shp_image.setGeometry(QtCore.QRect(10, 460, 601, 111))
         self.conf_shp_image.setObjectName("conf_shp_image")
@@ -91,21 +86,6 @@ class Ui_DrawSHPImage(object):
         self.lines_color.addItem('black')
         self.lines_color.addItem('yellow')
     
-        self.background_image_color = QtGui.QComboBox(self.tab)
-        self.background_image_color.setGeometry(QtCore.QRect(10, 40, 141, 31))
-        self.background_image_color.setObjectName("background_image_color")
-        self.background_label = QtGui.QLabel(self.tab)
-        self.background_label.setGeometry(QtCore.QRect(10, 10, 121, 21))
-        self.background_label.setObjectName("background_label")
-        self.polygons_color = QtGui.QComboBox(self.tab)
-        self.polygons_color.setGeometry(QtCore.QRect(180, 40, 141, 31))
-        self.polygons_color.setObjectName("polygons_color")
-        self.label = QtGui.QLabel(self.tab)
-        self.label.setGeometry(QtCore.QRect(180, 10, 111, 21))
-        self.label.setObjectName("label")
-        self.lines_color = QtGui.QComboBox(self.tab)
-        self.lines_color.setGeometry(QtCore.QRect(350, 40, 141, 31))
-        self.lines_color.setObjectName("lines_color")
         self.label_2 = QtGui.QLabel(self.tab)
         self.label_2.setGeometry(QtCore.QRect(350, 10, 91, 21))
         self.label_2.setObjectName("label_2")
@@ -121,6 +101,10 @@ class Ui_DrawSHPImage(object):
         self.projection_type.setObjectName("projection_type")
         #Projection types in combo box.
         self.projection_type.addItem('+proj=latlong +datum=WGS84')
+        self.projection_type.addItem('+proj=tmerc +datum=WGS84')
+        self.projection_type.addItem('+proj=cc +datum=WGS84')
+        self.projection_type.addItem('+proj=merc +datum=WGS84')
+        self.projection_type.addItem('+proj=fouc +datum=WGS84')
         
         #QLineEdit with output file name.
         self.out_image_name = QtGui.QLineEdit(self.tab_2)
@@ -204,36 +188,9 @@ class Ui_DrawSHPImage(object):
         self.line_2.setFrameShadow(QtGui.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.conf_shp_image.addTab(self.tab_4, "")
-        self.projection_type = QtGui.QComboBox(self.tab_2)
-        self.projection_type.setGeometry(QtCore.QRect(10, 40, 171, 31))
-        self.projection_type.setObjectName("projection_type")
-        self.out_image_name = QtGui.QLineEdit(self.tab_2)
-        self.out_image_name.setGeometry(QtCore.QRect(220, 40, 191, 31))
-        self.out_image_name.setObjectName("out_image_name")
-        self.out_image_label = QtGui.QLabel(self.tab_2)
-        self.out_image_label.setGeometry(QtCore.QRect(220, 20, 141, 21))
-        self.out_image_label.setObjectName("out_image_label")
-        self.conf_shp_image.addTab(self.tab_2, "")
-        self.shp_image_view = QtGui.QGraphicsView(DrawSHPImage)
-        self.shp_image_view.setGeometry(QtCore.QRect(10, 40, 601, 401))
-        self.shp_image_view.setObjectName("shp_image_view")
-        self.shp_name_label = QtGui.QLabel(DrawSHPImage)
-        self.shp_name_label.setGeometry(QtCore.QRect(10, 10, 62, 17))
-        self.shp_name_label.setObjectName("shp_name_label")
-        self.shp_file_name = QtGui.QLabel(DrawSHPImage)
-        self.shp_file_name.setGeometry(QtCore.QRect(50, 10, 62, 17))
-        self.shp_file_name.setText("")
-        self.shp_file_name.setObjectName("shp_file_name")
-        self.draw_image = QtGui.QPushButton(DrawSHPImage)
-        self.draw_image.setGeometry(QtCore.QRect(660, 40, 91, 27))
-        self.draw_image.setObjectName("draw_image")
-        self.clear_button = QtGui.QPushButton(DrawSHPImage)
-        self.clear_button.setGeometry(QtCore.QRect(660, 90, 91, 27))
-        self.clear_button.setObjectName("clear_button")
-        self.cancel_button = QtGui.QPushButton(DrawSHPImage)
-        self.cancel_button.setGeometry(QtCore.QRect(660, 140, 91, 27))
-        self.cancel_button.setObjectName("cancel_button")
 
+
+        self.conf_shp_image.addTab(self.tab_2, "")
         self.shp_image_view = QtGui.QGraphicsView(DrawSHPImage)
         self.shp_image_view.setGeometry(QtCore.QRect(10, 40, 605, 405))
         self.shp_image_view.setObjectName("shp_image_view")
@@ -353,10 +310,13 @@ class Ui_DrawSHPImage(object):
         self.shear_y = self.shear_y_input.text()
         #Set map size and projection type.
         m = mapnik.Map(self.x,self.y, self.projection)
+        print(m.srs)
         #Set background color.
         m.background = mapnik.Color(self.background)
 
+        print(self.confSHPDownloadsLoc+str(self.shp_file_name.text()) + '.shp')
         shapefile = osgeo.ogr.Open(self.confSHPDownloadsLoc+str(self.shp_file_name.text()) + '.shp')
+        
         numLayers = shapefile.GetLayerCount()
         
         print "Shapefile contains %d layers" % numLayers
@@ -445,7 +405,6 @@ class Ui_DrawSHPImage(object):
         self.picture = QtGui.QPixmap('/tmp/'+self.output_name)
         self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
         self.shp_image_view.setScene(self.scene)
-        
         #Check if angle of rotation is set. If is not empty, then rotate.
         if not self.rotation_angle.isEmpty():
             self.shp_image_view.rotate(float(self.rotation_angle))

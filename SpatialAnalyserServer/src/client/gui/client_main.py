@@ -16,6 +16,7 @@ import geo_services
 import sys
 sys.path.append("../../../interfaces/info")
 sys.path.append("../../../interfaces/projections")
+sys.path.append("../../../interfaces/geo")
 
 from Client import Client
 
@@ -92,7 +93,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QObject.connect(self.draw_osm_from_web, QtCore.SIGNAL("clicked()"), self.drawFromOSMWeb)
         QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.showGeoService)
-        QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.raster_info1)
+        QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.geo_lib)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -215,3 +216,17 @@ class Ui_MainWindow(Client):
         print(projection)
         raster_bands = self.client_get_raster_bands('../../../data_files/tif/L71044034_03420050418_B10.TIF')
         print(raster_bands)
+        
+    def geo_lib(self):
+        print('Using tests')
+        #print(self.client_distance_haversine(53.123, 21.020, 54.520, 18.530))
+        #print(self.client_distance_sloc(52.259, 21.020, 54.520, 18.530))
+        #print(self.client_initial_bearing(50.0359, 5.4255, 58.38, 3.042))
+        #print(self.client_final_bearing(50.0359, 5.4255, 58.38, 3.042))
+        #print(self.client_midpoint(34.122222, 118.4111111, 40.66972222, 73.94388889))
+        #print(self.client_intersection(51.885, 0.235, 108.63, 49.008, 2.549, 32.72))
+        #print(self.client_rhumb_distance(50.2150, 4.0925, 42.2104, 71.0227))
+        #print(self.client_rhumb_bearing(50.2150, 4.0925, 42.2104, 71.0227))
+        print(self.client_rhumb_destination_point(51.0732, 1.2017, 116.3810, 40.23))
+        print(self.client_rhumb_midpoint(50.2150, 4.0925, 42.2104, 71.0227))
+        print(self.client_destination_point(53.1914, 1.4347, 96.0118, 124.8))

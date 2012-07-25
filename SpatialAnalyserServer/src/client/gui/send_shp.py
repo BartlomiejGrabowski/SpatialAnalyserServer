@@ -16,6 +16,8 @@ sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 sys.path.append("../../../interfaces/projections")
 sys.path.append("../../../interfaces/info")
+sys.path.append("../../../interfaces/geo")
+
 from Client import Client
 
 

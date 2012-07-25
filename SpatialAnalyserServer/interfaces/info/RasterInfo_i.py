@@ -37,7 +37,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -68,7 +68,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
         
@@ -77,7 +77,7 @@ class RasterInfo_i(Info__POA.Raster):
             driver_long_name = dataset.GetDriver().LongName
             self.driver_name = Info.Driver(driver_short_name, driver_long_name)
         except Exception as ex:
-            self.logger.error('Exception occurred during getting driver name.')
+            self.logger.log.error('Exception occurred during getting driver name.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -93,7 +93,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -122,7 +122,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -147,7 +147,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -166,7 +166,7 @@ class RasterInfo_i(Info__POA.Raster):
         try:
             dataset = gdal.Open(dataset_path, GA_ReadOnly)
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -192,7 +192,7 @@ class RasterInfo_i(Info__POA.Raster):
                     metadata_list.append(item)
                     
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
               
@@ -220,7 +220,7 @@ class RasterInfo_i(Info__POA.Raster):
                 else:
                     return pszProjection
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -241,7 +241,7 @@ class RasterInfo_i(Info__POA.Raster):
                     metadata_list.append(metadata)
 
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)
             
@@ -289,7 +289,7 @@ class RasterInfo_i(Info__POA.Raster):
             self.corner_list.append(Info.Coordinate(corner[0], corner[1]))
                 
         except Exception as ex:
-            self.logger.error('Exception occurred during creating data set.')
+            self.logger.log.error('Exception occurred during creating data set.')
             raise Info.DatasetOpenFailed(ex)
             sys.exit(1)           
         return self.corner_list            

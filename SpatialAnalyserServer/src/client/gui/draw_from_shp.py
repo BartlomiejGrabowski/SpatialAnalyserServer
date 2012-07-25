@@ -241,7 +241,7 @@ class Ui_DrawFromSHPFile(Client):
         self.sh = draw_shp_image.Ui_DrawSHPImage()
         self.sh.setupUi(self.DrawSHPImage)
         #Get first part (without extension) of file name and set as a label text.
-        self.sh.shp_file_name.setText("<font color='blue'>%s</font>" % (self.relatedFiles[0].split('.')[0]))
+        self.sh.shp_file_name.setText(self.relatedFiles[0].split('.')[0])
         self.DrawSHPImage.show()
     
     def drawSHPFile(self):

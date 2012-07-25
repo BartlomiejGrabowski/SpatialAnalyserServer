@@ -1,0 +1,74 @@
+module Geo {
+	typedef float latitude;
+	typedef float longitude;
+	typedef float distance;
+	typedef float bearing;
+
+	struct Point {
+		latitude lat;
+		longitude lon;
+	};
+
+	exception LatitudeRangeException {
+		string reason;
+	};
+
+	exception LongitudeRangeException {
+		string reason;
+	};
+
+	exception InternalException {
+		string reason;
+	};
+
+	interface Basic {
+	
+		//Compute distance between two points in km using haversine formula.
+		distance distance_haversine(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2) 
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Compute distance between two points in km using spherical law of cosines formula.
+		distance distance_sloc(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns initial bearing from one point to another in degrees.
+		bearing initial_bearing(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns final bearing from one point to another in degrees.
+		bearing final_bearing(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns midpoint between two points.
+		Point midpoint(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns point of intersection of two path defined by point and bearing.
+		Point intersection(in latitude lat1, in longitude lon1, in bearing brng1, in latitude lat2,
+							in longitude lon2, in bearing brng2) 
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns distance traveling along rhumb line.
+		distance rhumb_distance(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns the bearing from this point to the supplied point along rhumb line, in degrees.
+		bearing rhumb_bearing(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns the destination point drom this point having traveled the given
+		//distance (in km) on the given bearing along a rhumb line.
+		Point rhumb_destination_point(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns the loxodromic midpoint (along a rhumb line) between this point
+		//and the supplied point.
+		Point rhumb_midpoint(in latitude lat1, in longitude lon1, in latitude lat2, in longitude lon2)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+
+		//Returns the destination point from source point.
+		Point destination_point(in latitude lat1, in longitude lon1, in bearing brng, in distance dist)
+						raises (LatitudeRangeException, LongitudeRangeException, InternalException);
+		
+	};
+};
