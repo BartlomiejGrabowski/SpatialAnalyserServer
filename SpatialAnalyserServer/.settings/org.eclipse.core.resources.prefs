@@ -1,4 +1,4 @@
-#Wed Jul 11 18:59:23 CEST 2012
+#Thu Jul 26 13:30:35 CEST 2012
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=e4c450059ebc9624d89d515d50ca172e65a57b46
@@ -10,6 +10,6 @@ encoding//src/client/gui/draw_osm_image.py=utf-8
 encoding//src/client/gui/draw_osm_web_image.py=utf-8
 encoding//src/client/gui/draw_osm_www.py=utf-8
 encoding//src/client/gui/draw_shp_image.py=utf-8
+encoding//src/client/gui/geo.py=utf-8
 encoding//src/client/gui/geo_services.py=utf-8
-encoding//src/client/gui/geo_services2.py=utf-8
 encoding//src/client/gui/send_shp.py=utf-8

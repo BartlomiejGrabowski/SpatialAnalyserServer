@@ -13,6 +13,7 @@ import draw_from_shp
 import draw_from_osm
 import draw_osm_www
 import geo_services
+import geo
 import sys
 sys.path.append("../../../interfaces/info")
 sys.path.append("../../../interfaces/projections")
@@ -55,9 +56,9 @@ class Ui_MainWindow(Client):
         self.geodetic_computation = QtGui.QPushButton(self.centralwidget)
         self.geodetic_computation.setGeometry(QtCore.QRect(630, 200, 93, 27))
         self.geodetic_computation.setObjectName("geodetic_computation")
-        self.raster_info = QtGui.QPushButton(self.centralwidget)
-        self.raster_info.setGeometry(QtCore.QRect(630, 240, 93, 27))
-        self.raster_info.setObjectName("raster_info")
+        self.geo_basic = QtGui.QPushButton(self.centralwidget)
+        self.geo_basic.setGeometry(QtCore.QRect(630, 240, 93, 27))
+        self.geo_basic.setObjectName("geo_basic")
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(60, 20, 241, 61))
         self.widget.setObjectName("widget")
@@ -93,7 +94,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.draw_osm_from_file, QtCore.SIGNAL("clicked()"), self.drawFromOSMFile)
         QtCore.QObject.connect(self.draw_osm_from_web, QtCore.SIGNAL("clicked()"), self.drawFromOSMWeb)
         QtCore.QObject.connect(self.geodetic_computation, QtCore.SIGNAL("clicked()"), self.showGeoService)
-        QtCore.QObject.connect(self.raster_info, QtCore.SIGNAL("clicked()"), self.geo_lib)
+        QtCore.QObject.connect(self.geo_basic, QtCore.SIGNAL("clicked()"), self.showGeoService2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -109,7 +110,7 @@ class Ui_MainWindow(Client):
         self.draw_osm_from_file.setText(QtGui.QApplication.translate("MainWindow", "Draw OSM", None, QtGui.QApplication.UnicodeUTF8))
         self.draw_osm_from_web.setText(QtGui.QApplication.translate("MainWindow", "Draw WWW", None, QtGui.QApplication.UnicodeUTF8))
         self.geodetic_computation.setText(QtGui.QApplication.translate("MainWindow", "Geodetic", None, QtGui.QApplication.UnicodeUTF8))
-        self.raster_info.setText(QtGui.QApplication.translate("MainWindow", "Raster Info", None, QtGui.QApplication.UnicodeUTF8))
+        self.geo_basic.setText(QtGui.QApplication.translate("MainWindow", "Geo Computation", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Connected to:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_server.setText(QtGui.QApplication.translate("MainWindow", "server", None, QtGui.QApplication.UnicodeUTF8))
 
@@ -175,6 +176,18 @@ class Ui_MainWindow(Client):
         self.sh = geo_services.Ui_GeoServices()
         self.sh.setupUi(self.ShowGeoService)
         self.ShowGeoService.show()
+        
+    def showGeoService2(self):
+        '''
+        @brief: This function is used to show form allows compute some geo-spatial data.
+        @param None:
+        @return: This function does not return a value.
+        '''
+        
+        self.ShowGeoService2 = QtGui.QWidget()
+        self.sh = geo.Ui_GeoBasic()
+        self.sh.setupUi(self.ShowGeoService2)
+        self.ShowGeoService2.show()
         
     def geodetic(self):
         self.client_get_fwd_transformation(176.2345, 38.2888, 30, 5200)
