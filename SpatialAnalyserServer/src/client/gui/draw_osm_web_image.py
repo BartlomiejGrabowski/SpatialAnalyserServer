@@ -21,7 +21,9 @@ sys.path.append("../../../interfaces/db")
 sys.path.append("../../../interfaces/shp")
 sys.path.append("../../../interfaces/projections")
 
-class Ui_DrawOSMImage(object):
+from Client import Client
+
+class Ui_DrawOSMImage(Client):
     '''
     Class Ui_DrawOSMImage is class displays window to drawing osm from website. PyQT implementation.
     @author: Bartlomiej Grabowski
@@ -46,6 +48,9 @@ class Ui_DrawOSMImage(object):
         
         DrawOSMImage.setObjectName("DrawOSMImage")
         DrawOSMImage.resize(1024, 768)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344069808_firefox.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        DrawOSMImage.setWindowIcon(icon)
         self.osm_image_view = QtGui.QGraphicsView(DrawOSMImage)
         self.osm_image_view.setGeometry(QtCore.QRect(20, 40, 801, 591))
         self.osm_image_view.setObjectName("osm_image_view")

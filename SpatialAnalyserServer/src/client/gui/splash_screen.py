@@ -1,5 +1,5 @@
 from PyQt4 import QtGui, QtCore
-import client_main
+import main
 import xml.etree.ElementTree as ET
 
 
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     splash.show_splash(splash.confSplashImageLoc)
     app.quit()
     MainWindow = QtGui.QMainWindow()
-    ui = client_main.Ui_MainWindow()
+    ui = main.Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

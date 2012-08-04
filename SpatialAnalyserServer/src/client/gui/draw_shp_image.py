@@ -37,7 +37,7 @@ class Ui_DrawSHPImage(Client):
         DrawSHPImage.setObjectName("DrawSHPImage")
         DrawSHPImage.resize(796, 594)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068568_agt_internet.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawSHPImage.setWindowIcon(icon)
         self.conf_shp_image = QtGui.QTabWidget(DrawSHPImage)
         self.conf_shp_image.setGeometry(QtCore.QRect(10, 460, 601, 111))

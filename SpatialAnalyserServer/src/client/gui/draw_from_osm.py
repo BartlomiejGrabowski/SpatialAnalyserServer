@@ -42,7 +42,7 @@ class Ui_DrawFromOSMFile(Client):
         DrawFromOSMFile.setObjectName("DrawFromOSMFile")
         DrawFromOSMFile.resize(742, 384)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068657_image.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawFromOSMFile.setWindowIcon(icon)
         self.get_file_list = QtGui.QPushButton(DrawFromOSMFile)
         self.get_file_list.setGeometry(QtCore.QRect(460, 30, 93, 27))

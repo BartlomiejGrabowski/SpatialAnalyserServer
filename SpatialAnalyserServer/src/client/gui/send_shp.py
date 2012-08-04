@@ -26,7 +26,7 @@ class Ui_SendSHP(Client):
         SendSHP.setObjectName("SendSHP")
         SendSHP.setGeometry(0, 0, 407, 300)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'sendshp.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068458_db_comit.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         SendSHP.setWindowIcon(icon)
         self.shp_file = QtGui.QLineEdit(SendSHP)
         self.shp_file.setGeometry(QtCore.QRect(20, 120, 251, 27))

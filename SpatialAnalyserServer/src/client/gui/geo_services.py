@@ -34,6 +34,9 @@ class Ui_GeoServices(Client):
         
         GeoServices.setObjectName("GeoServices")
         GeoServices.resize(937, 617)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344071416_statistics.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        GeoServices.setWindowIcon(icon)
         self.services_tab = QtGui.QTabWidget(GeoServices)
         self.services_tab.setGeometry(QtCore.QRect(0, 0, 931, 571))
         self.services_tab.setObjectName("services_tab")

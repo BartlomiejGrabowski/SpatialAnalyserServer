@@ -8,18 +8,25 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+
+import sys
+
+sys.path.append("..")
+sys.path.append("../../logger")
+sys.path.append("../../../interfaces/db")
+sys.path.append("../../../interfaces/shp")
+sys.path.append("../../../interfaces/projections")
+
+from Client import Client
 import draw_osm_web_image
 
-
-class Ui_DrawOSMFromWeb(object):
+class Ui_DrawOSMFromWeb(Client):
     '''
     Class Ui_DrawOSMImage is class displays window to drawing osm from website. PyQT implementation.
     @author: Bartlomiej Grabowski
     @version: 1.0
     '''
-    
-    def __init__(self):
-        self.osmUrl = 'http://api.openstreetmap.org/api/0.6/map'
+        
         
     def setupUi(self, DrawOSMFromWeb):
         '''
@@ -28,9 +35,12 @@ class Ui_DrawOSMFromWeb(object):
         @param DrawOSMFromWeb QtGui.QWidget: Input parameter is QtGui.QWidget.
         @return: This function does not return a value. 
         '''
-        
+        self.osmUrl = 'http://api.openstreetmap.org/api/0.6/map'
         DrawOSMFromWeb.setObjectName("DrawOSMFromWeb")
         DrawOSMFromWeb.resize(497, 296)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344069808_firefox.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        DrawOSMFromWeb.setWindowIcon(icon)
         self.frame = QtGui.QFrame(DrawOSMFromWeb)
         self.frame.setGeometry(QtCore.QRect(10, 10, 340, 271))
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)

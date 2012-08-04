@@ -20,6 +20,9 @@ class Ui_GeoBasic(Client):
     def setupUi(self, GeoBasic):
         GeoBasic.setObjectName("GeoBasic")
         GeoBasic.resize(890, 435)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344067877_Calculator.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        GeoBasic.setWindowIcon(icon)
         self.widgetTab = QtGui.QTabWidget(GeoBasic)
         self.widgetTab.setGeometry(QtCore.QRect(0, 0, 891, 391))
         self.widgetTab.setMinimumSize(QtCore.QSize(891, 0))

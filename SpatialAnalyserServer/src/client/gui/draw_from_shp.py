@@ -38,7 +38,7 @@ class Ui_DrawFromSHPFile(Client):
         DrawFromSHPFile.setObjectName("DrawFromSHPFile")
         DrawFromSHPFile.resize(742, 384)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068568_agt_internet.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawFromSHPFile.setWindowIcon(icon)
         self.get_file_list = QtGui.QPushButton(DrawFromSHPFile)
         self.get_file_list.setGeometry(QtCore.QRect(460, 30, 93, 27))

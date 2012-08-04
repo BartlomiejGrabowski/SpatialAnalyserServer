@@ -40,7 +40,7 @@ class Ui_DrawOSMImage(Client):
         DrawOSMImage.setObjectName("DrawOSMImage")
         DrawOSMImage.resize(1024, 768)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'earthsphere.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068657_image.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawOSMImage.setWindowIcon(icon)
         self.osm_name_label = QtGui.QLabel(DrawOSMImage)
         self.osm_name_label.setGeometry(QtCore.QRect(20, 10, 62, 17))
