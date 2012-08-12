@@ -39,6 +39,8 @@ class Ui_DrawOSMImage(Client):
         
         DrawOSMImage.setObjectName("DrawOSMImage")
         DrawOSMImage.resize(1024, 768)
+        DrawOSMImage.setFixedHeight(768)
+        DrawOSMImage.setFixedWidth(1024)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068657_image.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawOSMImage.setWindowIcon(icon)
@@ -65,6 +67,7 @@ class Ui_DrawOSMImage(Client):
         self.retranslateUi(DrawOSMImage)
         QtCore.QObject.connect(self.draw_image_button, QtCore.SIGNAL("clicked()"), self.drawOSMFile1)
         QtCore.QObject.connect(self.cancel_window_button, QtCore.SIGNAL("clicked()"), DrawOSMImage,  QtCore.SLOT("close()"))
+        QtCore.QObject.connect(self.clear_image_button, QtCore.SIGNAL("clicked()"), self.clearImage)
         QtCore.QMetaObject.connectSlotsByName(DrawOSMImage)
 
     def retranslateUi(self, DrawOSMImage):
@@ -746,7 +749,10 @@ class Ui_DrawOSMImage(Client):
         self.picture = QtGui.QPixmap('/tmp/'+self.file_name_label.text() + '.png')
         self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
         self.osm_image_view.setScene(self.scene)
-        
+ 
+    def clearImage(self):
+        '''Remove all elements from scene.'''
+        self.scene.clear()
 
 
 

@@ -36,6 +36,8 @@ class Ui_DrawSHPImage(Client):
         
         DrawSHPImage.setObjectName("DrawSHPImage")
         DrawSHPImage.resize(796, 594)
+        DrawSHPImage.setFixedHeight(594)
+        DrawSHPImage.setFixedWidth(796)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068568_agt_internet.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawSHPImage.setWindowIcon(icon)

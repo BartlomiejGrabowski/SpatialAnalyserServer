@@ -34,6 +34,8 @@ class Ui_GeoServices(Client):
         
         GeoServices.setObjectName("GeoServices")
         GeoServices.resize(937, 617)
+        GeoServices.setFixedHeight(617)
+        GeoServices.setFixedWidth(937)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344071416_statistics.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         GeoServices.setWindowIcon(icon)

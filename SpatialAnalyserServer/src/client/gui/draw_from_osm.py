@@ -41,6 +41,8 @@ class Ui_DrawFromOSMFile(Client):
         
         DrawFromOSMFile.setObjectName("DrawFromOSMFile")
         DrawFromOSMFile.resize(742, 384)
+        DrawFromOSMFile.setFixedHeight(384)
+        DrawFromOSMFile.setFixedWidth(742)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068657_image.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawFromOSMFile.setWindowIcon(icon)

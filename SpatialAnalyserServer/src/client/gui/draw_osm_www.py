@@ -38,6 +38,8 @@ class Ui_DrawOSMFromWeb(Client):
         self.osmUrl = 'http://api.openstreetmap.org/api/0.6/map'
         DrawOSMFromWeb.setObjectName("DrawOSMFromWeb")
         DrawOSMFromWeb.resize(497, 296)
+        DrawOSMFromWeb.setFixedHeight(296)
+        DrawOSMFromWeb.setFixedWidth(497)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344069808_firefox.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawOSMFromWeb.setWindowIcon(icon)

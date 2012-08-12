@@ -245,6 +245,24 @@ class Ui_MainWindow(Client):
         self.about_btn.setIcon(icon7)
         self.about_btn.setIconSize(QtCore.QSize(32, 32))
         self.about_btn.setObjectName("about_btn")
+        self.exit_btn = QtGui.QCommandLinkButton(self.frame)
+        self.exit_btn.setGeometry(QtCore.QRect(0, 420, 231, 61))
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(0, 170, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 170, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 170, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
+        self.exit_btn.setPalette(palette)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("icons/1344068502_button_cancel.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.exit_btn.setIcon(icon8)
+        self.exit_btn.setIconSize(QtCore.QSize(32, 32))
+        self.exit_btn.setObjectName("exit_btn")
         self.graphicsView = QtGui.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(230, 0, 571, 481))
         self.graphicsView.setObjectName("graphicsView")
@@ -265,6 +283,7 @@ class Ui_MainWindow(Client):
         QtCore.QObject.connect(self.geo_comp_btn, QtCore.SIGNAL("clicked()"), self.showGeoService)
         QtCore.QObject.connect(self.geo_calc_btn, QtCore.SIGNAL("clicked()"), self.showGeoService2)
         QtCore.QObject.connect(self.about_btn, QtCore.SIGNAL("clicked()"), self.showAbout)
+        QtCore.QObject.connect(self.exit_btn, QtCore.SIGNAL("clicked()"), MainWindow, QtCore.SLOT("close()"))
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -276,6 +295,7 @@ class Ui_MainWindow(Client):
         self.geo_comp_btn.setText(QtGui.QApplication.translate("MainWindow", "Geodetic computations", None, QtGui.QApplication.UnicodeUTF8))
         self.geo_calc_btn.setText(QtGui.QApplication.translate("MainWindow", "Geospatial calculator", None, QtGui.QApplication.UnicodeUTF8))
         self.about_btn.setText(QtGui.QApplication.translate("MainWindow", "About", None, QtGui.QApplication.UnicodeUTF8))
+        self.exit_btn.setText(QtGui.QApplication.translate("MainWindow", "Exit", None, QtGui.QApplication.UnicodeUTF8))
 
     def sendSHP(self):
         '''

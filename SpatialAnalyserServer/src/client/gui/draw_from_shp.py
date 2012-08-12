@@ -37,6 +37,8 @@ class Ui_DrawFromSHPFile(Client):
         
         DrawFromSHPFile.setObjectName("DrawFromSHPFile")
         DrawFromSHPFile.resize(742, 384)
+        DrawFromSHPFile.setFixedHeight(384)
+        DrawFromSHPFile.setFixedWidth(742)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068568_agt_internet.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         DrawFromSHPFile.setWindowIcon(icon)

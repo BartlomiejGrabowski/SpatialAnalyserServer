@@ -25,6 +25,8 @@ class Ui_SendSHP(Client):
     def setupUi(self, SendSHP):
         SendSHP.setObjectName("SendSHP")
         SendSHP.setGeometry(0, 0, 407, 300)
+        SendSHP.setFixedHeight(300)
+        SendSHP.setFixedWidth(407)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344068458_db_comit.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         SendSHP.setWindowIcon(icon)
