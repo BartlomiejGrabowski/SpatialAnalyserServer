@@ -37,6 +37,7 @@ class PostgresBasic(object):
         fdb.set_conn_parameters()
         
         #Set value of parameters.
+        self.ip = fdb.best_ip
         self.db = fdb.db
         self.user = fdb.user
         self.passwd = fdb.passwd
@@ -52,9 +53,9 @@ class PostgresBasic(object):
         @return: handle to a Postgres database. 
         """
         
-        self.logger.log.info("Connecting to database: %s" % (self.db))
+        self.logger.log.info("Connecting to host: %s" % (self.ip))
 
-        conn = psycopg2.connect(database=self.db, user=self.user, password=self.passwd)
+        conn = psycopg2.connect(host=self.ip, database=self.db, user=self.user, password=self.passwd)
             
         self.logger.log.info("Connected to %s database as %s user" % (self.db, self.user))
         
@@ -105,14 +106,3 @@ class PostgresBasic(object):
 if __name__ == "__main__":    
     test = PostgresBasic()
     test.connectToDatabase("test_gis", "postgres", "postgres")
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        

@@ -1,5 +1,14 @@
 module SHP {
 
+	typedef string<1024> ip;
+	typedef string<1024> db;
+	typedef string<1024> user;
+
+	struct dbParams {
+		ip db_ip;
+		db db_name;
+		user db_user;
+	};
 	exception FileDoesNotExist { 
 		string reason;
 		string fileName;
@@ -11,7 +20,7 @@ module SHP {
 	};
 
 	interface ShpToDB {
-		void send_shp_to_postgres(in string shp_file, in string table_name) raises (FileDoesNotExist, CannotConnectToDB);
+		dbParams send_shp_to_postgres(in string shp_file, in string table_name) raises (FileDoesNotExist, CannotConnectToDB);
 
 		void send_wbd_to_postgres(in string shp_file) raises (FileDoesNotExist, CannotConnectToDB);
 	};

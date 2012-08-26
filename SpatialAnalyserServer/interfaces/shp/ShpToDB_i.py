@@ -31,6 +31,10 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         
     def send_shp_to_postgres(self, shpFile, tableName):
         pb = PostgresBasic()
+        
+        
+        paramList = SHP.dbParams(pb.ip, pb.db, pb.user)
+        
         self.logger.log.info("Connecting to %s database" % (pb.db))
         try:
             connection = pb.connectToDatabase()
@@ -74,6 +78,7 @@ class ShpToDB_i(SHP__POA.ShpToDB):
         cursor.execute("VACUUM ANALYZE")
         connection.set_isolation_level(old_level)
         
+        return paramList        
     
     def send_wbd_to_postgres(self, shpFile):
         pb = PostgresBasic()

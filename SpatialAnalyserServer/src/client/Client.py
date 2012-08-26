@@ -88,9 +88,6 @@ class Client(object):
         #Fetch kind of interface.
         self.confSHPIntKind = shpConf.find('Kind').text
 
-        self.confSHPIntID = shpConf.find('ID')
-        #Fetch kind of interface.
-        self.confSHPIntKind = shpConf.find('Kind')
         
         #SHPDraw INTERFACE.
         shpDrawConf = interfacesConf.find('ShpDraw')
@@ -154,6 +151,7 @@ class Client(object):
         '''
         
         client = Client()
+        dbParams = list()
         
         #Get reference to object. 
 
@@ -171,8 +169,8 @@ class Client(object):
         try:
             client.logger.log.info("Calling send_shp_to_postgres() function")
             #Call send_shp_to_postgres function from shp_to_db.idl file.
-            shpRef.send_shp_to_postgres(fileName, tabName)
-            return 0
+            dbParams = shpRef.send_shp_to_postgres(fileName, tabName)
+            return dbParams
         except SHP.FileDoesNotExist as ex:
             client.logger.log.error("%s. %s" % (ex.reason, ex.fileName))
             return 1

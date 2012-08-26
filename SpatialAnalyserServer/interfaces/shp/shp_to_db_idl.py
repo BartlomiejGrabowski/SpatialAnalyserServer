@@ -15,6 +15,58 @@ _0_SHP = omniORB.openModule("SHP", r"shp_to_db.idl")
 _0_SHP__POA = omniORB.openModule("SHP__POA", r"shp_to_db.idl")
 
 
+# typedef ... ip
+class ip:
+    _NP_RepositoryId = "IDL:SHP/ip:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_SHP.ip = ip
+_0_SHP._d_ip  = (omniORB.tcInternal.tv_string,1024)
+_0_SHP._ad_ip = (omniORB.tcInternal.tv_alias, ip._NP_RepositoryId, "ip", (omniORB.tcInternal.tv_string,1024))
+_0_SHP._tc_ip = omniORB.tcInternal.createTypeCode(_0_SHP._ad_ip)
+omniORB.registerType(ip._NP_RepositoryId, _0_SHP._ad_ip, _0_SHP._tc_ip)
+del ip
+
+# typedef ... db
+class db:
+    _NP_RepositoryId = "IDL:SHP/db:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_SHP.db = db
+_0_SHP._d_db  = (omniORB.tcInternal.tv_string,1024)
+_0_SHP._ad_db = (omniORB.tcInternal.tv_alias, db._NP_RepositoryId, "db", (omniORB.tcInternal.tv_string,1024))
+_0_SHP._tc_db = omniORB.tcInternal.createTypeCode(_0_SHP._ad_db)
+omniORB.registerType(db._NP_RepositoryId, _0_SHP._ad_db, _0_SHP._tc_db)
+del db
+
+# typedef ... user
+class user:
+    _NP_RepositoryId = "IDL:SHP/user:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_SHP.user = user
+_0_SHP._d_user  = (omniORB.tcInternal.tv_string,1024)
+_0_SHP._ad_user = (omniORB.tcInternal.tv_alias, user._NP_RepositoryId, "user", (omniORB.tcInternal.tv_string,1024))
+_0_SHP._tc_user = omniORB.tcInternal.createTypeCode(_0_SHP._ad_user)
+omniORB.registerType(user._NP_RepositoryId, _0_SHP._ad_user, _0_SHP._tc_user)
+del user
+
+# struct dbParams
+_0_SHP.dbParams = omniORB.newEmptyClass()
+class dbParams (omniORB.StructBase):
+    _NP_RepositoryId = "IDL:SHP/dbParams:1.0"
+
+    def __init__(self, db_ip, db_name, db_user):
+        self.db_ip = db_ip
+        self.db_name = db_name
+        self.db_user = db_user
+
+_0_SHP.dbParams = dbParams
+_0_SHP._d_dbParams  = (omniORB.tcInternal.tv_struct, dbParams, dbParams._NP_RepositoryId, "dbParams", "db_ip", omniORB.typeMapping["IDL:SHP/ip:1.0"], "db_name", omniORB.typeMapping["IDL:SHP/db:1.0"], "db_user", omniORB.typeMapping["IDL:SHP/user:1.0"])
+_0_SHP._tc_dbParams = omniORB.tcInternal.createTypeCode(_0_SHP._d_dbParams)
+omniORB.registerType(dbParams._NP_RepositoryId, _0_SHP._d_dbParams, _0_SHP._tc_dbParams)
+del dbParams
+
 # exception FileDoesNotExist
 _0_SHP.FileDoesNotExist = omniORB.newEmptyClass()
 class FileDoesNotExist (CORBA.UserException):
@@ -65,7 +117,7 @@ _0_SHP._tc_ShpToDB = omniORB.tcInternal.createTypeCode(_0_SHP._d_ShpToDB)
 omniORB.registerType(ShpToDB._NP_RepositoryId, _0_SHP._d_ShpToDB, _0_SHP._tc_ShpToDB)
 
 # ShpToDB operations and attributes
-ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist, _0_SHP.CannotConnectToDB._NP_RepositoryId: _0_SHP._d_CannotConnectToDB})
+ShpToDB._d_send_shp_to_postgres = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), (omniORB.typeMapping["IDL:SHP/dbParams:1.0"], ), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist, _0_SHP.CannotConnectToDB._NP_RepositoryId: _0_SHP._d_CannotConnectToDB})
 ShpToDB._d_send_wbd_to_postgres = (((omniORB.tcInternal.tv_string,0), ), (), {_0_SHP.FileDoesNotExist._NP_RepositoryId: _0_SHP._d_FileDoesNotExist, _0_SHP.CannotConnectToDB._NP_RepositoryId: _0_SHP._d_CannotConnectToDB})
 
 # ShpToDB object reference

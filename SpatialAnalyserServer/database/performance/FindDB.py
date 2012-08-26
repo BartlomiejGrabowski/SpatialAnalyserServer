@@ -32,10 +32,10 @@ class FindDB(threading.Thread):
 
 
     def get_db_delay(self):
-        hosts = ["192.168.1.102", "192.168.1.100"]
+        hosts = ["192.168.1.102", "192.168.1.101"]
 
         #spawn a pool of threads, and pass them queue instance 
-        for i in range(2):
+        for i in range(3):
             t = FindDB(self.ips, self.times)
             t.setDaemon(True)
             t.start()
@@ -59,12 +59,12 @@ class FindDB(threading.Thread):
         return best_ips.__getitem__(0)
     
     def set_conn_parameters(self):
-        best_ip = self.get_best_ip()
-        if best_ip == '192.168.1.102':
+        self.best_ip = self.get_best_ip()
+        if self.best_ip == '192.168.1.102':
             self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
-        elif best_ip == '192.168.1.100':
+        elif self.best_ip == '192.168.1.101':
             self.db = 'gis_db'
             self.user = 'postgres'
             self.passwd = 'postgres'
@@ -77,6 +77,4 @@ if __name__ == "__main__":
     times = {}
 
     obj = FindDB(ips, times)
-    obj.get_best_ip()
-
-
+    print(obj.get_best_ip())

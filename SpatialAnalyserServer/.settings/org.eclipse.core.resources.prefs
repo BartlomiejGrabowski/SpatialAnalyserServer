@@ -1,4 +1,4 @@
-#Sun Aug 12 17:57:30 CEST 2012
+#Sun Aug 26 10:52:43 CEST 2012
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=e4c450059ebc9624d89d515d50ca172e65a57b46
@@ -15,3 +15,4 @@ encoding//src/client/gui/geo.py=utf-8
 encoding//src/client/gui/geo_services.py=utf-8
 encoding//src/client/gui/main.py=utf-8
 encoding//src/client/gui/send_shp.py=utf-8
+encoding//src/client/gui/send_shp1.py=utf-8
