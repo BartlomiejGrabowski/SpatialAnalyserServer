@@ -6,13 +6,14 @@
 <!ELEMENT SHPFilesDirectory (Location)>
 <!ELEMENT NamingContext (ServerContext, ObjectContext, NameService)>
 <!ELEMENT POA (Name)>
-<!ELEMENT Contexts (Shp, ShpToDB, SHPDraw, Geodetic, Raster, Basic)>
+<!ELEMENT Contexts (Shp, ShpToDB, SHPDraw, Geodetic, Raster, Basic, Processing)>
 <!ELEMENT Shp (ID, Kind)>
 <!ELEMENT ShpToDB (ID, Kind)>
 <!ELEMENT SHPDraw (ID, Kind)>
 <!ELEMENT Geodetic (ID, Kind)>
 <!ELEMENT Raster (ID, Kind)>
 <!ELEMENT Basic (ID, Kind)>
+<!ELEMENT Processing (ID, Kind)>
 
 <!ELEMENT Location (#PCDATA)>
 <!ELEMENT ServerContext (#PCDATA)>

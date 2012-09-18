@@ -10,6 +10,7 @@
 from PyQt4 import QtCore, QtGui
 import sys
 import os
+import raster
 sys.path.append("..")
 sys.path.append("../../logger")
 sys.path.append("../../../interfaces/db")
@@ -23,6 +24,7 @@ class Ui_GeoServices(Client):
     @author: Bartlomiej Grabowski
     @version: 1.0
     '''
+    
     
     def setupUi(self, GeoServices):
         '''
@@ -211,6 +213,10 @@ class Ui_GeoServices(Client):
         self.get_info_btn.setGeometry(QtCore.QRect(10, 30, 91, 27))
         self.get_info_btn.setObjectName("get_info_btn")
         self.get_info_btn.setEnabled(False)
+        self.show_image_btn = QtGui.QPushButton(self.tab_2)
+        self.show_image_btn.setGeometry(QtCore.QRect(10, 60, 91, 27))
+        self.show_image_btn.setObjectName("show_image_btn")
+        self.show_image_btn.setEnabled(False)
         self.path_to_file = QtGui.QLineEdit(self.tab_2)
         self.path_to_file.setGeometry(QtCore.QRect(307, 30, 611, 27))
         self.path_to_file.setObjectName("path_to_file")
@@ -328,6 +334,7 @@ class Ui_GeoServices(Client):
         QtCore.QObject.connect(self.inter_clear_all, QtCore.SIGNAL("clicked()"), self.clearInterFrame)
         QtCore.QObject.connect(self.select_file_btn, QtCore.SIGNAL("clicked()"), self.selectRasterFile)
         QtCore.QObject.connect(self.get_info_btn, QtCore.SIGNAL("clicked()"), self.getRasterFileInfo)
+        QtCore.QObject.connect(self.show_image_btn, QtCore.SIGNAL("clicked()"), self.showImage)
         QtCore.QObject.connect(self.input_projection_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentInDesc)
         QtCore.QObject.connect(self.output_projection_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentOutDesc)
         QtCore.QObject.connect(self.ellipsoid_input, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.getCurrentEllpsDesc)
@@ -393,6 +400,7 @@ class Ui_GeoServices(Client):
         self.exit_btn.setText(QtGui.QApplication.translate("GeoServices", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.select_file_btn.setText(QtGui.QApplication.translate("GeoServices", "Select File", None, QtGui.QApplication.UnicodeUTF8))
         self.get_info_btn.setText(QtGui.QApplication.translate("GeoServices", "Get info", None, QtGui.QApplication.UnicodeUTF8))
+        self.show_image_btn.setText(QtGui.QApplication.translate("GeoServices", "Show image", None, QtGui.QApplication.UnicodeUTF8))
         self.label_20.setText(QtGui.QApplication.translate("GeoServices", "Path:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_21.setText(QtGui.QApplication.translate("GeoServices", "Status:", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("GeoServices", "Input pramterers", None, QtGui.QApplication.UnicodeUTF8))
@@ -620,6 +628,7 @@ class Ui_GeoServices(Client):
         if not fname.isEmpty(): 
             self.path_to_file.setText(fname)
             self.get_info_btn.setEnabled(True)
+            self.show_image_btn.setEnabled(True)
             
     def getRasterFileInfo(self):
         '''
@@ -688,3 +697,15 @@ class Ui_GeoServices(Client):
                                             % (corner_list[3].x, corner_list[3].y))
         self.raster_properties_text.append('\tCenter: (%s, %s)' \
                                             % (corner_list[4].x, corner_list[4].y))
+        
+        
+    def showImage(self):
+        '''
+        @brief This function is used to show raster image.
+        @param None
+        @return This function does not return a value.
+        ''' 
+        self.ShowRasterImage = QtGui.QWidget()
+        self.sh = raster.Ui_FileProcessing(self.path_to_file.text())
+        self.sh.setupUi(self.ShowRasterImage)
+        self.ShowRasterImage.show()

@@ -1,0 +1,15 @@
+module Raster {
+
+	exception FileException {
+		string reason;
+	};
+	exception InternalException {
+		string reason;
+	};
+
+	interface Processing {
+		string image_filter(in string file_name, in string filter_name) raises (InternalException, FileException);
+
+		string convert_image(in string file_name, in string mode_name) raises (InternalException, FileException);
+	};
+};

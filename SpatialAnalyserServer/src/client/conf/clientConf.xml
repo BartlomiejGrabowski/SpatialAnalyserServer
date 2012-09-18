@@ -44,6 +44,10 @@
 			<ID>GeoBasic</ID>
 			<Kind>Object</Kind>
 		</Basic>
+		<Processing>
+			<ID>RasterProcessing</ID>
+			<Kind>Object</Kind>
+		</Processing>
 		
 	</Interfaces>
 </ClientConf>

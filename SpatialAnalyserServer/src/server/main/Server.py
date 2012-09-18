@@ -21,6 +21,7 @@ sys.path.append("../../../interfaces/shp")
 sys.path.append("../../../interfaces/projections")
 sys.path.append("../../../interfaces/info")
 sys.path.append("../../../interfaces/geo")
+sys.path.append("../../../interfaces/raster")
 
 # Import interface implementation.
 from Shp_i import Shp_i
@@ -29,6 +30,7 @@ from SHPDraw_i import SHPDraw_i
 from GeodeticComputation_i import GeodeticComputation_i
 from RasterInfo_i import RasterInfo_i
 from Geo_i import Geo_i
+from RasterProcessing_i import RasterProcessing_i
 
 
 import xml.etree.ElementTree as ET
@@ -101,7 +103,13 @@ class Server(object):
         self.confBasicContextID = confBasicContext.find('ID').text
         #Fetch kind of Basic context.
         self.confBasicContextKind = confBasicContext.find('Kind').text
-        
+
+        #Interface Processing context.
+        confProcessingContext = confContexts.find('Processing')
+        #Fetch ID of Processing context.
+        self.confProcessingContextID = confProcessingContext.find('ID').text
+        #Fetch kind of Processing context.
+        self.confProcessingContextKind = confProcessingContext.find('Kind').text
         
         
         self.logger.log.info("Starting the server")
@@ -170,6 +178,8 @@ if __name__ == "__main__":
     rasterObj = RasterInfo_i()
     #Create Basic object.
     basicObj = Geo_i()
+    #Create Processing object.
+    processingObj = RasterProcessing_i()
     
     server.bind_new_context(server.confShpContextID, server.confShpContextKind, dbObj)
     
@@ -182,4 +192,6 @@ if __name__ == "__main__":
     server.bind_new_context(server.confRasterContextID, server.confRasterContextKind, rasterObj)
     
     server.bind_new_context(server.confBasicContextID, server.confBasicContextKind, basicObj)
+    
+    server.bind_new_context(server.confProcessingContextID, server.confProcessingContextKind, processingObj)
     server.activate_POA()

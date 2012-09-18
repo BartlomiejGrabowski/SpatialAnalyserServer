@@ -18,6 +18,7 @@ import SHPDraw
 import Info
 import Projection
 import Geo
+import Raster
 import xml.etree.ElementTree as ET
 
 class Client(object):
@@ -116,6 +117,13 @@ class Client(object):
         self.confBasicIntID = basicConf.find('ID').text
         #Fetch kind of interface.
         self.confBasicIntKind = basicConf.find('Kind').text
+        
+        #Processing INTERFACE.
+        processingConf = interfacesConf.find('Processing')
+        #Fetch ID from interface.
+        self.confProcessingIntID = processingConf.find('ID').text
+        #Fetch kind of interface.
+        self.confProcessingIntKind = processingConf.find('Kind').text
         
         #Images XML TAG.
         iconsDirConf = doc.find('IconsDir')
@@ -1014,3 +1022,51 @@ class Client(object):
             client.logger.log.error(ex.reason)
             return 1
         return self.destination
+    
+    def client_image_filter(self, raster_file, filter_name):
+        """ @brief Function applies filter on image.
+            @param raster_file string: Source raster file.
+            @param filter_name string: Filter name.
+            @return outfile string: Image after filter applying. """
+            
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            self.outfile = processingObj.image_filter(raster_file, filter_name)
+        except (Raster.FileException, Raster.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.outfile
+    
+    def client_convert_image(self, raster_file, mode_name):
+        """ @brief Function converts image mode.
+            @param raster_file string: Source raster file.
+            @param mode_name string: mode name.
+            @return outfile string: Image after filter applying. """
+            
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            self.outfile = processingObj.convert_image(raster_file, mode_name)
+        except (Raster.FileException, Raster.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.outfile
