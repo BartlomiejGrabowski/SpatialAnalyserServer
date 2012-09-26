@@ -10,6 +10,7 @@
 from PyQt4 import QtCore, QtGui
 import Image
 import sys
+import os
 sys.path.append("..")
 sys.path.append("../../logger")
 sys.path.append("../../../interfaces/db")
@@ -31,6 +32,11 @@ class Ui_FileProcessing(Client):
     def setupUi(self, FileProcessing):
         FileProcessing.setObjectName("FileProcessing")
         FileProcessing.resize(929, 784)
+        FileProcessing.setFixedHeight(784)
+        FileProcessing.setFixedWidth(929)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.confIconsDir+'1344071416_statistics.ico'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        FileProcessing.setWindowIcon(icon)
         self.image_view = QtGui.QGraphicsView(FileProcessing)
         self.image_view.setGeometry(QtCore.QRect(10, 40, 761, 541))
         self.image_view.setObjectName("image_view")
@@ -92,6 +98,24 @@ class Ui_FileProcessing(Client):
         self.mode_box = QtGui.QComboBox(FileProcessing)
         self.mode_box.setGeometry(QtCore.QRect(200, 610, 171, 31))
         self.mode_box.setObjectName("mode_box")
+        self.label_9 = QtGui.QLabel(FileProcessing)
+        self.label_9.setGeometry(QtCore.QRect(390, 590, 61, 17))
+        self.label_9.setObjectName("label_9")
+        self.contrast_box = QtGui.QComboBox(FileProcessing)
+        self.contrast_box.setGeometry(QtCore.QRect(390, 610, 171, 31))
+        self.contrast_box.setObjectName("contrast_box")
+        self.label_10 = QtGui.QLabel(FileProcessing)
+        self.label_10.setGeometry(QtCore.QRect(10, 660, 70, 17))
+        self.label_10.setObjectName("label_10")
+        self.brightness_box = QtGui.QComboBox(FileProcessing)
+        self.brightness_box.setGeometry(QtCore.QRect(10, 680, 171, 31))
+        self.brightness_box.setObjectName("brightness_box")
+        self.label_11 = QtGui.QLabel(FileProcessing)
+        self.label_11.setGeometry(QtCore.QRect(200, 660, 70, 17))
+        self.label_11.setObjectName("label_11")
+        self.sharpness_box = QtGui.QComboBox(FileProcessing)
+        self.sharpness_box.setGeometry(QtCore.QRect(200, 680, 171, 31))
+        self.sharpness_box.setObjectName("sharpness_box")
         self.ok_button = QtGui.QPushButton(FileProcessing)
         self.ok_button.setGeometry(QtCore.QRect(820, 740, 91, 27))
         self.ok_button.setObjectName("ok_button")
@@ -141,13 +165,42 @@ class Ui_FileProcessing(Client):
         self.mode_box.addItem('YCbCr')
         self.mode_box.addItem('I')
         self.mode_box.addItem('F')
+        
+        #Fill contrast box.
+        contrast_list = [-90, -80, -70, -60, -50, -40, 
+                         -30, -20, -10, 0, 10, 20, 30, 
+                         40, 50, 60, 70, 80, 90]
+        for i in contrast_list:
+            self.contrast_box.addItem(str(i))
+        self.contrast_box.setCurrentIndex(9)
+        
+        #Fill brightness box.
+        brightness_list = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0,
+                           1.2, 1.4, 1.6, 1.8, 2.0]
+        for i in brightness_list:
+            self.brightness_box.addItem(str(i))
+        self.brightness_box.setCurrentIndex(5)
+        
+        #Fill sharpness box.
+        sharpness_list = [-5.0, -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0,
+                          3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+        for i in sharpness_list:
+            self.sharpness_box.addItem(str(i))
+        self.sharpness_box.setCurrentIndex(6)
+        
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(self.file)
         self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
         self.image_view.setScene(self.scene)
         
-        QtCore.QObject.connect(self.ok_button, QtCore.SIGNAL("clicked()"), self.modeProcessing)
+        QtCore.QObject.connect(self.ok_button, QtCore.SIGNAL("clicked()"), self.allProcessing)
+        QtCore.QObject.connect(self.filter_box, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.filterProcessing)
+        QtCore.QObject.connect(self.mode_box, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.modeProcessing)
+        QtCore.QObject.connect(self.contrast_box, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.contrastProcessing)
+        QtCore.QObject.connect(self.brightness_box, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.brightnessProcessing)
+        QtCore.QObject.connect(self.sharpness_box, QtCore.SIGNAL("currentIndexChanged(const QString&)"), self.sharpnessProcessing)
+        QtCore.QObject.connect(self.cancel_button, QtCore.SIGNAL("clicked()"), FileProcessing, QtCore.SLOT("close()"))
 
         
     def retranslateUi(self, FileProcessing):
@@ -160,28 +213,203 @@ class Ui_FileProcessing(Client):
         self.label_7.setText(QtGui.QApplication.translate("FileProcessing", "Info:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("FileProcessing", "Filter:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("FileProcessing", "Mode:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_9.setText(QtGui.QApplication.translate("FileProcessing", "Contrast:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_10.setText(QtGui.QApplication.translate("FileProcessing", "Brightness:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_11.setText(QtGui.QApplication.translate("FileProcessing", "Sharpness:", None, QtGui.QApplication.UnicodeUTF8))
         self.ok_button.setText(QtGui.QApplication.translate("FileProcessing", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self.cancel_button.setText(QtGui.QApplication.translate("FileProcessing", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         
-    def filterProcessing(self):
-        print(str(self.filter_box.currentText()))
-        print(self.file)
-        out = self.client_image_filter(str(self.file), str(self.filter_box.currentText()))
-        print(out)
+    def downloadFile(self, fileName):
+        '''
+        @brief: This function is used to download file from server.
+        @param fileName string: Input parameter is file name. 
+        @return: This function does not return a value. Returns 1 if error occurred.
+        '''
+    
+        #Get file content to string.
+        fileContent = self.client_get_raster_file(fileName)
+        try:
+            #Create file in downloads directory. Name of file is the same as the name on server.
+            out_file = open(fileName, 'w')
+            #Write list of strings into file.
+            out_file.writelines(fileContent)
+            #Close the file.
+            out_file.close()
+        except IOError as ex:
+            self.logger.log.error("%s exception occurred during open %s file" % (ex, fileName))
+            return 1 
+        
+    def filterProcessing(self, index):
+        if self.filter_box.currentText() != 'None':
+            out = self.client_image_filter(str(self.file), str(index))
+        else:
+            out = self.file
+        
+        #self.downloadFile(out)
+        
+        #Display image on scene.
+        self.scene = QtGui.QGraphicsScene()
+        self.picture = QtGui.QPixmap(out) 
+        self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
+        self.image_view.setScene(self.scene)
+        
+        
+    def modeProcessing(self, index):
+        if self.mode_box.currentText() != 'None':
+            if self.filter_box.currentText() != 'None':
+                filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
+                out = self.client_convert_image(str(filterFile), str(self.mode_box.currentText()))
+                self.mode_label.setText(str(self.mode_box.currentText()))
+            else:
+                out = self.client_convert_image(str(self.file), str(self.mode_box.currentText()))
+                self.mode_label.setText(str(self.mode_box.currentText()))
+        else:
+            if self.filter_box.currentText() != 'None':
+                filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
+                out = self.client_convert_image(str(filterFile), str(self.mode_box.currentText()))
+                self.mode_label.setText(str(self.mode_box.currentText()))
+            else:
+                out = self.file
+        
+        #self.downloadFile(out)
+        
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(out)
         self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
         self.image_view.setScene(self.scene)
         
-    def modeProcessing(self):
-        print(str(self.mode_box.currentText()))
-        print(self.file)
-        out = self.client_convert_image(str(self.file), str(self.mode_box.currentText()))
-        self.mode_label.setText(str(self.mode_box.currentText()))
-        print(out)
+    def contrastProcessing(self, index):
+        if self.contrast_box.currentText() != '0' \
+            and self.filter_box.currentText() != 'None' \
+                and  self.mode_box.currentText() != 'None':
+            modeFile = '/tmp/' + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
+            print(modeFile)
+            out = self.client_contrast_image(str(modeFile), str(self.contrast_box.currentText()))
+            
+        if self.contrast_box.currentText() != '0' \
+            and self.filter_box.currentText() != 'None' \
+                and  self.mode_box.currentText() == 'None':
+            filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
+            out = self.client_contrast_image(str(filterFile), str(self.contrast_box.currentText()))
+            
+        if self.contrast_box.currentText() != '0' \
+            and self.filter_box.currentText() == 'None' \
+                and  self.filter_box.currentText() == 'None':
+            contrastFile = '/tmp/' + self.contrast_box.currentText() + os.path.basename(str(self.file))
+            out = self.client_contrast_image(str(contrastFile), str(self.contrast_box.currentText()))
+            
+        if self.contrast_box.currentText() == '0':
+            out = self.file
+    
+        #self.downloadFile(out)
+            
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(out)
         self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
         self.image_view.setScene(self.scene)
+        
+    def brightnessProcessing(self, index):
+        if self.brightness_box.currentText() != '1.0':
+            if self.contrast_box.currentText() != '0' \
+                and self.filter_box.currentText() != 'None' \
+                and  self.mode_box.currentText() != 'None':
+                    contrastFile = '/tmp/' + self.contrast_box.currentText() + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
+                    out = self.client_brightness_image(str(contrastFile), str(self.brightness_box.currentText()))
+                    
+        if self.brightness_box.currentText() != '1.0':
+            if self.contrast_box.currentText() == '0' \
+                and self.filter_box.currentText() != 'None' \
+                and  self.mode_box.currentText() != 'None':
+                    modeFile = '/tmp/' + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
+                    out = self.client_brightness_image(str(modeFile), str(self.brightness_box.currentText()))
+                    
+        if self.brightness_box.currentText() != '1.0':
+            if self.contrast_box.currentText() == '0' \
+                and self.filter_box.currentText() != 'None' \
+                and  self.mode_box.currentText() == 'None':
+                    filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
+                    out = self.client_brightness_image(str(filterFile), str(self.brightness_box.currentText()))
+                    
+        if self.brightness_box.currentText() != '1.0':
+            if self.contrast_box.currentText() == '0' \
+                and self.filter_box.currentText() == 'None' \
+                and  self.mode_box.currentText() == 'None':
+                    out = self.client_brightness_image(str(self.file), str(self.brightness_box.currentText()))
+                    
+        if self.brightness_box.currentText() == '1.0':
+            if self.contrast_box.currentText() == '0' \
+                and self.filter_box.currentText() == 'None' \
+                and  self.mode_box.currentText() == 'None':
+                    out = self.file
+            
+        #self.downloadFile(out)
+            
+        #Display image on scene.
+        self.scene = QtGui.QGraphicsScene()
+        self.picture = QtGui.QPixmap(out)
+        self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
+        self.image_view.setScene(self.scene)
+    
+    def sharpnessProcessing(self):
+        if self.sharpness_box.currentText() != '1.0':
+            if self.brightness_box.currentText() != '1.0':
+                if self.contrast_box.currentText() != '0' \
+                    and self.filter_box.currentText() != 'None' \
+                    and  self.mode_box.currentText() != 'None':
+                        brightnessFile = '/tmp/' + self.brightness_box.currentText() + self.contrast_box.currentText() + self.mode_box.currentText() \
+                         + self.filter_box.currentText() + os.path.basename(str(self.file))
+                        out = self.client_sharpness_image(str(brightnessFile), str(self.sharpness_box.currentText()))
+                        
+        if self.sharpness_box.currentText() != '1.0':
+            if self.brightness_box.currentText() == '1.0':
+                if self.contrast_box.currentText() != '0' \
+                    and self.filter_box.currentText() != 'None' \
+                    and  self.mode_box.currentText() != 'None':
+                        contrastFile = '/tmp/' + self.contrast_box.currentText() + self.mode_box.currentText() \
+                         + self.filter_box.currentText() + os.path.basename(str(self.file))
+                        out = self.client_sharpness_image(str(contrastFile), str(self.sharpness_box.currentText()))
+                        
+        if self.sharpness_box.currentText() != '1.0':
+            if self.brightness_box.currentText() == '1.0':
+                if self.contrast_box.currentText() == '0' \
+                    and self.filter_box.currentText() != 'None' \
+                    and  self.mode_box.currentText() != 'None':
+                        modeFile = '/tmp/' + self.mode_box.currentText() \
+                         + self.filter_box.currentText() + os.path.basename(str(self.file))
+                        out = self.client_sharpness_image(str(modeFile), str(self.sharpness_box.currentText()))
+                        
+        if self.sharpness_box.currentText() != '1.0':
+            if self.brightness_box.currentText() == '1.0':
+                if self.contrast_box.currentText() == '0' \
+                    and self.filter_box.currentText() != 'None' \
+                    and  self.mode_box.currentText() == 'None':
+                        filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
+                        out = self.client_sharpness_image(str(filterFile), str(self.sharpness_box.currentText()))
+                        
+        if self.sharpness_box.currentText() != '1.0':
+            if self.brightness_box.currentText() == '1.0':
+                if self.contrast_box.currentText() == '0' \
+                    and self.filter_box.currentText() == 'None' \
+                    and  self.mode_box.currentText() == 'None':
+                        out = self.client_sharpness_image(str(self.file), str(self.sharpness_box.currentText()))
+            
+        if self.sharpness_box.currentText() == '1.0':
+            out = self.file
+        
+        #self.downloadFile(out)
+        
+        #Display image on scene.
+        self.scene = QtGui.QGraphicsScene()
+        self.picture = QtGui.QPixmap(out)
+        self.scene.addItem(QtGui.QGraphicsPixmapItem(self.picture))
+        self.image_view.setScene(self.scene)
+        
+    def allProcessing(self):
+        self.image = 'out.png'
+        self.pixmap = QtGui.QPixmap(QtGui.QPixmap.grabWidget(self.image_view))
+        self.pixmap.save(self.image)
+        
+            
+        

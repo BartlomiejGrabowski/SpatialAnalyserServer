@@ -15,6 +15,18 @@ _0_Raster = omniORB.openModule("Raster", r"raster.idl")
 _0_Raster__POA = omniORB.openModule("Raster__POA", r"raster.idl")
 
 
+# typedef ... FileContent
+class FileContent:
+    _NP_RepositoryId = "IDL:Raster/FileContent:1.0"
+    def __init__(self, *args, **kw):
+        raise RuntimeError("Cannot construct objects of this type.")
+_0_Raster.FileContent = FileContent
+_0_Raster._d_FileContent  = (omniORB.tcInternal.tv_sequence, omniORB.tcInternal.tv_octet, 0)
+_0_Raster._ad_FileContent = (omniORB.tcInternal.tv_alias, FileContent._NP_RepositoryId, "FileContent", (omniORB.tcInternal.tv_sequence, omniORB.tcInternal.tv_octet, 0))
+_0_Raster._tc_FileContent = omniORB.tcInternal.createTypeCode(_0_Raster._ad_FileContent)
+omniORB.registerType(FileContent._NP_RepositoryId, _0_Raster._ad_FileContent, _0_Raster._tc_FileContent)
+del FileContent
+
 # exception FileException
 _0_Raster.FileException = omniORB.newEmptyClass()
 class FileException (CORBA.UserException):
@@ -45,6 +57,21 @@ _0_Raster._tc_InternalException = omniORB.tcInternal.createTypeCode(_0_Raster._d
 omniORB.registerType(InternalException._NP_RepositoryId, _0_Raster._d_InternalException, _0_Raster._tc_InternalException)
 del InternalException
 
+# exception FileNotFound
+_0_Raster.FileNotFound = omniORB.newEmptyClass()
+class FileNotFound (CORBA.UserException):
+    _NP_RepositoryId = "IDL:Raster/FileNotFound:1.0"
+
+    def __init__(self, reason):
+        CORBA.UserException.__init__(self, reason)
+        self.reason = reason
+
+_0_Raster.FileNotFound = FileNotFound
+_0_Raster._d_FileNotFound  = (omniORB.tcInternal.tv_except, FileNotFound, FileNotFound._NP_RepositoryId, "FileNotFound", "reason", (omniORB.tcInternal.tv_string,0))
+_0_Raster._tc_FileNotFound = omniORB.tcInternal.createTypeCode(_0_Raster._d_FileNotFound)
+omniORB.registerType(FileNotFound._NP_RepositoryId, _0_Raster._d_FileNotFound, _0_Raster._tc_FileNotFound)
+del FileNotFound
+
 # interface Processing
 _0_Raster._d_Processing = (omniORB.tcInternal.tv_objref, "IDL:Raster/Processing:1.0", "Processing")
 omniORB.typeMapping["IDL:Raster/Processing:1.0"] = _0_Raster._d_Processing
@@ -65,6 +92,10 @@ omniORB.registerType(Processing._NP_RepositoryId, _0_Raster._d_Processing, _0_Ra
 # Processing operations and attributes
 Processing._d_image_filter = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
 Processing._d_convert_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
+Processing._d_contrast_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
+Processing._d_brightness_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
+Processing._d_sharpness_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
+Processing._d_get_raster_file = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:Raster/FileContent:1.0"], ), {_0_Raster.FileNotFound._NP_RepositoryId: _0_Raster._d_FileNotFound})
 
 # Processing object reference
 class _objref_Processing (CORBA.Object):
@@ -79,7 +110,19 @@ class _objref_Processing (CORBA.Object):
     def convert_image(self, *args):
         return _omnipy.invoke(self, "convert_image", _0_Raster.Processing._d_convert_image, args)
 
-    __methods__ = ["image_filter", "convert_image"] + CORBA.Object.__methods__
+    def contrast_image(self, *args):
+        return _omnipy.invoke(self, "contrast_image", _0_Raster.Processing._d_contrast_image, args)
+
+    def brightness_image(self, *args):
+        return _omnipy.invoke(self, "brightness_image", _0_Raster.Processing._d_brightness_image, args)
+
+    def sharpness_image(self, *args):
+        return _omnipy.invoke(self, "sharpness_image", _0_Raster.Processing._d_sharpness_image, args)
+
+    def get_raster_file(self, *args):
+        return _omnipy.invoke(self, "get_raster_file", _0_Raster.Processing._d_get_raster_file, args)
+
+    __methods__ = ["image_filter", "convert_image", "contrast_image", "brightness_image", "sharpness_image", "get_raster_file"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Processing._NP_RepositoryId, _objref_Processing)
 _0_Raster._objref_Processing = _objref_Processing
@@ -91,7 +134,7 @@ class Processing (PortableServer.Servant):
     _NP_RepositoryId = _0_Raster.Processing._NP_RepositoryId
 
 
-    _omni_op_d = {"image_filter": _0_Raster.Processing._d_image_filter, "convert_image": _0_Raster.Processing._d_convert_image}
+    _omni_op_d = {"image_filter": _0_Raster.Processing._d_image_filter, "convert_image": _0_Raster.Processing._d_convert_image, "contrast_image": _0_Raster.Processing._d_contrast_image, "brightness_image": _0_Raster.Processing._d_brightness_image, "sharpness_image": _0_Raster.Processing._d_sharpness_image, "get_raster_file": _0_Raster.Processing._d_get_raster_file}
 
 Processing._omni_skeleton = Processing
 _0_Raster__POA.Processing = Processing

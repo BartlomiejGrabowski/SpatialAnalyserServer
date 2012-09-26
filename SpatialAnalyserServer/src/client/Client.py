@@ -1070,3 +1070,102 @@ class Client(object):
             client.logger.log.error(ex.reason)
             return 1
         return self.outfile
+    
+    def client_contrast_image(self, raster_file, contrast):
+        """ @brief Function adjusts contrast.
+            @param raster_file string: Source raster file.
+            @param mode_name string: contrast value.
+            @return outfile string: Image after adjusting contrast. """
+            
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            self.outfile = processingObj.contrast_image(raster_file, contrast)
+        except (Raster.FileException, Raster.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.outfile
+    
+    def client_brightness_image(self, raster_file, brightness):
+        """ @brief Function is used to control the brightness of an image.
+            @param raster_file string: Source raster file.
+            @param brightness string: brightness value.
+            @return outfile string: Function returns brightness enhancer instance. """
+            
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            self.outfile = processingObj.brightness_image(raster_file, brightness)
+        except (Raster.FileException, Raster.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.outfile
+    
+    def client_sharpness_image(self, raster_file, sharpness):
+        """ @brief Function is used to control the sharpness of an image.
+            @param raster_file string: Source raster file.
+            @param sharpness string: sharpness value.
+            @return outfile string: Function returns sharpness enhancer instance. """
+            
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            self.outfile = processingObj.sharpness_image(raster_file, sharpness)
+        except (Raster.FileException, Raster.InternalException) as ex:
+            client.logger.log.error(ex.reason)
+            return 1
+        return self.outfile
+    
+    def client_get_raster_file(self, fileName):        
+        '''
+        @brief: This function is used to get raster file content from server.
+        @see: Client
+        @param fileName string: Input parameter is a raster file name.
+        @return: sequence<octet> Returns octet sequence or 1 if error occurred. 
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            #Call get_shp_file_content from shp_draw.idl file.
+            fileContent = processingObj.get_raster_file(fileName)
+            return fileContent
+        except Raster.FileNotFound as ex:
+            client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
+            return 1

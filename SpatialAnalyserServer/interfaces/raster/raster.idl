@@ -1,5 +1,7 @@
 module Raster {
 
+	typedef sequence<octet> FileContent;
+
 	exception FileException {
 		string reason;
 	};
@@ -7,9 +9,21 @@ module Raster {
 		string reason;
 	};
 
+	exception FileNotFound {
+		string reason;
+	};
+
 	interface Processing {
 		string image_filter(in string file_name, in string filter_name) raises (InternalException, FileException);
 
 		string convert_image(in string file_name, in string mode_name) raises (InternalException, FileException);
+
+		string contrast_image(in string file_name, in string contrast) raises (InternalException, FileException);
+
+		string brightness_image(in string file_name, in string brightness) raises (InternalException, FileException);
+
+		string sharpness_image(in string file_name, in string sharpness) raises (InternalException, FileException);
+
+		FileContent get_raster_file(in string fileName) raises (FileNotFound);
 	};
 };
