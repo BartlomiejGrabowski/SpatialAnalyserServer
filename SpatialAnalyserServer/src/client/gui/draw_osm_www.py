@@ -116,7 +116,7 @@ class Ui_DrawOSMFromWeb(Client):
         @return: This function does not return a value.
         '''
         
-        DrawOSMFromWeb.setWindowTitle(QtGui.QApplication.translate("DrawOSMFromWeb", "Draw OSM file from web", None, QtGui.QApplication.UnicodeUTF8))
+        DrawOSMFromWeb.setWindowTitle(QtGui.QApplication.translate("DrawOSMFromWeb", "Draw OSM file from Web", None, QtGui.QApplication.UnicodeUTF8))
         self.www_label.setText(QtGui.QApplication.translate("DrawOSMFromWeb", "www:", None, QtGui.QApplication.UnicodeUTF8))
         self.coordinates_label.setText(QtGui.QApplication.translate("DrawOSMFromWeb", "coordinates:", None, QtGui.QApplication.UnicodeUTF8))
         self.minlon_label.setText(QtGui.QApplication.translate("DrawOSMFromWeb", "minlon:", None, QtGui.QApplication.UnicodeUTF8))

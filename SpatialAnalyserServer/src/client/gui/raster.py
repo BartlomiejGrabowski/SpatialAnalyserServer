@@ -208,7 +208,7 @@ class Ui_FileProcessing(Client):
         self.label.setText(QtGui.QApplication.translate("FileProcessing", "File:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("FileProcessing", "Format:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("FileProcessing", "Size:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("Fistr(self.filter_box.currentText())leProcessing", "Mode:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("FileProcessing", "Mode:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("FileProcessing", "Palette:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("FileProcessing", "Info:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("FileProcessing", "Filter:", None, QtGui.QApplication.UnicodeUTF8))
@@ -407,9 +407,9 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
         
     def allProcessing(self):
-        self.image = 'out.png'
+        self.image = 'all_processing_image.png'
         self.pixmap = QtGui.QPixmap(QtGui.QPixmap.grabWidget(self.image_view))
-        self.pixmap.save(self.image)
+        self.pixmap.save(os.getenv("HOME") + '/' + self.image)
         
             
         

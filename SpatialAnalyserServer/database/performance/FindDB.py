@@ -32,10 +32,10 @@ class FindDB(threading.Thread):
 
 
     def get_db_delay(self):
-        hosts = ["192.168.1.102", "192.168.1.101"]
+        hosts = ["192.168.1.102"]
 
         #spawn a pool of threads, and pass them queue instance 
-        for i in range(3):
+        for i in range(2):
             t = FindDB(self.ips, self.times)
             t.setDaemon(True)
             t.start()
@@ -64,10 +64,10 @@ class FindDB(threading.Thread):
             self.db = 'shp_database'
             self.user = 'postgres'
             self.passwd = 'postgres'
-        elif self.best_ip == '192.168.1.101':
-            self.db = 'gis_db'
-            self.user = 'postgres'
-            self.passwd = 'postgres'
+        #elif self.best_ip == '192.168.1.101':
+        #    self.db = 'gis_db'
+        #    self.user = 'postgres'
+        #    self.passwd = 'postgres'
         else:
             raise "Unknown database parameters!"
         

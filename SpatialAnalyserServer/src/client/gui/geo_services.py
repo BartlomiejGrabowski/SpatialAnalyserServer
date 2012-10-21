@@ -403,7 +403,7 @@ class Ui_GeoServices(Client):
         self.show_image_btn.setText(QtGui.QApplication.translate("GeoServices", "Show image", None, QtGui.QApplication.UnicodeUTF8))
         self.label_20.setText(QtGui.QApplication.translate("GeoServices", "Path:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_21.setText(QtGui.QApplication.translate("GeoServices", "Status:", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setTitle(QtGui.QApplication.translate("GeoServices", "Input pramterers", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("GeoServices", "Input parameters", None, QtGui.QApplication.UnicodeUTF8))
         self.label_22.setText(QtGui.QApplication.translate("GeoServices", "Input projection:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_23.setText(QtGui.QApplication.translate("GeoServices", "Output projection:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_24.setText(QtGui.QApplication.translate("GeoServices", "Coordinate X:", None, QtGui.QApplication.UnicodeUTF8))
