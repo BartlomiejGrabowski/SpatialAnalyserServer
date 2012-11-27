@@ -1,7 +1,7 @@
 module SHPDraw {
 	typedef string <1024> DirPath;	
 	
-    	typedef string <1024> FileName;
+    typedef string <1024> FileName;
 	typedef string <1024> Created;
 	typedef string <1024> LastModified;
 
@@ -29,5 +29,6 @@ module SHPDraw {
 
 		FileList get_osm_file_list() raises (UnknownInternalError);
 		FileContent get_osm_file_content(in string fileName) raises (FileNotFound);
+		string draw_osm_file(in string fileName, in long width, in long height) raises (FileNotFound);
 	};
 };

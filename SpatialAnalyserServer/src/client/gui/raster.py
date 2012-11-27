@@ -230,7 +230,7 @@ class Ui_FileProcessing(Client):
         fileContent = self.client_get_raster_file(fileName)
         try:
             #Create file in downloads directory. Name of file is the same as the name on server.
-            out_file = open(fileName, 'w')
+            out_file = open(fileName, 'r+')
             #Write list of strings into file.
             out_file.writelines(fileContent)
             #Close the file.
@@ -239,13 +239,15 @@ class Ui_FileProcessing(Client):
             self.logger.log.error("%s exception occurred during open %s file" % (ex, fileName))
             return 1 
         
-    def filterProcessing(self, index):
-        if self.filter_box.currentText() != 'None':
-            out = self.client_image_filter(str(self.file), str(index))
-        else:
-            out = self.file
+    def sendFileToServer(self):
+        fileContent = open(str(self.file), 'r+').read()
+        self.client_save_raster_file(fileContent, '/tmp/'+os.path.basename(str(self.file)))
         
-        #self.downloadFile(out)
+    def filterProcessing(self, index):
+        self.sendFileToServer()
+        out = self.client_image_filter('/tmp/'+os.path.basename(str(self.file)), str(index))
+        
+        self.downloadFile(out)
         
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -255,23 +257,10 @@ class Ui_FileProcessing(Client):
         
         
     def modeProcessing(self, index):
-        if self.mode_box.currentText() != 'None':
-            if self.filter_box.currentText() != 'None':
-                filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
-                out = self.client_convert_image(str(filterFile), str(self.mode_box.currentText()))
-                self.mode_label.setText(str(self.mode_box.currentText()))
-            else:
-                out = self.client_convert_image(str(self.file), str(self.mode_box.currentText()))
-                self.mode_label.setText(str(self.mode_box.currentText()))
-        else:
-            if self.filter_box.currentText() != 'None':
-                filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
-                out = self.client_convert_image(str(filterFile), str(self.mode_box.currentText()))
-                self.mode_label.setText(str(self.mode_box.currentText()))
-            else:
-                out = self.file
+        self.sendFileToServer()
+        out = self.client_convert_image('/tmp/'+os.path.basename(str(self.file)), str(self.mode_box.currentText()))
         
-        #self.downloadFile(out)
+        self.downloadFile(out)
         
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -280,29 +269,10 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
         
     def contrastProcessing(self, index):
-        if self.contrast_box.currentText() != '0' \
-            and self.filter_box.currentText() != 'None' \
-                and  self.mode_box.currentText() != 'None':
-            modeFile = '/tmp/' + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
-            print(modeFile)
-            out = self.client_contrast_image(str(modeFile), str(self.contrast_box.currentText()))
-            
-        if self.contrast_box.currentText() != '0' \
-            and self.filter_box.currentText() != 'None' \
-                and  self.mode_box.currentText() == 'None':
-            filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
-            out = self.client_contrast_image(str(filterFile), str(self.contrast_box.currentText()))
-            
-        if self.contrast_box.currentText() != '0' \
-            and self.filter_box.currentText() == 'None' \
-                and  self.filter_box.currentText() == 'None':
-            contrastFile = '/tmp/' + self.contrast_box.currentText() + os.path.basename(str(self.file))
-            out = self.client_contrast_image(str(contrastFile), str(self.contrast_box.currentText()))
-            
-        if self.contrast_box.currentText() == '0':
-            out = self.file
+        self.sendFileToServer()
+        out = self.client_contrast_image('/tmp/'+os.path.basename(str(self.file)), str(self.contrast_box.currentText()))
     
-        #self.downloadFile(out)
+        self.downloadFile(out)
             
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -311,40 +281,11 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
         
     def brightnessProcessing(self, index):
-        if self.brightness_box.currentText() != '1.0':
-            if self.contrast_box.currentText() != '0' \
-                and self.filter_box.currentText() != 'None' \
-                and  self.mode_box.currentText() != 'None':
-                    contrastFile = '/tmp/' + self.contrast_box.currentText() + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
-                    out = self.client_brightness_image(str(contrastFile), str(self.brightness_box.currentText()))
-                    
-        if self.brightness_box.currentText() != '1.0':
-            if self.contrast_box.currentText() == '0' \
-                and self.filter_box.currentText() != 'None' \
-                and  self.mode_box.currentText() != 'None':
-                    modeFile = '/tmp/' + self.mode_box.currentText() + self.filter_box.currentText() + os.path.basename(str(self.file))
-                    out = self.client_brightness_image(str(modeFile), str(self.brightness_box.currentText()))
-                    
-        if self.brightness_box.currentText() != '1.0':
-            if self.contrast_box.currentText() == '0' \
-                and self.filter_box.currentText() != 'None' \
-                and  self.mode_box.currentText() == 'None':
-                    filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
-                    out = self.client_brightness_image(str(filterFile), str(self.brightness_box.currentText()))
-                    
-        if self.brightness_box.currentText() != '1.0':
-            if self.contrast_box.currentText() == '0' \
-                and self.filter_box.currentText() == 'None' \
-                and  self.mode_box.currentText() == 'None':
-                    out = self.client_brightness_image(str(self.file), str(self.brightness_box.currentText()))
-                    
-        if self.brightness_box.currentText() == '1.0':
-            if self.contrast_box.currentText() == '0' \
-                and self.filter_box.currentText() == 'None' \
-                and  self.mode_box.currentText() == 'None':
-                    out = self.file
+        self.sendFileToServer()
+        out = self.client_brightness_image('/tmp/'+os.path.basename(str(self.file)), str(self.brightness_box.currentText()))
+
             
-        #self.downloadFile(out)
+        self.downloadFile(out)
             
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -353,52 +294,10 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
     
     def sharpnessProcessing(self):
-        if self.sharpness_box.currentText() != '1.0':
-            if self.brightness_box.currentText() != '1.0':
-                if self.contrast_box.currentText() != '0' \
-                    and self.filter_box.currentText() != 'None' \
-                    and  self.mode_box.currentText() != 'None':
-                        brightnessFile = '/tmp/' + self.brightness_box.currentText() + self.contrast_box.currentText() + self.mode_box.currentText() \
-                         + self.filter_box.currentText() + os.path.basename(str(self.file))
-                        out = self.client_sharpness_image(str(brightnessFile), str(self.sharpness_box.currentText()))
-                        
-        if self.sharpness_box.currentText() != '1.0':
-            if self.brightness_box.currentText() == '1.0':
-                if self.contrast_box.currentText() != '0' \
-                    and self.filter_box.currentText() != 'None' \
-                    and  self.mode_box.currentText() != 'None':
-                        contrastFile = '/tmp/' + self.contrast_box.currentText() + self.mode_box.currentText() \
-                         + self.filter_box.currentText() + os.path.basename(str(self.file))
-                        out = self.client_sharpness_image(str(contrastFile), str(self.sharpness_box.currentText()))
-                        
-        if self.sharpness_box.currentText() != '1.0':
-            if self.brightness_box.currentText() == '1.0':
-                if self.contrast_box.currentText() == '0' \
-                    and self.filter_box.currentText() != 'None' \
-                    and  self.mode_box.currentText() != 'None':
-                        modeFile = '/tmp/' + self.mode_box.currentText() \
-                         + self.filter_box.currentText() + os.path.basename(str(self.file))
-                        out = self.client_sharpness_image(str(modeFile), str(self.sharpness_box.currentText()))
-                        
-        if self.sharpness_box.currentText() != '1.0':
-            if self.brightness_box.currentText() == '1.0':
-                if self.contrast_box.currentText() == '0' \
-                    and self.filter_box.currentText() != 'None' \
-                    and  self.mode_box.currentText() == 'None':
-                        filterFile = '/tmp/' + self.filter_box.currentText() + os.path.basename(str(self.file))
-                        out = self.client_sharpness_image(str(filterFile), str(self.sharpness_box.currentText()))
-                        
-        if self.sharpness_box.currentText() != '1.0':
-            if self.brightness_box.currentText() == '1.0':
-                if self.contrast_box.currentText() == '0' \
-                    and self.filter_box.currentText() == 'None' \
-                    and  self.mode_box.currentText() == 'None':
-                        out = self.client_sharpness_image(str(self.file), str(self.sharpness_box.currentText()))
-            
-        if self.sharpness_box.currentText() == '1.0':
-            out = self.file
-        
-        #self.downloadFile(out)
+        self.sendFileToServer()
+        out = self.client_sharpness_image('/tmp/'+os.path.basename(str(self.file)), str(self.sharpness_box.currentText()))
+     
+        self.downloadFile(out)
         
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()

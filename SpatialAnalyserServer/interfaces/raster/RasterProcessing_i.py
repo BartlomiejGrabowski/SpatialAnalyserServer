@@ -57,6 +57,7 @@ class RasterProcessing_i(Raster__POA.Processing):
             if filter_name == 'None':
                 return 'None'   
             out.save(outfile)
+            os.chmod(outfile, 0777)
         except IOError as ex:
             raise Raster.FileException(str(ex))
         except KeyError as ex:
@@ -76,6 +77,7 @@ class RasterProcessing_i(Raster__POA.Processing):
                 return 'None'   
             out = im.convert(mode_name)
             out.save(outfile)
+            os.chmod(outfile, 0777)
         except IOError as ex:
             raise Raster.FileException(str(ex))
         except KeyError as ex:
@@ -101,6 +103,7 @@ class RasterProcessing_i(Raster__POA.Processing):
                 enh.enhance(0.9 + int(contrast)/10).save(outfile)
                 return outfile
             enh.enhance(1 + int(contrast)/10).save(outfile)
+            os.chmod(outfile, 0777)
         except IOError as ex:
             raise Raster.FileException(str(ex))
         except KeyError as ex:
@@ -120,6 +123,7 @@ class RasterProcessing_i(Raster__POA.Processing):
             im = Image.open(raster_file)
             enh = ImageEnhance.Brightness(im)
             enh.enhance(float(brightness)).save(outfile)
+            os.chmod(outfile, 0777)
         except IOError as ex:
             raise Raster.FileException(str(ex))
         except KeyError as ex:
@@ -139,6 +143,7 @@ class RasterProcessing_i(Raster__POA.Processing):
             im = Image.open(raster_file)
             enh = ImageEnhance.Sharpness(im)
             enh.enhance(float(sharpness)).save(outfile)
+            os.chmod(outfile, 0777)
         except IOError as ex:
             raise Raster.FileException(str(ex))
         except KeyError as ex:
@@ -153,6 +158,21 @@ class RasterProcessing_i(Raster__POA.Processing):
             fileContent = open(fileName, 'r').read()
         except IOError as ex:
             self.logger.error("%s exception occurred during opening raster file" % (ex))
-            raise Raster.FileNotFound("Error occurred during opening raster file", fileName)
+            raise Raster.FileNotFound("Error occurred during opening raster file")
             sys.exit(1)
         return fileContent
+    
+    def save_raster_file(self, content, fileName):
+        self.logger.log.info("save_raster_file method invocation.")
+        
+        try:
+            out_file = open(fileName, 'w')
+            #Write list of strings into file.
+            out_file.writelines(content)
+            os.chmod(fileName, 0777)
+            #Close the file.
+            out_file.close()
+        except IOError as ex:
+            self.logger.log.error("%s exception occurred during open %s file" % (ex, fileName))
+            raise Raster.FileNotFound("Error occurred during opening raster file")
+            sys.exit(1)

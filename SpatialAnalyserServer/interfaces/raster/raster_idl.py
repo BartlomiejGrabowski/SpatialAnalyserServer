@@ -96,6 +96,7 @@ Processing._d_contrast_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcIn
 Processing._d_brightness_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
 Processing._d_sharpness_image = (((omniORB.tcInternal.tv_string,0), (omniORB.tcInternal.tv_string,0)), ((omniORB.tcInternal.tv_string,0), ), {_0_Raster.InternalException._NP_RepositoryId: _0_Raster._d_InternalException, _0_Raster.FileException._NP_RepositoryId: _0_Raster._d_FileException})
 Processing._d_get_raster_file = (((omniORB.tcInternal.tv_string,0), ), (omniORB.typeMapping["IDL:Raster/FileContent:1.0"], ), {_0_Raster.FileNotFound._NP_RepositoryId: _0_Raster._d_FileNotFound})
+Processing._d_save_raster_file = ((omniORB.typeMapping["IDL:Raster/FileContent:1.0"], (omniORB.tcInternal.tv_string,0)), (), {_0_Raster.FileNotFound._NP_RepositoryId: _0_Raster._d_FileNotFound})
 
 # Processing object reference
 class _objref_Processing (CORBA.Object):
@@ -122,7 +123,10 @@ class _objref_Processing (CORBA.Object):
     def get_raster_file(self, *args):
         return _omnipy.invoke(self, "get_raster_file", _0_Raster.Processing._d_get_raster_file, args)
 
-    __methods__ = ["image_filter", "convert_image", "contrast_image", "brightness_image", "sharpness_image", "get_raster_file"] + CORBA.Object.__methods__
+    def save_raster_file(self, *args):
+        return _omnipy.invoke(self, "save_raster_file", _0_Raster.Processing._d_save_raster_file, args)
+
+    __methods__ = ["image_filter", "convert_image", "contrast_image", "brightness_image", "sharpness_image", "get_raster_file", "save_raster_file"] + CORBA.Object.__methods__
 
 omniORB.registerObjref(Processing._NP_RepositoryId, _objref_Processing)
 _0_Raster._objref_Processing = _objref_Processing
@@ -134,7 +138,7 @@ class Processing (PortableServer.Servant):
     _NP_RepositoryId = _0_Raster.Processing._NP_RepositoryId
 
 
-    _omni_op_d = {"image_filter": _0_Raster.Processing._d_image_filter, "convert_image": _0_Raster.Processing._d_convert_image, "contrast_image": _0_Raster.Processing._d_contrast_image, "brightness_image": _0_Raster.Processing._d_brightness_image, "sharpness_image": _0_Raster.Processing._d_sharpness_image, "get_raster_file": _0_Raster.Processing._d_get_raster_file}
+    _omni_op_d = {"image_filter": _0_Raster.Processing._d_image_filter, "convert_image": _0_Raster.Processing._d_convert_image, "contrast_image": _0_Raster.Processing._d_contrast_image, "brightness_image": _0_Raster.Processing._d_brightness_image, "sharpness_image": _0_Raster.Processing._d_sharpness_image, "get_raster_file": _0_Raster.Processing._d_get_raster_file, "save_raster_file": _0_Raster.Processing._d_save_raster_file}
 
 Processing._omni_skeleton = Processing
 _0_Raster__POA.Processing = Processing

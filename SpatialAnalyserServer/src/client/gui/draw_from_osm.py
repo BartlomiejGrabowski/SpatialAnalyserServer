@@ -222,10 +222,6 @@ class Ui_DrawFromOSMFile(Client):
         @param None:
         @return: This function does not return a value.
         '''
-        
-        #Loop thru related files list.
-        for fileName in self.relatedFiles:
-            self.downloadFile(self.confOSMDownloadsLoc, fileName)
 
         #Show OSM draw image form.
         self.DrawOSMImage = QtGui.QWidget()
@@ -236,27 +232,3 @@ class Ui_DrawFromOSMFile(Client):
         #Show a form that allows draw image from shp file.
         self.DrawOSMImage.show()
         
-        
-    def downloadFile(self, destDir, fileName):
-        '''
-        @brief: This function is used to download file from server.
-        @param destDir string: Input parameter is destination directory.
-        @param fileName string: Input parameter is file name. 
-        @return: This function does not return a value. Returns 1 if error occurred.
-        '''
-        
-        #Redirect stdout to /dev/null.
-        #f = open(os.devnull, 'w')
-        #sys.stdout = f
-        #Get file content to string.
-        fileContent = self.client_get_osm_file_content(fileName)
-        try:
-            #Create file in downloads directory. Name of file is the same as the name on server.
-            out_file = open("%s/%s" % (destDir, fileName), 'w')
-            #Write list of strings into file.
-            out_file.writelines(fileContent)
-            #Close the file.
-            out_file.close()
-        except IOError as ex:
-            self.logger.log.error("%s exception occurred during open %s/%s file" % (ex, destDir, fileName))
-            return 1 

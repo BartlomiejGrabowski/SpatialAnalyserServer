@@ -330,6 +330,35 @@ class Client(object):
             client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
             return 1
 
+
+    def client_draw_osm_file(self, osmFileName, width, height):
+        '''
+        @brief: This function is used to draw picture from osm file.
+        @param osmFileName: string Path to OSM file.
+        @param width: long Width picture.
+        @param height: long Height picture.
+        @return: This function returns file name string.
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confSHPDrawIntID, self.confSHPDrawIntKind)
+        
+        client.logger.log.info("Narrowing reference to SHPDraw.Basic reference")
+        #Narrow reference to Basic interface.
+        osmDrawObj = obj._narrow(SHPDraw.Basic)
+        if osmDrawObj is None:
+            client.logger.log.error("Object reference is no an SHPDraw::Basic")
+            sys.exit(1)
+        try:
+            #Call get_osm_file_content function from shp_draw.idl file.
+            pathToOSM = osmDrawObj.draw_osm_file(osmFileName, width, height)
+            return pathToOSM
+        except SHPDraw.FileNotFound as ex:
+            client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
+            return 1
+        
     def client_get_fwd_transformation(self, lons, lats, az, dist):
         '''
         @brief: This function is used to get forward transformation.
@@ -1163,9 +1192,34 @@ class Client(object):
             client.logger.log.error("Object reference is no an Raster::Processing")
             sys.exit(1)
         try:
-            #Call get_shp_file_content from shp_draw.idl file.
             fileContent = processingObj.get_raster_file(fileName)
             return fileContent
         except Raster.FileNotFound as ex:
-            client.logger.log.error("%s.File: %s" % (ex.reason, ex.fileName))
+            client.logger.log.error("Error: " % (ex.reason))
             return 1
+        
+    def client_save_raster_file(self, content, fileName):        
+        '''
+        @brief: This function is used to save raster file on server.
+        @see: Client
+        @param content sequence<octet> File content.
+        @param fileName string: Input parameter is a raster file name.
+        @return: None. 
+        '''
+        
+        client = Client()
+        
+        #Get reference to object.
+        obj = client.get_reference_to_obj(self.confProcessingIntID, self.confProcessingIntKind)
+        
+        client.logger.log.info("Narrowing reference to Raster.Processing reference")
+        #Narrow reference to Processing interface.
+        processingObj = obj._narrow(Raster.Processing)
+        if processingObj is None:
+            client.logger.log.error("Object reference is no an Raster::Processing")
+            sys.exit(1)
+        try:
+            processingObj.save_raster_file(content, fileName)
+        except Raster.FileNotFound as ex:
+            client.logger.log.error("Error" % (ex.reason))
+            sys.exit(1)

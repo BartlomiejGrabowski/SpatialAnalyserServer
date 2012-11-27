@@ -25,5 +25,7 @@ module Raster {
 		string sharpness_image(in string file_name, in string sharpness) raises (InternalException, FileException);
 
 		FileContent get_raster_file(in string fileName) raises (FileNotFound);
+
+        void save_raster_file(in FileContent content, in string fileName) raises (FileNotFound);
 	};
 };
