@@ -244,11 +244,21 @@ class Ui_FileProcessing(Client):
         self.client_save_raster_file(fileContent, '/tmp/'+os.path.basename(str(self.file)))
         
     def filterProcessing(self, index):
+        import time
+        full_time_start = time.time()
         self.sendFileToServer()
+        
+        processing_time_start = time.time()
         out = self.client_image_filter('/tmp/'+os.path.basename(str(self.file)), str(index))
+        processing_time_stop = time.time()
         
         self.downloadFile(out)
+        full_time_stop = time.time()
         
+        full_time = full_time_stop - full_time_start
+        processing_time = processing_time_stop - processing_time_start
+        
+        print("FILTER_PROCESSING PROC: %s FULL: %s" % (processing_time, full_time))
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(out) 
@@ -257,10 +267,21 @@ class Ui_FileProcessing(Client):
         
         
     def modeProcessing(self, index):
+        import time
+        full_time_start = time.time()
         self.sendFileToServer()
+        
+        processing_time_start = time.time()
         out = self.client_convert_image('/tmp/'+os.path.basename(str(self.file)), str(self.mode_box.currentText()))
+        processing_time_stop = time.time()
         
         self.downloadFile(out)
+        full_time_stop = time.time()
+        
+        full_time = full_time_stop - full_time_start
+        processing_time = processing_time_stop - processing_time_start
+        
+        print("MODE_PROCESSING PROC: %s FULL: %s" % (processing_time, full_time))
         
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -269,10 +290,22 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
         
     def contrastProcessing(self, index):
+        import time
+        full_time_start = time.time()
+        
         self.sendFileToServer()
+        
+        processing_time_start = time.time()
         out = self.client_contrast_image('/tmp/'+os.path.basename(str(self.file)), str(self.contrast_box.currentText()))
+        processing_time_stop = time.time()
     
         self.downloadFile(out)
+        full_time_stop = time.time()
+        
+        full_time = full_time_stop - full_time_start
+        processing_time = processing_time_stop - processing_time_start
+        
+        print("CONTRAST_PROCESSING PROC: %s FULL: %s" % (processing_time, full_time))
             
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
@@ -281,12 +314,23 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
         
     def brightnessProcessing(self, index):
+        import time
+        full_time_start = time.time()
+        
         self.sendFileToServer()
+        
+        processing_time_start = time.time()
         out = self.client_brightness_image('/tmp/'+os.path.basename(str(self.file)), str(self.brightness_box.currentText()))
-
+        processing_time_stop = time.time()
             
         self.downloadFile(out)
-            
+        full_time_stop = time.time()
+        
+        full_time = full_time_stop - full_time_start
+        processing_time = processing_time_stop - processing_time_start
+        
+        print("BRIGHTNESS_PROCESSING PROC: %s FULL: %s" % (processing_time, full_time))
+              
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(out)
@@ -294,11 +338,23 @@ class Ui_FileProcessing(Client):
         self.image_view.setScene(self.scene)
     
     def sharpnessProcessing(self):
-        self.sendFileToServer()
-        out = self.client_sharpness_image('/tmp/'+os.path.basename(str(self.file)), str(self.sharpness_box.currentText()))
-     
-        self.downloadFile(out)
+        import time
+        full_time_start = time.time()
         
+        self.sendFileToServer()
+        
+        processing_time_start = time.time()
+        out = self.client_sharpness_image('/tmp/'+os.path.basename(str(self.file)), str(self.sharpness_box.currentText()))
+        processing_time_stop = time.time()
+        
+        self.downloadFile(out)
+        full_time_stop = time.time()
+        
+        full_time = full_time_stop - full_time_start
+        processing_time = processing_time_stop - processing_time_start
+        
+        print("SHARPNESS_PROCESSING PROC: %s FULL: %s" % (processing_time, full_time))
+             
         #Display image on scene.
         self.scene = QtGui.QGraphicsScene()
         self.picture = QtGui.QPixmap(out)
